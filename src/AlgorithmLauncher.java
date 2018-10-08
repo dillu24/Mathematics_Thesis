@@ -1,10 +1,12 @@
-import TSP.Graphs.CompleteWeightedPlanarGraph;
+import TSP.ApproximationAlgorithms.ACO.ACOEngine;
 
 /**
  * Created by Dylan Galea on 07/10/2018.
  */
+
 public class AlgorithmLauncher {
     public static void main (String args[]){
-        CompleteWeightedPlanarGraph graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/burma14");
+        ACOEngine aco = new ACOEngine();
+        aco.approximateTsp();
     }
 }

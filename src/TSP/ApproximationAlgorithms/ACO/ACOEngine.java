@@ -1,0 +1,145 @@
+package TSP.ApproximationAlgorithms.ACO;
+
+import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbourHeuristicEngine;
+import TSP.Graphs.CompleteWeightedPlanarGraph;
+import TSP.Graphs.Graph;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+
+/**
+ * Created by Dylan Galea on 08/10/2018.
+ */
+public class ACOEngine {
+    private ArrayList<Ant> listOfAnts;
+    private int beta;
+    private double alpha;
+    private double q0;
+    private double t0;
+    private double[][] pheromoneMatrix;
+    private Graph graph;
+    private int numberOfAnts;
+
+    public ACOEngine(){
+        listOfAnts = new ArrayList<>();
+        beta = 2;
+        alpha = 0.1;
+        q0 = 0.1;
+        numberOfAnts =10;
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/burma14");
+        NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
+        t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
+        pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
+        for(int i=0;i<graph.getVertices().size();i++){
+            for(int j=0;j<graph.getVertices().size();j++){
+                pheromoneMatrix[i][j] = 0.00005;
+            }
+        }
+    }
+
+    public ACOEngine(int beta, double alpha, double q0, double t0, String filePath,int numberOfAnts){
+        listOfAnts = new ArrayList<>();
+        this.beta = beta;
+        this.alpha = alpha;
+        this.q0 = q0;
+        graph = new CompleteWeightedPlanarGraph(filePath);
+        this.t0 = t0;
+        this.numberOfAnts = numberOfAnts;
+        pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
+        for(int i=0;i<graph.getVertices().size();i++){
+            for(int j=0;j<graph.getVertices().size();j++){
+                pheromoneMatrix[i][j] = 0.00005;
+            }
+        }
+    }
+
+    private void createAnts(){
+        Random randomNumberGenerator = new Random(System.currentTimeMillis());
+        for(int i =0;i<numberOfAnts;i++){
+            listOfAnts.add(new Ant(randomNumberGenerator.nextInt(graph.getVertices().size())));
+        }
+    }
+
+    private int determineNextCity(Ant ant){
+        Random randomNumberGenerator = new Random(System.currentTimeMillis());
+        double q = randomNumberGenerator.nextDouble();
+        if(q<=q0){
+            return probabilisticFormulaPart1(ant);
+        }else{
+            return probabilisticFormulaPart2(ant);
+        }
+    }
+
+    private int probabilisticFormulaPart1(Ant ant){
+        HashSet<Integer> visitedCities = ant.getVisitedCities();
+        int currentCityId = ant.getCurrentCityId();
+        double max_value = Double.MIN_VALUE;
+        int chosenCityId = -1;
+        for(int i=0;i< graph.getVertices().size();i++){
+            if(visitedCities.contains(i)){
+                continue;
+            }
+            double computedValue = pheromoneMatrix[currentCityId][i]*Math.pow(1/(graph.getAdjacencyMatrix()[currentCityId][i]),beta);
+            if(computedValue >= max_value){
+                max_value = computedValue;
+                chosenCityId = i;
+            }
+        }
+        return chosenCityId;
+    }
+
+    private int probabilisticFormulaPart2(Ant ant){
+        Random randomNumberGenerator = new Random(System.currentTimeMillis());
+        double randomNumber = randomNumberGenerator.nextDouble();
+        double totalProbability = 0.0;
+        for(int i=0;i<graph.getVertices().size();i++){
+            totalProbability += probabilisticDistribution(ant,i);
+            if(totalProbability > randomNumber){
+                return i;
+            }
+        }
+        return -1; //on error
+    }
+
+    private double probabilisticDistribution(Ant ant,int nextCityId){
+        int currentCityId = ant.getCurrentCityId();
+        HashSet<Integer> visitedCities = ant.getVisitedCities();
+        double denominator = 0.0;
+        if(visitedCities.contains(nextCityId)){
+            return 0.0;
+        }else{
+            for(int i=0;i<graph.getVertices().size();i++) {
+                if (visitedCities.contains(i)) {
+                    continue;
+                }
+                denominator += pheromoneMatrix[currentCityId][i] * Math.pow(1 /
+                        (graph.getAdjacencyMatrix()[currentCityId][i]), beta);
+            }
+            return (pheromoneMatrix[currentCityId][nextCityId] * Math.pow(1 /
+                    (graph.getAdjacencyMatrix()[currentCityId][nextCityId]), beta)) / denominator;
+        }
+    }
+
+    public double approximateTsp(){
+        double routeLength = 0.0;
+        int numberOfCities = graph.getVertices().size();
+        double [][] adjacencyMatrix = graph.getAdjacencyMatrix();
+        for(int i=0;i<1000000;i++){
+            createAnts();
+            while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){
+                for(int j=0;j<numberOfAnts;j++){
+                    int nextCityId = determineNextCity(listOfAnts.get(j));
+                    listOfAnts.get(j).moveToCity(nextCityId,adjacencyMatrix);
+                }
+            }
+            System.out.println("Generation "+i);
+            listOfAnts = new ArrayList<>();
+            //ToDo update pheromone matrix when going back , symmetrically
+            //todo local pher update also symmetrically
+            //todo best ant tour updates , not global
+        }
+        return routeLength;
+    }
+
+}
