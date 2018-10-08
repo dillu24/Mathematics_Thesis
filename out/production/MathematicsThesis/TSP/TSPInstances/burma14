@@ -1,4 +1,4 @@
-NOTE:This File's co-ordinates have been shifted to the left so that the string regax does not output an empty string as
+NOTE: This File's co-ordinates have been shifted to the left so that the string regax does not output an empty string as
 first element in the result
 NAME: burma14
 TYPE: TSP
