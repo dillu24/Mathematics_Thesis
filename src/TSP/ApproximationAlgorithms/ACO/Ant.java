@@ -1,5 +1,6 @@
 package TSP.ApproximationAlgorithms.ACO;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -7,12 +8,14 @@ import java.util.HashSet;
  */
 public class Ant {
     private HashSet<Integer> visitedCities;
+    private ArrayList<Integer> visitedCitiesOrdered; //due to global updating
     private int currentCityId;
     private int startingCityId;
     private double routeLength;
 
     public Ant(){
         visitedCities = new HashSet<>();
+        visitedCitiesOrdered = new ArrayList<>();
         currentCityId = -1;
         startingCityId = -1;
         routeLength = 0.00;
@@ -20,14 +23,18 @@ public class Ant {
 
     public Ant(int startingCityId){
         visitedCities = new HashSet<>();
+        visitedCitiesOrdered = new ArrayList<>();
         this.startingCityId = startingCityId;
         currentCityId = startingCityId;
         visitedCities.add(currentCityId);
+        visitedCitiesOrdered.add(currentCityId);
     }
 
     public HashSet<Integer> getVisitedCities(){
         return visitedCities;
     }
+
+    public ArrayList<Integer> getVisitedCitiesOrdered(){ return visitedCitiesOrdered; }
 
     public void setStartingCityId(int startingCityId){
         this.startingCityId = startingCityId;
@@ -52,6 +59,7 @@ public class Ant {
     public void moveToCity(int nextCityId,double[][] adjacencyMatrix){
         routeLength -= adjacencyMatrix[currentCityId][startingCityId]; // to remove returning back since uncomplete
         visitedCities.add(nextCityId);
+        visitedCitiesOrdered.add(nextCityId);
         routeLength += adjacencyMatrix[currentCityId][nextCityId];
         currentCityId = nextCityId;
         routeLength += adjacencyMatrix[currentCityId][startingCityId]; // return back for now to complete tour

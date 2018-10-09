@@ -25,9 +25,9 @@ public class ACOEngine {
         listOfAnts = new ArrayList<>();
         beta = 2;
         alpha = 0.1;
-        q0 = 0.1;
+        q0 = 0.9;
         numberOfAnts =10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/burma14");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/ch130");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
@@ -121,23 +121,51 @@ public class ACOEngine {
         }
     }
 
+    public void localTrailUpdating(int cityId1 , int cityId2){
+        pheromoneMatrix[cityId1][cityId2] = ((1-alpha)*pheromoneMatrix[cityId1][cityId2]) + (alpha*t0);
+        pheromoneMatrix[cityId2][cityId1] = ((1-alpha)*pheromoneMatrix[cityId2][cityId1]) + (alpha*t0);
+    }
+
+    public void globalTrailUpdating(int cityId1, int cityId2, double tourLength){
+        pheromoneMatrix[cityId1][cityId2] = ((1-alpha)*pheromoneMatrix[cityId1][cityId2]) + (alpha*(1/tourLength));
+        pheromoneMatrix[cityId2][cityId1] = ((1-alpha)*pheromoneMatrix[cityId2][cityId1]) + (alpha*(1/tourLength));
+    }
+
     public double approximateTsp(){
-        double routeLength = 0.0;
+        double routeLength = Double.MAX_VALUE;
         int numberOfCities = graph.getVertices().size();
         double [][] adjacencyMatrix = graph.getAdjacencyMatrix();
         for(int i=0;i<1000000;i++){
             createAnts();
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){
                 for(int j=0;j<numberOfAnts;j++){
-                    int nextCityId = determineNextCity(listOfAnts.get(j));
-                    listOfAnts.get(j).moveToCity(nextCityId,adjacencyMatrix);
+                    Ant ant = listOfAnts.get(j);
+                    int nextCityId = determineNextCity(ant);
+                    localTrailUpdating(ant.getCurrentCityId(),nextCityId);
+                    ant.moveToCity(nextCityId,adjacencyMatrix);
                 }
             }
-            System.out.println("Generation "+i);
+            double shortestTour = Double.MAX_VALUE;
+            int bestAntIndex = -1;
+            for(int j=0;j<numberOfAnts;j++){ //To update pheromone back also .. nahseb trid tamila nkella bla sens ..also ccekja lim lahjar tour
+                Ant ant = listOfAnts.get(j);
+                localTrailUpdating(ant.getCurrentCityId(),ant.getStartingCityId());
+                if(ant.getRouteLength()<shortestTour){
+                    shortestTour = ant.getRouteLength();
+                    bestAntIndex = j;
+                }
+            }
+            Ant ant = listOfAnts.get(bestAntIndex);
+            ArrayList<Integer> bestRoute = ant.getVisitedCitiesOrdered();
+            for(int j=0;j<bestRoute.size()-1;j++){
+                globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),ant.getRouteLength());
+            }
+            globalTrailUpdating(bestRoute.get(bestRoute.size()-1),bestRoute.get(0),ant.getRouteLength());
+            if(ant.getRouteLength() < routeLength){
+                routeLength = ant.getRouteLength();
+            }
+            System.out.println("Generation "+i+" Best tour length = "+routeLength);
             listOfAnts = new ArrayList<>();
-            //ToDo update pheromone matrix when going back , symmetrically
-            //todo local pher update also symmetrically
-            //todo best ant tour updates , not global
         }
         return routeLength;
     }
