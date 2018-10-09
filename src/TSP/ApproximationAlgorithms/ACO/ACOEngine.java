@@ -26,8 +26,8 @@ public class ACOEngine {
         beta = 2;
         alpha = 0.1;
         q0 = 0.9;
-        numberOfAnts =10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/ch130");
+        numberOfAnts = 10;
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/berlin52");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
@@ -121,12 +121,12 @@ public class ACOEngine {
         }
     }
 
-    public void localTrailUpdating(int cityId1 , int cityId2){
+    private void localTrailUpdating(int cityId1 , int cityId2){
         pheromoneMatrix[cityId1][cityId2] = ((1-alpha)*pheromoneMatrix[cityId1][cityId2]) + (alpha*t0);
         pheromoneMatrix[cityId2][cityId1] = ((1-alpha)*pheromoneMatrix[cityId2][cityId1]) + (alpha*t0);
     }
 
-    public void globalTrailUpdating(int cityId1, int cityId2, double tourLength){
+    private void globalTrailUpdating(int cityId1, int cityId2, double tourLength){
         pheromoneMatrix[cityId1][cityId2] = ((1-alpha)*pheromoneMatrix[cityId1][cityId2]) + (alpha*(1/tourLength));
         pheromoneMatrix[cityId2][cityId1] = ((1-alpha)*pheromoneMatrix[cityId2][cityId1]) + (alpha*(1/tourLength));
     }
