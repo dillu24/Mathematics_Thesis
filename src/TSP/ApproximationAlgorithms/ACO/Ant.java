@@ -56,13 +56,13 @@ public class Ant {
         return routeLength;
     }
 
-    public void moveToCity(int nextCityId,double[][] adjacencyMatrix){
-        routeLength -= adjacencyMatrix[currentCityId][startingCityId]; // to remove returning back since uncomplete
+    public void moveToCity(int nextCityId,double[][] distanceMatrix){
+        routeLength -= distanceMatrix[currentCityId][startingCityId]; // to remove returning back since uncomplete
         visitedCities.add(nextCityId);
         visitedCitiesOrdered.add(nextCityId);
-        routeLength += adjacencyMatrix[currentCityId][nextCityId];
+        routeLength += distanceMatrix[currentCityId][nextCityId];
         currentCityId = nextCityId;
-        routeLength += adjacencyMatrix[currentCityId][startingCityId]; // return back for now to complete tour
+        routeLength += distanceMatrix[currentCityId][startingCityId]; // return back for now to complete tour
     }
 
     public boolean antCompletedTour(int numberOfCities){

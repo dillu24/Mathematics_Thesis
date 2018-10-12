@@ -27,7 +27,7 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/burma14");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/berlin52");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
@@ -80,7 +80,7 @@ public class ACOEngine {
             if(visitedCities.contains(i)){
                 continue;
             }
-            double computedValue = pheromoneMatrix[currentCityId][i]*Math.pow(1/(graph.getAdjacencyMatrix()[currentCityId][i]),beta);
+            double computedValue = pheromoneMatrix[currentCityId][i]*Math.pow(1/(graph.getDistanceMatrix()[currentCityId][i]),beta);
             if(computedValue >= max_value){
                 max_value = computedValue;
                 chosenCityId = i;
@@ -114,10 +114,10 @@ public class ACOEngine {
                     continue;
                 }
                 denominator += pheromoneMatrix[currentCityId][i] * Math.pow(1 /
-                        (graph.getAdjacencyMatrix()[currentCityId][i]), beta);
+                        (graph.getDistanceMatrix()[currentCityId][i]), beta);
             }
             return (pheromoneMatrix[currentCityId][nextCityId] * Math.pow(1 /
-                    (graph.getAdjacencyMatrix()[currentCityId][nextCityId]), beta)) / denominator;
+                    (graph.getDistanceMatrix()[currentCityId][nextCityId]), beta)) / denominator;
         }
     }
 
@@ -134,7 +134,7 @@ public class ACOEngine {
     public double approximateTsp(){
         double routeLength = Double.MAX_VALUE;
         int numberOfCities = graph.getVertices().size();
-        double [][] adjacencyMatrix = graph.getAdjacencyMatrix();
+        double [][] distanceMatrix = graph.getDistanceMatrix();
         for(int i=0;i<1000000;i++){
             createAnts();
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){
@@ -142,7 +142,7 @@ public class ACOEngine {
                     Ant ant = listOfAnts.get(j);
                     int nextCityId = determineNextCity(ant);
                     localTrailUpdating(ant.getCurrentCityId(),nextCityId);
-                    ant.moveToCity(nextCityId,adjacencyMatrix);
+                    ant.moveToCity(nextCityId,distanceMatrix);
                 }
             }
             double shortestTour = Double.MAX_VALUE;

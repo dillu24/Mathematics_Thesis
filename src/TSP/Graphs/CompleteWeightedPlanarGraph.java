@@ -34,10 +34,10 @@ public class CompleteWeightedPlanarGraph extends Graph {
                 line = reader.readLine();
             }
             reader.close();
-            adjacencyMatrix = new double[vertices.size()][vertices.size()];
+            distanceMatrix = new double[vertices.size()][vertices.size()];
             for(int i =0;i<vertices.size();i++){
                 for(int j=0;j<vertices.size();j++){
-                    adjacencyMatrix[i][j] = getEuclideanDistance(vertices.get(i),vertices.get(j));
+                    distanceMatrix[i][j] = getEuclideanDistance(vertices.get(i),vertices.get(j));
                 }
             }
         }catch (IOException e) {

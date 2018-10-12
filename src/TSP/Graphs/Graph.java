@@ -2,7 +2,6 @@ package TSP.Graphs;
 
 import TSP.City;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -10,11 +9,11 @@ import java.util.ArrayList;
  */
 public abstract class Graph {
     protected ArrayList<City> vertices;
-    protected double[][] adjacencyMatrix;
+    protected double[][] distanceMatrix;
 
     public Graph(){
         vertices = new ArrayList<City>();
-        adjacencyMatrix = new double[0][0];
+        distanceMatrix = new double[0][0];
     }
 
     public Graph(String filepath){
@@ -26,8 +25,8 @@ public abstract class Graph {
         return vertices;
     }
 
-    public double[][] getAdjacencyMatrix(){
-        return adjacencyMatrix;
+    public double[][] getDistanceMatrix(){
+        return distanceMatrix;
     }
 
     public abstract void initializeGraph(String filepath);
