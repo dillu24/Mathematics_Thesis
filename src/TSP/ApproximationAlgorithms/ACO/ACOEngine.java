@@ -1,3 +1,4 @@
+//To make it faster considered complete graph .. if graph if not complete do very large distances to avoid
 package TSP.ApproximationAlgorithms.ACO;
 
 import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbourHeuristicEngine;
@@ -77,7 +78,7 @@ public class ACOEngine {
         double max_value = Double.MIN_VALUE;
         int chosenCityId = -1;
         for(int i=0;i< graph.getVertices().size();i++){
-            if(visitedCities.contains(i) || graph.getDistanceMatrix()[ant.getCurrentCityId()][i] == 0){ //To make the algorithm more general to not only consider complete graphs
+            if(visitedCities.contains(i)){
                 continue;
             }
             double computedValue = pheromoneMatrix[currentCityId][i]*Math.pow(1/(graph.getDistanceMatrix()[currentCityId][i]),beta);
@@ -106,11 +107,11 @@ public class ACOEngine {
         int currentCityId = ant.getCurrentCityId();
         HashSet<Integer> visitedCities = ant.getVisitedCities();
         double denominator = 0.0;
-        if(visitedCities.contains(nextCityId) || graph.getDistanceMatrix()[ant.getCurrentCityId()][nextCityId]==0){ //to make the algorithm more general
+        if(visitedCities.contains(nextCityId)){
             return 0.0;
         }else{
             for(int i=0;i<graph.getVertices().size();i++) {
-                if (visitedCities.contains(i) || graph.getDistanceMatrix()[ant.getCurrentCityId()][i] ==0) { //to make algorithm more general
+                if (visitedCities.contains(i)) {
                     continue;
                 }
                 denominator += pheromoneMatrix[currentCityId][i] * Math.pow(1 /

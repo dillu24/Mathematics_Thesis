@@ -8,7 +8,7 @@ import TSP.ApproximationAlgorithms.TwiceAroundMST.PrimsPriorityQueueEntry;
 
 public class AlgorithmLauncher {
     public static void main (String args[]){
-        //ACOEngine aco = new ACOEngine();
-        //aco.approximateTsp();
+        ACOEngine aco = new ACOEngine();
+        aco.approximateTsp();
     }
 }
