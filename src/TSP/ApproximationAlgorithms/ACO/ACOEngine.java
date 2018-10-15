@@ -27,7 +27,7 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/TSPInstances/berlin52");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
@@ -77,7 +77,7 @@ public class ACOEngine {
         double max_value = Double.MIN_VALUE;
         int chosenCityId = -1;
         for(int i=0;i< graph.getVertices().size();i++){
-            if(visitedCities.contains(i)){
+            if(visitedCities.contains(i) || graph.getDistanceMatrix()[ant.getCurrentCityId()][i] == 0){ //To make the algorithm more general to not only consider complete graphs
                 continue;
             }
             double computedValue = pheromoneMatrix[currentCityId][i]*Math.pow(1/(graph.getDistanceMatrix()[currentCityId][i]),beta);
@@ -106,11 +106,11 @@ public class ACOEngine {
         int currentCityId = ant.getCurrentCityId();
         HashSet<Integer> visitedCities = ant.getVisitedCities();
         double denominator = 0.0;
-        if(visitedCities.contains(nextCityId)){
+        if(visitedCities.contains(nextCityId) || graph.getDistanceMatrix()[ant.getCurrentCityId()][nextCityId]==0){ //to make the algorithm more general
             return 0.0;
         }else{
             for(int i=0;i<graph.getVertices().size();i++) {
-                if (visitedCities.contains(i)) {
+                if (visitedCities.contains(i) || graph.getDistanceMatrix()[ant.getCurrentCityId()][i] ==0) { //to make algorithm more general
                     continue;
                 }
                 denominator += pheromoneMatrix[currentCityId][i] * Math.pow(1 /
