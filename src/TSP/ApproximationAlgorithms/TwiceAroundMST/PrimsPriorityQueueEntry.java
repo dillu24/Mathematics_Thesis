@@ -33,6 +33,6 @@ public class PrimsPriorityQueueEntry implements Comparable<PrimsPriorityQueueEnt
 
     @Override
     public int compareTo(PrimsPriorityQueueEntry entry) {
-        return minimumWeightConnectedEdge.compareTo(entry.getMinimumWeightConnectedEdge());
+        return Double.compare(minimumWeightConnectedEdge,entry.getMinimumWeightConnectedEdge());
     }
 }

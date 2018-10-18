@@ -1,4 +1,5 @@
-//To make it faster considered complete graph .. if graph if not complete do very large distances to avoid
+//To make it faster considered complete graph .. if graph if not complete do very large distances to avoid .. loops
+//avoided because the ant will add the vertex to the list of vertices hence it will not consider it.
 package TSP.ApproximationAlgorithms.ACO;
 
 import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbourHeuristicEngine;

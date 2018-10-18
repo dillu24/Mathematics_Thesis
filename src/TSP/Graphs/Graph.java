@@ -29,5 +29,13 @@ public abstract class Graph {
         return distanceMatrix;
     }
 
+    public void setDistanceMatrix(double distanceMatrix[][]){
+        this.distanceMatrix = distanceMatrix;
+    }
+
+    public void setVertices(ArrayList<City> vertices){
+        this.vertices = vertices;
+    }
+
     public abstract void initializeGraph(String filepath);
 }
