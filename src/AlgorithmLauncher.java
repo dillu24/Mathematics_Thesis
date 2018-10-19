@@ -37,6 +37,6 @@ public class AlgorithmLauncher {
                 new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"));
         System.out.println("Nearest Neighbour heuristic result: "+nnh.ApproximateTsp());
 
-        //Interface app = new Interface(); Interface for visuals will be developed later
+
     }
 }

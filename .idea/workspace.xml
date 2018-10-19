@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13c7ba10-a7d3-4ad4-93db-ad47b6b78e3f" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/ACOGUI/Interface$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/ACOGUI/Interface.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ACOGUI/Interface.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/ApproximationAlgorithms/ACO/ACOEngine.class" afterPath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/ApproximationAlgorithms/ACO/ACOEngine.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/City.class" afterPath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/City.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/Graphs/CompleteWeightedPlanarGraph.class" afterPath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/Graphs/CompleteWeightedPlanarGraph.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/Graphs/Graph.class" afterPath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/Graphs/Graph.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AlgorithmLauncher.java" afterPath="$PROJECT_DIR$/src/AlgorithmLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/City.java" afterPath="$PROJECT_DIR$/src/TSP/City.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,9 +34,19 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlgorithmLauncher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AlgorithmLauncher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
-                <element signature="e#181#182#0" expanded="true" />
-                <element signature="e#212#213#0" expanded="true" />
+                <element signature="e#0#2103#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,12 +99,12 @@
         <option value="$PROJECT_DIR$/src/ACOApplet.html" />
         <option value="$PROJECT_DIR$/src/ACOApplet.java" />
         <option value="$PROJECT_DIR$/src/ACOGUI/Interface.java" />
-        <option value="$PROJECT_DIR$/src/AlgorithmLauncher.java" />
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" />
         <option value="$PROJECT_DIR$/src/TSP/City.java" />
         <option value="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" />
         <option value="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" />
         <option value="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" />
+        <option value="$PROJECT_DIR$/src/AlgorithmLauncher.java" />
       </list>
     </option>
   </component>
@@ -454,7 +467,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -471,7 +484,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23426062" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23426062" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -619,36 +632,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ACOGUI/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-140">
-          <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2229#2230#0" expanded="true" />
-            <element signature="e#2266#2267#0" expanded="true" />
-            <element signature="e#2335#2504#0" expanded="true" />
-            <element signature="e#2503#2504#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AlgorithmLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="86" lean-forward="false" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
-          <folding>
-            <element signature="e#0#2191#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -704,14 +692,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ACOGUI/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AlgorithmLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2103#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-          <folding>
-            <element signature="e#181#182#0" expanded="true" />
-            <element signature="e#212#213#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
