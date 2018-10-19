@@ -2,11 +2,11 @@ package TSP.ApproximationAlgorithms.TwiceAroundMST;
 
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
-import com.sun.org.apache.xpath.internal.operations.String;
+
 
 import java.util.PriorityQueue;
 import java.util.Random;
-
+//Was made to work even on non complete graphs.
 /**
  * Created by Dylan Galea on 15/10/2018.
  */
