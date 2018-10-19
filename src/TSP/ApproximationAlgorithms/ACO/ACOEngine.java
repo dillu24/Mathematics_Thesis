@@ -154,7 +154,7 @@ public class ACOEngine {
         double routeLength = Double.MAX_VALUE;
         int numberOfCities = graph.getVertices().size();
         double [][] distanceMatrix = graph.getDistanceMatrix();
-        for(int i=0;i<1000000;i++){
+        for(int i=0;i<100000;i++){
             createAnts();
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){
                 for(int j=0;j<numberOfAnts;j++){
@@ -183,7 +183,7 @@ public class ACOEngine {
             if(ant.getRouteLength() < routeLength){
                 routeLength = ant.getRouteLength();
             }
-            System.out.println("Generation "+i+" Best tour length = "+routeLength);
+            System.out.println("Iteration "+i+" Best tour length = "+routeLength);
             listOfAnts = new ArrayList<>();
         }
         return routeLength;

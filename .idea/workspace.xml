@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13c7ba10-a7d3-4ad4-93db-ad47b6b78e3f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AlgorithmLauncher.java" afterPath="$PROJECT_DIR$/src/AlgorithmLauncher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/City.java" afterPath="$PROJECT_DIR$/src/TSP/City.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,70 +26,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ACOEngine.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java">
+      <file leaf-file-name="TestGraph.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="189" column="5" lean-forward="false" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
+            <state relative-caret-position="85">
+              <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
               <folding>
-                <element signature="e#0#7871#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Interface.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ACOGUI/Interface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2229#2230#0" expanded="true" />
-                <element signature="e#2266#2267#0" expanded="true" />
-                <element signature="e#2335#2504#0" expanded="true" />
-                <element signature="e#2503#2504#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompleteWeightedPlanarGraph.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding>
-                <element signature="e#312#313#0" expanded="true" />
-                <element signature="e#343#344#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/Graph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-              <folding>
-                <element signature="e#247#248#0" expanded="true" />
-                <element signature="e#295#296#0" expanded="true" />
-                <element signature="e#457#458#0" expanded="true" />
-                <element signature="e#488#489#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlgorithmLauncher.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AlgorithmLauncher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="29" column="10" lean-forward="false" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#181#182#0" expanded="true" />
+                <element signature="e#212#213#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,7 +70,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/TSP/Graph/CompleteWeightedGraph.java" />
         <option value="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedGraph.java" />
-        <option value="$PROJECT_DIR$/src/TSP/City.java" />
         <option value="$PROJECT_DIR$/src/TSP/TSPInstances/berlin52" />
         <option value="$PROJECT_DIR$/src/TSP/TSPInstances/burma14" />
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/Ant.java" />
@@ -136,17 +80,18 @@
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/Ant.java" />
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/Graph.java" />
         <option value="$PROJECT_DIR$/src/TSP/Graphs/UndirectedWeightedGraph.java" />
-        <option value="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" />
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/PrimsPriorityQueueEntry.java" />
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/PrimMST.java" />
         <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/TwiceAroundMSTHeuristic.java" />
         <option value="$PROJECT_DIR$/src/ACOApplet.html" />
         <option value="$PROJECT_DIR$/src/ACOApplet.java" />
-        <option value="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" />
-        <option value="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" />
-        <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" />
         <option value="$PROJECT_DIR$/src/ACOGUI/Interface.java" />
         <option value="$PROJECT_DIR$/src/AlgorithmLauncher.java" />
+        <option value="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" />
+        <option value="$PROJECT_DIR$/src/TSP/City.java" />
+        <option value="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" />
+        <option value="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" />
+        <option value="$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java" />
       </list>
     </option>
   </component>
@@ -235,28 +180,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Graphs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MathematicsThesis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MathematicsThesis" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TSP" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ApproximationAlgorithms" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -531,7 +454,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -548,7 +471,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23426062" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23426062" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -574,12 +497,6 @@
           <line>153</line>
           <properties />
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/AlgorithmLauncher.java</url>
-          <line>28</line>
-          <properties />
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/TwiceAroundMSTHeuristic.java</url>
@@ -608,20 +525,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#7871#0" expanded="true" />
+            <element signature="e#0#7869#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TSP/boq.java" />
-    <entry file="file://$PROJECT_DIR$/src/TSP/GraphInstances/burma14">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TSP/GraphInstances/berlin52">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-708">
@@ -643,14 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="204" column="3" lean-forward="false" selection-start-line="204" selection-start-column="3" selection-end-line="204" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSP/City.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -679,16 +581,6 @@
           <caret line="8" column="47" lean-forward="false" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-          <folding>
-            <element signature="e#215#216#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -727,44 +619,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#343#344#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-          <folding>
-            <element signature="e#247#248#0" expanded="true" />
-            <element signature="e#295#296#0" expanded="true" />
-            <element signature="e#457#458#0" expanded="true" />
-            <element signature="e#488#489#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="189" column="5" lean-forward="false" selection-start-line="189" selection-start-column="5" selection-end-line="189" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#7871#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ACOGUI/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="-140">
           <caret line="29" column="25" lean-forward="true" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -776,12 +633,84 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AlgorithmLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="86" lean-forward="false" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#2191#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSP/City.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
+          <folding>
+            <element signature="e#1365#1366#0" expanded="true" />
+            <element signature="e#1391#1392#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
-          <caret line="29" column="10" lean-forward="false" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
+          <caret line="185" column="41" lean-forward="false" selection-start-line="185" selection-start-column="41" selection-end-line="185" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#7869#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSP/GraphInstances/burma14">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="78" column="84" lean-forward="false" selection-start-line="78" selection-start-column="84" selection-end-line="78" selection-end-column="84" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2897#2898#0" expanded="true" />
+            <element signature="e#2937#2938#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-55">
+          <caret line="62" column="119" lean-forward="false" selection-start-line="62" selection-start-column="119" selection-end-line="62" selection-end-column="119" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TSP/Graphs/TestGraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="49" lean-forward="false" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+          <folding>
+            <element signature="e#181#182#0" expanded="true" />
+            <element signature="e#212#213#0" expanded="true" />
           </folding>
         </state>
       </provider>

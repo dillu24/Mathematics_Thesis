@@ -1,11 +1,11 @@
-//Test Class for MST
 package TSP.Graphs;
 import TSP.City;
 
-/**
- * Created by Dylan Galea on 18/10/2018.
- */
 public class TestGraph extends Graph {
+    /**
+     * ToDo make it in code rather than as class.
+     */
+
     public TestGraph(String filepath){
         super(filepath);
     }
