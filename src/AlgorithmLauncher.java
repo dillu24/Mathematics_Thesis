@@ -1,3 +1,4 @@
+import ACOGUI.Interface;
 import TSP.ApproximationAlgorithms.ACO.ACOEngine;
 import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbourHeuristicEngine;
 import TSP.ApproximationAlgorithms.TwiceAroundMST.PrimMST;
@@ -11,8 +12,8 @@ import TSP.Graphs.TestGraph;
 
 public class AlgorithmLauncher {
     public static void main (String args[]){
-        ACOEngine aco = new ACOEngine();
-        aco.approximateTsp();
+        //ACOEngine aco = new ACOEngine();
+        //aco.approximateTsp();
 
         //TestGraph graph = new TestGraph(null);
         //PrimMST prim = new PrimMST(graph);
@@ -25,10 +26,11 @@ public class AlgorithmLauncher {
             //System.out.println();
         //}
 
-        TwiceAroundMSTHeuristic heur = new TwiceAroundMSTHeuristic(new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/d198"));
-        System.out.println(heur.approximateTSP());
+        //TwiceAroundMSTHeuristic heur = new TwiceAroundMSTHeuristic(new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/d198"));
+        //System.out.println(heur.approximateTSP());
 
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/d198"));
         System.out.println(nnh.ApproximateTsp());
+        //Interface app = new Interface();
     }
 }

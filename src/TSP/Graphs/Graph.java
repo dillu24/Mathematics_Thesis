@@ -13,7 +13,6 @@ public abstract class Graph {
 
     public Graph(){
         vertices = new ArrayList<City>();
-        distanceMatrix = new double[0][0];
     }
 
     public Graph(String filepath){

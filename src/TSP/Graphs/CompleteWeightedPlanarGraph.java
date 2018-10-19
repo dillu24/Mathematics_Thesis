@@ -46,7 +46,7 @@ public class CompleteWeightedPlanarGraph extends Graph {
         }
     }
 
-    private double getEuclideanDistance(City city1,City city2){
+    public double getEuclideanDistance(City city1,City city2){
         return Math.sqrt(Math.pow(city1.getX()-city2.getX(),2)+Math.pow(city1.getY()-city2.getY(),2));
     }
 

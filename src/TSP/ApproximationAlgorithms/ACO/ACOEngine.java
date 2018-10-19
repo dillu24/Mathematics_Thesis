@@ -29,7 +29,24 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/d198");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52");
+        NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
+        t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
+        pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
+        for(int i=0;i<graph.getVertices().size();i++){
+            for(int j=0;j<graph.getVertices().size();j++){
+                pheromoneMatrix[i][j] = 0.00005;
+            }
+        }
+    }
+
+    public ACOEngine(Graph g){
+        listOfAnts = new ArrayList<>();
+        beta = 2;
+        alpha = 0.1;
+        q0 = 0.9;
+        numberOfAnts = 10;
+        graph = g;
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp());
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()];
