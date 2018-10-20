@@ -13,17 +13,31 @@ public class AlgorithmLauncher {
         ACOEngine aco = new ACOEngine(); //Creates the ACO algorithm object
         System.out.println("This is the Ant System's result: "+aco.approximateTsp()); //Starts the algorithm and
                                                                                       // displays result
-
         /* This was done for testing purposes only, to check that the MST output is correct
-        TestGraph graph = new TestGraph(null);
-        //PrimMST prim = new PrimMST(graph);
-        //int [][]adj = prim.calculateMinimumWeightSpanningTree();
-        //for(int i=0;i<adj.length;i++){
-            //for(int j=0;j<adj.length;j++){
-                //System.out.print(adj[i][j]);
-                //System.out.print(" ");
-            //}
-            //System.out.println();
+        CompleteWeightedPlanarGraph testGraph = new CompleteWeightedPlanarGraph();
+        ArrayList<City> vertices = new ArrayList<>();
+        for(int i=0;i<9;i++){
+            vertices.add(new City(i,0,0));
+        }
+        testGraph.setVertices(vertices);
+        double distanceMatrix[][] = {{0.0,4.0,8.0,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE},
+                {4.0,0.0,11.0,8.0,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE},
+                {8.0,11.0,0.0,Double.MAX_VALUE,7.0,1.0,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE},
+                {Double.MAX_VALUE,8.0,Double.MAX_VALUE,0.0,2.0,Double.MAX_VALUE,7.0,4.0,Double.MAX_VALUE},
+                {Double.MAX_VALUE,Double.MAX_VALUE,7.0,2.0,0.0,6.0,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE},
+                {Double.MAX_VALUE,Double.MAX_VALUE,1.0,Double.MAX_VALUE,6.0,0.0,Double.MAX_VALUE,2.0,Double.MAX_VALUE},
+                {Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,7.0,Double.MAX_VALUE,Double.MAX_VALUE,0.0,14.0,9.0},
+                {Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,4.0,Double.MAX_VALUE,2.0,14.0,0.0,10.0},
+                {Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE,9.0,10.0,0.0}};
+        testGraph.setDistanceMatrix(distanceMatrix);
+        PrimMST mst = new PrimMST(testGraph);
+        int [][]adj = mst.calculateMinimumWeightSpanningTree();
+        for(int i=0;i<adj.length;i++){
+            for(int j=0;j<adj.length;j++){
+                System.out.print(adj[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
         }*/
 
         //This creates the TwiceAroundMstHeuristic object that is used to start the algorithm and displays result
