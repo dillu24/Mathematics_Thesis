@@ -12,6 +12,7 @@ public class PrimsPriorityQueueEntry implements Comparable<PrimsPriorityQueueEnt
     /**
      * This constructor is used to create a new entry for a particular city given it's id.
      * @param cityID
+     *  Stores the city id to be stored in this.cityID
      */
     public PrimsPriorityQueueEntry(int cityID){
         this.cityID = cityID;

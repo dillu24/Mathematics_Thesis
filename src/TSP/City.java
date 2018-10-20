@@ -87,6 +87,7 @@ public class City {
      * This method is used to return the value stored in the private variable 'iD', since this is set as private in
      * order to encourage encapsulation.
      * @return
+     *  Returns the value stored in this.iD
      */
     public int getID(){
         return iD;

@@ -27,6 +27,7 @@ public abstract class Graph {
     /**
      * This constructor is used to create a graph given the filepath of the TSPLIB instance file.
      * @param filepath
+     *  Stores the value to be stored in this.filepath
      */
     public Graph(String filepath){
         vertices = new ArrayList<City>(); //give memory
