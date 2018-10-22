@@ -1,0 +1,25 @@
+\documentclass{article}
+\title{Applications of Graph Theory and Combinatorics in Computer Science}
+\author{Dylan Galea}
+
+\usepackage{cite}
+\usepackage{amsmath}
+
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+\maketitle
+\section{The Travelling Salesman Problem}
+To define the Travelling Salesman Problem , first the concept of a Hamiltonian Cycle must be defined.
+\begin{definition}[Hamiltonian Cycle]
+Given a graph G(V,E), a Hamiltonian Cycle in G is a cycle in G such that $\forall$ v $\in$ V, v is in the cycle and is visited only once . A graph that contains a Hamiltonian cycle is called a Hamiltonian Graph \cite{weisstein_2018}.
+\end{definition}
+The Travelling Salesmann Problem can now be defined as follows.
+\begin{definition}[Travelling Salesman Problem]
+Given simple graph G(V,E) were V is the list of vertices(cities) in G and E is the set of weighted edges between every 2 vertices of G , the problem is to find a minimum weight Hamiltonian Cycle in G \cite{geeksforgeeks_2018}.
+\end{definition}
+ToDo define NP HARD problems .. link with hamiltonian cycle and do example
+\newpage{}
+\bibliography{bibliography}
+\bibliographystyle{IEEEtran}
+\end{document}
