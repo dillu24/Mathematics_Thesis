@@ -6,15 +6,17 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
-\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{theorem}{definition}[subsection]
 \newtheorem{definition}{Definition}[subsection]
-\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma}[definition]{Lemma}
 
 \begin{document}
-\tableofcontents
 \maketitle
+\newpage
+\tableofcontents
+\newpage
 \section{The Travelling Salesman Problem}
-\subsection{Important Definitions and Problem Background}
+\subsection{Basic Definitions and Results}
 To define the Travelling Salesman Problem , first the concept of a Hamiltonian Cycle must be defined. This concept is defined in definition \ref{Hamiltonian Cycle} below.
 \begin{definition}[Hamiltonian Cycle]
 \label{Hamiltonian Cycle}
@@ -25,20 +27,26 @@ The Travelling Salesman problem can now be defined as shown in definition \ref{T
 \label{Travelling Salesman Problem}
 Given a simple graph G(V,E) such that $\forall$ v,w $\in$ V ,v $\ne$ w $\{v,w\}$ $\in$ E, the Travelling Salesman Problem is the task of finding a minimum weight Hamiltonian Cycle in G \cite{geeksforgeeks_2018}.
 \end{definition}
+DOOOOOOOOOOOOOOOOOOOOOOOOOOO EXAMPLE HEREEE OF THE PROBLEM 
 Definition \ref{Travelling Salesman Problem} suggests that in the Travelling Salesman Problem it is already known that the graph to be evaluated is Hamiltonian, otherwise a minimum weight Hamiltonian Cycle can never be found.This uncertainty can be tackled by proving
 that any complete graph on more than 3 vertices is Hamiltonian. This fact is proved in lemma \ref{Kn is Hamiltonian} below.
 \begin{lemma}
 \label{Kn is Hamiltonian}
-For n $>$= 3, The complete graph on n vertices is Hamiltonian
+For n $\geq$ 3, The complete graph on n vertices is Hamiltonian
 \end{lemma}
 \begin{proof}
-Let Kn be the complete graph on n $>=$ 3 vertices labelled v1,v2,...,vn. Order all the vertices in the order v1,v2,...,vn with no repetitions of vertices.Then C=(v1 v2 ... vn v1) must be a cycle in Kn because because $\forall$ vi,vj $\in$ C, vi $\ne$ vj then $\{vi,vj\}$ $\in$ E(Kn). Also since $\forall$ v $\in$ V(Kn) ,v is a vertex in the cycle with only one occurence in C(except for v1 which has 2 occurences) then C must be a Hamiltonian Cycle in Kn . Thus Kn must be Hamiltonian.
+Let $K_n$ be the complete graph on n $\geq$ 3 vertices labelled v1,v2,...,vn. Order all the vertices in the order v1,v2,...,vn with no repetitions of vertices.Then C=(v1 v2 ... vn v1) must be a cycle in $K_n$ because because $\forall$ vi,vj $\in$ C, vi $\ne$ vj then $\{vi,vj\}$ $\in$ E($K_n$). Also since $\forall$ v $\in$ V($K_n$) ,v is a vertex in the cycle with only one occurence in C(except for v1 which has 2 occurences) then C must be a Hamiltonian Cycle in $K_n$ . Thus $K_n$ must be Hamiltonian.
 \end{proof}
-
-
-
-
-ToDo define NP HARD problems .. link with hamiltonian cycle and do example
+Since every $K_n$ for n $\geq$ 3 vertices is Hamiltonian this suggests that in order to find the minimum weight Hamiltonian cycle one could compute every Hamiltonian cycle in $K_n$ and then return the cycle of least cost. However, this is infeasible because starting and ending in some arbitrary vertex of $K_n$ generates $\frac{(n-1)!}{2}$ distinct Hamiltonian cycles(proved in  lemma $\ref{running_time}$ below) . Thus the algorithm would have a time complexity O(n!) making it very infeasible to compute in reasonable time.\cite{geeksforgeeks_2018}
+\begin{lemma}
+\label{running_time}
+For n $\geq$ 3 the complete graph on n vertices has $\frac{(n-1)!}{2}$ distinct Hamiltonian cycles
+\end{lemma}
+\begin{proof}
+Let $K_n$ be the complete graph on n $\geq$ 3 vertices .Since E($K_n$) contains an edge for every possible dinstinct vertices u,v $\in$ V($K_n$) then every permutation of V($K_n$) must represent a Hamiltonian Cycle in $K_n$ and vice versa(1-1 correspondence). Now on n vertices there are n! possible number of permutations, thus we have n! Hamiltonian cycles due to the 1-1 correspondence. However, different permutations of V($K_n$ ) may represent the same Hamiltonian Cycle in $K_n$, since the same edges would be used from E($K_n$) but in a different order of the vertices . In fact, consider the Hamiltonian Cycle C represented by the permutation (v1 v2...vn). In terms of Hamiltonian cycles, the permutation (v1 v2 ...vn) is the same as the permutation (v2...vn v1) because the same edges in E($K_n$) are used . Thus for each Hamiltonian cycle in $K_n$ we can have n permutations representing the same cycle.However,for each of these n permutation representations , the reverse of each of the n permutations represent the same Hamiltonian Cycle with the difference being the the cycle is traversed in reverse order, thus we have 2n permutations representing the same Hamiltonian Cycle. Thus the number of distinct permutations is $\frac{n!}{2n}$ = $\frac{(n-1)!}{2}$. \cite{mathematics_stack_exchange_2012}
+\end{proof}
+The above discussion portrays the difficulty in writing an algorithm that executes in reasonable time, to solve the Travelling Salesman Problem for any number of cities . This leads to a discussion on NP-Completness and the class of NP-Complete problems in the next sub-section. 
+\subsection{NP-Completness}
 \newpage{}
 \bibliography{bibliography}
 \bibliographystyle{IEEEtran}
