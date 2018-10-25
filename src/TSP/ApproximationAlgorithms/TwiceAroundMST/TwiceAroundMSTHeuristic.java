@@ -12,7 +12,9 @@ public class TwiceAroundMSTHeuristic {
      * the space the graph is being considered. In the case were TSPLIB instances are being used , euclidean distance
      * is defined in them thus , the triangle inequality must hold . That being said to avoid repetitions in the tour
      * it is needed that the graph must be complete , thus if the graph is not complete another heuristic must be used
-     * or we add infinite weights to missing edges , however this can make the approximate tour very infeasible.
+     * or we add infinite weights to missing edges , however this can make the approximate tour very infeasible. It must
+     * also be noted that in this implementation , the algorithm is made to start from all the  vertices
+     * , taking the minimum in the process for better approximation results.
      */
     private Graph g; //Stores the graph to be considered
     private int [][] MSTAdjacencyMatrix; // Stores the MST's adjacency matrix calculated by Prim's algorithm
@@ -49,13 +51,18 @@ public class TwiceAroundMSTHeuristic {
      *  An approximation for the TSP
      */
     public double approximateTSP(){
-        Random generator = new Random(System.currentTimeMillis()); //The random number generator instance
-        double result = 0.0; //stores the result
-        DFS(generator.nextInt(g.getVertices().size()));//Do a DFS of the MST by starting from a random vertex
-        for(int i=0;i<approximateTour.size()-1;i++){//Calculate the result tour length
-            result += g.getDistanceMatrix()[approximateTour.get(i)][approximateTour.get(i+1)];
+        double result = Double.MAX_VALUE; //stores the result
+        for(int j=0;j<g.getVertices().size();j++) { //do procedure form every vertex for better approximation result
+            double partialResult = 0.0;
+            DFS(j);//Do a DFS of the MST by starting from current vertex of mst
+            for (int i = 0; i < approximateTour.size() - 1; i++) {//Calculate the result tour length
+                partialResult += g.getDistanceMatrix()[approximateTour.get(i)][approximateTour.get(i + 1)];
+            }
+            partialResult += g.getDistanceMatrix()[approximateTour.get(approximateTour.size() - 1)][approximateTour.get(0)]; //do not forget to calculate the distance from the last city to first city (since hamiltonian)
+            if (partialResult < result) {
+                result = partialResult;
+            }
         }
-        result += g.getDistanceMatrix()[approximateTour.get(approximateTour.size()-1)][approximateTour.get(0)]; //do not forget to calculate the distance from the last city to first city (since hamiltonian)
         return result; //return result
     }
 

@@ -4,20 +4,40 @@
 
 \usepackage{cite}
 \usepackage{amsmath}
+\usepackage{amsthm}
 
-\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
 
 \begin{document}
+\tableofcontents
 \maketitle
 \section{The Travelling Salesman Problem}
-To define the Travelling Salesman Problem , first the concept of a Hamiltonian Cycle must be defined.
+\subsection{Important Definitions and Problem Background}
+To define the Travelling Salesman Problem , first the concept of a Hamiltonian Cycle must be defined. This concept is defined in definition \ref{Hamiltonian Cycle} below.
 \begin{definition}[Hamiltonian Cycle]
+\label{Hamiltonian Cycle}
 Given a graph G(V,E), a Hamiltonian Cycle in G is a cycle in G such that $\forall$ v $\in$ V, v is in the cycle and is visited only once . A graph that contains a Hamiltonian cycle is called a Hamiltonian Graph \cite{weisstein_2018}.
 \end{definition}
-The Travelling Salesmann Problem can now be defined as follows.
+The Travelling Salesman problem can now be defined as shown in definition \ref{Travelling Salesman Problem} below.
 \begin{definition}[Travelling Salesman Problem]
-Given simple graph G(V,E) were V is the list of vertices(cities) in G and E is the set of weighted edges between every 2 vertices of G , the problem is to find a minimum weight Hamiltonian Cycle in G \cite{geeksforgeeks_2018}.
+\label{Travelling Salesman Problem}
+Given a simple graph G(V,E) such that $\forall$ v,w $\in$ V ,v $\ne$ w $\{v,w\}$ $\in$ E, the Travelling Salesman Problem is the task of finding a minimum weight Hamiltonian Cycle in G \cite{geeksforgeeks_2018}.
 \end{definition}
+Definition \ref{Travelling Salesman Problem} suggests that in the Travelling Salesman Problem it is already known that the graph to be evaluated is Hamiltonian, otherwise a minimum weight Hamiltonian Cycle can never be found.This uncertainty can be tackled by proving
+that any complete graph on more than 3 vertices is Hamiltonian. This fact is proved in lemma \ref{Kn is Hamiltonian} below.
+\begin{lemma}
+\label{Kn is Hamiltonian}
+For n $>$= 3, The complete graph on n vertices is Hamiltonian
+\end{lemma}
+\begin{proof}
+Let Kn be the complete graph on n $>=$ 3 vertices labelled v1,v2,...,vn. Order all the vertices in the order v1,v2,...,vn with no repetitions of vertices.Then C=(v1 v2 ... vn v1) must be a cycle in Kn because because $\forall$ vi,vj $\in$ C, vi $\ne$ vj then $\{vi,vj\}$ $\in$ E(Kn). Also since $\forall$ v $\in$ V(Kn) ,v is a vertex in the cycle with only one occurence in C(except for v1 which has 2 occurences) then C must be a Hamiltonian Cycle in Kn . Thus Kn must be Hamiltonian.
+\end{proof}
+
+
+
+
 ToDo define NP HARD problems .. link with hamiltonian cycle and do example
 \newpage{}
 \bibliography{bibliography}
