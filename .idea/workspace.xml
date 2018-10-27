@@ -4,8 +4,6 @@
     <list default="true" id="13c7ba10-a7d3-4ad4-93db-ad47b6b78e3f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up.pdf" afterPath="$PROJECT_DIR$/write_up.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up.synctex.gz" afterPath="$PROJECT_DIR$/write_up.synctex.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bibliography.bib" afterPath="$PROJECT_DIR$/bibliography.bib" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up.tex" afterPath="$PROJECT_DIR$/write_up.tex" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
