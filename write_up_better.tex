@@ -22,22 +22,23 @@
 \tableofcontents
 \newpage
 \section{Introduction}
-Before defining the Travelling Salesman Problem and proving properties about it, a number of concepts must first be defined. Therefore, what follows is a sub-section that introduces a number of graph theoretic concepts which are required for the Travelling Salesman Problem.
+Before defining the Travelling Salesman Problem and proving properties about it, a number of graph theoretic concepts must first be defined. Therefore, what follows is a sub-section that introduces a number of graph theoretic concepts which are required for the Travelling Salesman Problem.
 \subsection{Some Graph Theory}
 Graph theory is the study of the structure called a graph. A graph can be defined formally as shown in definition \ref{Graph} below.
 \begin{definition}[Graph]
 \label{Graph}
-A graph G is a pair (V,E) were V is any finite set called the set of vertices of G, and E $\subseteq$ \{$\{u,v\}$ $:$ u,v $\in$ V and u $\neq$ v\} is called the set of edges of G {\normalfont{\cite{black_tanenbaum_2017}}}. A graph G defined by the pair (V,E) is denoted by G(V,E).
+A graph G is a pair (V,E) were V is any non empty finite set called the set of vertices of G, and E $\subseteq$ \{$\{u,v\}$ $:$ u,v $\in$ V and u $\neq$ v\} is called the set of edges of G {\normalfont{\cite{black_tanenbaum_2017}}}. A graph G defined by the pair (V,E) is denoted by G(V,E) or G.
 \end{definition}
-A graph defined as in definition \ref{Graph} is called an undirected graph. There is also the concept of a directed graph were E $\subseteq$ \{(u,v) $:$ u,v $\in$ V and u $\neq$ v\} \cite{black_tanenbaum_2017}. However, in this thesis it can be assumed that any graph that will be considered is undirected unless otherwise stated. It can also be assumed that there are no edges between same vertices unless otherwise stated.
+A graph defined using definition \ref{Graph} is called an undirected graph. There is also the concept of a directed graph were $\mathit{E}$ $\subseteq$ \{(u,v) $:$ u,v $\in$ V and u $\neq$ v\} \cite{black_tanenbaum_2017}. However, in this thesis it can be assumed that any graph that will be considered is undirected unless otherwise stated. It can also be assumed that there are no edges between same vertices unless otherwise stated. The discussion will now proceed by introducing more graph theoretic terminology, along with examples for these terminologies.\\
+\\When 2 vertices are joined by an edge, they are said to be adjacent. This is defined formally in definition \ref{adjacent} below.
 \begin{definition}
 \label{adjacent}
 Given a graph G(V,E), $\forall$ u,v $\in$ V, u and v are said to be adjacent if \{$u,v\}$ $\in$ E. \normalfont{\cite{weisstein_2018_3}}
 \end{definition}
-Any graph G(V,E) can also be illustrated pictorially by representing the vertices of G using dots, and by representing the edges of G using lines between adjacent vertices. Example \ref{Example 1} below depicts how a graph can be represented pictorially.
+Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the vertices of $\mathit{G}$ using circles, and by representing the edges of $\mathit{G}$ using lines between adjacent vertices. Example \ref{Example 1} below depicts how a graph can be represented pictorially.
 \begin{example}
 \label{Example 1}
-Consider the graph G(V,E) such that  V=\{$v_1, v_2, v_3, v_4\}$ and E = \{$\{v_1, v_2\}, \{v_2,v_3\}, \{v_3,v_4\}, \{v_4,v_1\}\}$.\\Then G can be represented pictorially as :\\
+{\normalfont{Consider the graph}} G(V,E) {\normalfont{such that}}  V=\{$v_1, v_2, v_3, v_4\}$ {\normalfont{and}} E = \{$\{v_1, v_2\}, \{v_2,v_3\}, \{v_3,v_4\}, \{v_4,v_1\}\}$.\\{\normalfont{Then}} G {\normalfont{can be represented pictorially as :}}\\
 
 \begin{tikzpicture}[
     > = , % arrow head style
@@ -54,10 +55,10 @@ Consider the graph G(V,E) such that  V=\{$v_1, v_2, v_3, v_4\}$ and E = \{$\{v_1
     minimum size = 1mm
     ]
 
-    \node[state] (v1) {v1};
-    \node[state] (v2) [right=of v1] {v2};
-    \node[state] (v3) [below =of v1] {v3};
-    \node[state] (v4) [below =of v2] {v4};
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
   
     \path[->] (v1) edge  node[]{}(v2);
     \path[->] (v2) edge  node[]{} (v3);
@@ -70,23 +71,125 @@ There are many other examples of graphs, one of them being the complete graph on
 \label{Complete Graph}
 A graph G(V,E) is said to be complete if $\forall$ v,w $\in$ V v $\neq$ w, v is adjacent to w. The complete graph on n vertices is denoted by $K_n$. \normalfont{\cite{complete_graphs}}
 \end{definition}
-Given any graph G(V,E) one can also define the concept of a path.
+Given any graph $\mathit{G(V,E)}$, one can also define concepts that lie within G, one of them being a path.
 \begin{definition}[Path]
 \label{Path}
-Given a graph G(V,E), a path in G joining the vertices u,v $\in$ V is a sequence of vertices u = $u_1$, $u_2$, ...,$u_n$ = v in which no vertex is repeated and, $\forall$ $u_i$,$u_{i+1}$ i $\in$ [n-1], \{$u_i,u_{i+1}\}$ $\in$ E. \normalfont{\cite{thompson}  }
+Given a graph G(V,E), a path in G joining any 2 vertices u,v $\in$ V, is a sequence of vertices u = $u_1$, $u_2$, ...,$u_n$ = v in which no vertex is repeated and, $\forall$ $u_i$,$u_{i+1}$ i $\in$ [n-1], \{$u_i,u_{i+1}\}$ $\in$ E {\normalfont{\cite{thompson}}}. A path on n vertices is denoted by $P_n$.
 \end{definition}
-Using definition \ref{Path}, the concept of a cycle can now be defined.
-\begin{definition}
+Definition \ref{Path} can now be used to define cycles and connectivity in a graph.
+\begin{definition}[Connected Graph]
+\label{connectedgraph}
+A graph G(V,E) is said to be connected if $\forall$ u,v $\in$ V u $\neq$ v, u and v are joined by a path. \normalfont{\cite{connected}}
+\end{definition}
+\begin{definition}[Cycle]
 \label{cycle}
+Given a graph G(V,E), a cycle in G is a path $P_n$ n $\geq$ 4, such that, the starting vertex and the end vertex are equal. \normalfont{\cite{cycle}} 
 \end{definition}
-Example \ref{example3} below illustrates definitions \ref{Complete Graph}, \ref{Path}, \ref{cycle} above.
+By definitions \ref{Path}, \ref{cycle} above, it is clear that a cycle is a special instance of a path, with the only difference being that, in a cycle the first vertex and the last vertex are equal. For better understanding of definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph}, \ref{cycle} example \ref{example3} is constructed.
 \begin{example}
 \label{example3}
-\end{example} 
+{\normalfont{Consider the graph}} G(V,E) {\normalfont{below:}}\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = black,
+    minimum size = 1mm
+    ]
+
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge  node[]{}(v2);
+    \path[->] (v1) edge  node[]{}(v3);
+    \path[->] (v2) edge  node[]{} (v3);
+    \path[->] (v3) edge  node[]{}(v4);
+    \path[->] (v2) edge  node[]{}(v4);
+    \path[->] (v4) edge  node[]{}(v1);
+\end{tikzpicture}
+\\
+{\normalfont{Since every vertex in}} G {\normalfont{is adjacent to every other vertex, }}G {\normalfont{must be complete. Therefore, it must also be connected because, there is a path}} $P_2$ {\normalfont{between any 2 distinct vertices of}} G{\normalfont{. This graph is denoted by}} $K_4$ {\normalfont{since it is the complete graph on 4 vertices.}}\\
+{\normalfont{Some examples of paths in}} G {\normalfont{are:}}\\
+1. $v_1$ $v_2$ $v_3$ $v_4$\\
+2. $v_1$ $v_4$\\
+3. $v_4$ $v_3$ $v_1$\\
+{\normalfont{Some examples of cycles in}} G {\normalfont{are:}}\\
+1. $v_1$ $v_2$ $v_3$ $v_4$ $v_1$\\
+2. $v_1$ $v_4$ $v_2$ $v_3$ $v_1$\\
+3. $v_4$ $v_3$ $v_1$ $v_4$\\
+\end{example}
+Another important terminology is that of subgraphs. 
+\begin{definition}[Subgraph]
+\label{subgraph}
+Given a graph G(V,E) and a graph H($V^\prime$,$E^\prime$), H is a subgraph of G if $V^\prime$ $\subseteq$ V and $E^\prime$ $\subseteq$ E.  \normalfont{\cite{harris_hirst_mossinghoff_2008}}
+\end{definition}
+After defining some important concepts, the next step is to extend definition \ref{Graph} to define another class of graphs called weighted graphs. It must be noted that all definitions presented so far apply also to weighted graphs.
+\begin{definition}[Weight Function]
+\label{Weighted Function}
+Given a graph G(V,E) a weight function is a function f : E $\mapsto$ $\real$ {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. The real numbers assigned to each edge are called weights.
+\end{definition}
+\begin{definition}
+\label{Weighted Graph}
+A weighted graph is a graph G(V,E) with a weight function f {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. This is denoted by the triple G(V,E,f). 
+\end{definition}
+According to Bondy and Murty \cite{bondy_murty_1982}, weighted graphs occur regularly in applied graph theory. For example, a railway network can be represented by a weighted graph were, the vertices are the set of towns in the railway network, and there are edges between 2 vertices in the graph if there is a direct route from one town to another, without visiting other towns in the process. In addition to that, the shortest path between 2 towns in the network may be required. It is clear that in order to try and solve such problems, the total weight of a subgraph must first be defined.
+\begin{definition}[Weight of a Subgraph]
+\label{weightofasubgraph}
+Given a weighted graph G(V,E,f), the total weight of any subgraph  H($V^\prime$,$E^\prime$,f) of G is: $$\sum_{e \in E^\prime}^{} f(e) $$. \normalfont{\cite{bondy_murty_1982}}
+\end{definition}
+It is important to note that by definition \ref{subgraph}, any graph G(V,E) is a subgraph of itself, therefore, it's weight can be calculated. This is highlighted in Example \ref{example4} below.
+\begin{example}
+\label{example4}
+{\normalfont{Consider the weighted graph}} G(V,E,f) {\normalfont{such that,}} G(V,E) {\normalfont{ is the graph in example \ref{example3} with weight function}} f {\normalfont{such that}},\\
+f(\{$v_1, v_2\}$) = 8\\
+f(\{$v_1, v_3\}$) = 5\\
+f(\{$v_2, v_3\}$) = 2\\
+f(\{$v_3, v_4\}$) = 10\\
+f(\{$v_2, v_4\}$) = 4\\
+f(\{$v_4, v_1\}$) = 7\\
+{\normalfont{Then according to definition \ref{weightofasubgraph}, the weight of}} G {\normalfont{is 36.}}\\
+\end{example}
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {v1};
+    \node[state] (v2) [right=of v1] {v2};
+    \node[state] (v3) [below =of v1] {v3};
+    \node[state] (v4) [below =of v2] {v4};
+  
+    \path[->] (v1) edge  node[]{8}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}
+
+
 \newpage
 \section{The Travelling Salesman Problem}
 \subsection{Heuristics}
-\section{The Ant Colony Algorithm}
+\subsection{The Ant Colony Algorithm}
 \newpage
 \section{Experimental Data}
 \newpage
