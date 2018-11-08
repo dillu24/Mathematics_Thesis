@@ -35,7 +35,7 @@ A graph defined using definition \ref{Graph} is called an undirected graph. Ther
 \label{adjacent}
 Given a graph G(V,E), $\forall$ u,v $\in$ V, u and v are said to be adjacent if \{$u,v\}$ $\in$ E. \normalfont{\cite{weisstein_2018_3}}
 \end{definition}
-Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the vertices of $\mathit{G}$ using circles, and by representing the edges of $\mathit{G}$ using lines between adjacent vertices. Example \ref{Example 1} below depicts how a graph can be represented pictorially.
+Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the vertices of $\mathit{G}$ using circles, and by representing the edges of $\mathit{G}$ using lines between adjacent vertices.As a result in this thesis, a graph is sometimes given formally using sets, or as a pictorial representation assuming that one can be converted to another. Example \ref{Example 1} below depicts how a graph can be represented pictorially.
 \begin{example}
 \label{Example 1}
 {\normalfont{Consider the graph}} G(V,E) {\normalfont{such that}}  V=\{$v_1, v_2, v_3, v_4\}$ {\normalfont{and}} E = \{$\{v_1, v_2\}, \{v_2,v_3\}, \{v_3,v_4\}, \{v_4,v_1\}\}$.\\{\normalfont{Then}} G {\normalfont{can be represented pictorially as :}}\\
@@ -85,7 +85,7 @@ A graph G(V,E) is said to be connected if $\forall$ u,v $\in$ V u $\neq$ v, u an
 \label{cycle}
 Given a graph G(V,E), a cycle in G is a path $P_n$ n $\geq$ 4, such that, the starting vertex and the end vertex are equal. \normalfont{\cite{cycle}} 
 \end{definition}
-By definitions \ref{Path}, \ref{cycle} above, it is clear that a cycle is a special instance of a path, with the only difference being that, in a cycle the first vertex and the last vertex are equal. For better understanding of definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph}, \ref{cycle} example \ref{example3} is constructed.
+By definitions \ref{Path}, \ref{cycle} above, it is clear that a cycle is a special instance of a path, with the only difference being that in a cycle, the first vertex and the last vertex are equal. Another thing worth mentioning is that according to definitions \ref{Path} and \ref{cycle}, cycles and paths are sequences of vertices and not actual graphs. However, this is not the case because they can be represented easily as graphs. For example, given the path/cycle $\mathit{u_1, u_2, ...,u_n}$ a new graph $\mathit{G(V,E)}$ can be created such that, $\mathit{V(G)= \{ u_1, u_2, ..., u_n\}}$ and $\mathit{E(G) = \{ \{u_i, u_{i+1}\} : i \in [n-1]\}}$. For example, consider the cycle v1 v2 v3 v4 v1, then the graph $\mathit{G(V,E)}$ $\mathit{V(G)= \{ v_1, v_2, v_3, v_4\}}$ \\$\mathit{E(G) = \{ \{v_1, v_2\}, \{v_2, v_3\}, \{v_3, v_4\}, \{v_4, v_1\} \}}$ depicted in example \ref{Example 1}, is the graph representing this cycle. Since this construction can be done, cycles can be both treated as graphs and sequences. This will later be useful when defining Hamiltonian cycles. For better understanding of definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph}, \ref{cycle} example \ref{example3} is constructed.
 \begin{example}
 \label{example3}
 {\normalfont{Consider the graph}} G(V,E) {\normalfont{below:}}\\
@@ -146,7 +146,7 @@ According to Bondy and Murty \cite{bondy_murty_1982}, weighted graphs occur regu
 \label{weightofasubgraph}
 Given a weighted graph G(V,E,f), the total weight of any subgraph  H($V^\prime$,$E^\prime$,f) of G is: $$\sum_{e \in E^\prime}^{} f(e) $$. \normalfont{\cite{bondy_murty_1982}}
 \end{definition}
-It is important to note that by definition \ref{subgraph}, any graph G(V,E) is a subgraph of itself, therefore, it's weight can be calculated. This is highlighted in Example \ref{example4} below.
+It is important to note that by definition \ref{subgraph}, any weighted graph G is a subgraph of itself, therefore, it's weight can be calculated. This is highlighted in Example \ref{example4} below.
 \begin{example}
 \label{example4}
 {\normalfont{Consider the weighted graph}} G(V,E,f) {\normalfont{such that,}} G(V,E) {\normalfont{ is the graph in example \ref{example3} with weight function}} f {\normalfont{such that}},\\
@@ -183,9 +183,28 @@ f(\{$v_4, v_1\}$) = 7\\
     \path[->] (v3) edge  node[]{10}(v4);
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
-\end{tikzpicture}
-
-
+\end{tikzpicture}\\
+\\
+According to Guichard \cite{guichard_2018}, trees are another useful class of graphs.
+\begin{definition}[Tree]
+\label{tree}
+A tree is a connected graph with no cycles. \normalfont{\cite{guichard_2018}}
+\end{definition}
+Having defined much of the basic graph theoretic concepts, it is now time to define harder concepts that use previous definitions. It is important to note that these concepts can be applied to both weighted and unweighted graphs.
+\begin{definition}[Spanning Subgraph]
+\label{spanning subgraph}
+H($V^\prime$,$E^\prime$) is a spanning subgraph of G(V,E) if H is a subgraph of G and $V^\prime$ = V. \normalfont{\cite{ray_2013}}
+\end{definition}
+There are many spanning subgraphs, however the ones that are relevant to this thesis are spanning trees and spanning cycles, the latter mostly known as Hamiltonian cycles.
+\begin{definition}[Spanning Tree]
+A graph H is a spanning tree of G if H is a tree and H is a spanning subgraph of G. \normalfont{\cite{ray_2013}}
+\label{spanning tree}
+\end{definition}
+\begin{definition}[Hamiltonian Cycle]
+\label{hamiltonian cycle}
+Given a graph G, c is a Hamiltonian cycle in G if c is a cycle and c is a spanning subgraph of G. Also, a graph that contains a Hamiltonian cycle is called a Hamiltonian graph. \normalfont{\cite{weisstein_2018}}
+\end{definition}
+It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cycles can be represented as graphs by the construction discussed earlier. What follows now is an example that illustrates better definitions \ref{spanning subgraph}, \ref{spanning tree} and \ref{hamiltonian cycle}. 
 \newpage
 \section{The Travelling Salesman Problem}
 \subsection{Heuristics}
