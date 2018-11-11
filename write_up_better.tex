@@ -373,6 +373,24 @@ $C_5$ {\normalfont{above is Hamiltonian because it contains the Hamiltonian cycl
 \end{example} 
 To conclude, these facts seem to indicate that determining whether a graph is Hamiltonian is a very difficult problem. In addition to that this means that there are certain problems that are harder than other problems. In order to reason about such problems, some computational theory must first be established. This is done in the next subsection.
 \subsection{Some Computational Theory}
+After defining some important graph theoretic concepts, it is now time to discuss some important computational theory that is relevant to this thesis. The discussion will now proceed by defining different types of problems and describe the relationship between them.
+\begin{definition}
+\label{optimization problems}
+A problem were the goal is to find the best solution out of all possible solutions. \normalfont{\cite{black_2009}}
+\end{definition}
+Definition \ref{optimization problems} indicates that when solving an optimisation problem, each solution has an associated value. Then, the aim of the algorithm solving this optimisation problem would be, to find the solution with the best (min/max) value. Another type of problems are decision problems.
+\begin{definition}
+\label{decision problems}
+Decision problems are problems were the solution is either a yes or a no. \normalfont{\cite{cormen_leiserson_rivest_stein}}
+\end{definition}
+In \cite{cormen_leiserson_rivest_stein} it is argued that given an optimisation problem, one can construct a related decision problem such that the decision problem is easier to reason about than the optimisation problem. Therefore, if some optimisation problem is easy to be solved, it's related decision problem is easy aswell \cite{cormen_leiserson_rivest_stein}. On the other hand, if the decision problem is hard to solve then this would mean that the related optimization problem is also hard to solve \cite{cormen_leiserson_rivest_stein}. Before going into harder computational theory, an example is given to undestand the difference between optimisation problems and decision problems and how one can be converted to another.
+\begin{example}
+\label{example decision/optimization}
+{\normalfont{Two optimisation problems are:\\
+1. The shortest path problem\\
+2. The minimum spanning tree problem\\
+Given a connected weighted graph}} G{\normalfont{, the shortest path problem is the task of finding a path}} P {\normalfont{in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths in }}G {\normalfont{\cite{hackerearth_blog}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the minimum spanning tree problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{geeksforgeeks}.}}
+\end{example}   
 \newpage
 \section{The Travelling Salesman Problem}
 \subsection{Heuristics}
