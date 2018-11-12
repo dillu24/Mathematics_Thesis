@@ -376,21 +376,26 @@ To conclude, these facts seem to indicate that determining whether a graph is Ha
 After defining some important graph theoretic concepts, it is now time to discuss some important computational theory that is relevant to this thesis. The discussion will now proceed by defining different types of problems and describe the relationship between them.
 \begin{definition}
 \label{optimization problems}
-A problem were the goal is to find the best solution out of all possible solutions. \normalfont{\cite{black_2009}}
+An optimisation problem is a problem were the goal is to find the best solution out of all possible solutions. \normalfont{\cite{black_2009}}
 \end{definition}
-Definition \ref{optimization problems} indicates that when solving an optimisation problem, each solution has an associated value. Then, the aim of the algorithm solving this optimisation problem would be, to find the solution with the best (min/max) value. Another type of problems are decision problems.
+Definition \ref{optimization problems} indicates that when solving an optimisation problem, each solution has an associated value. The aim of the algorithm solving this optimisation problem would then be to find the solution with the best (min/max) value. Another type of problems are decision problems.
 \begin{definition}
 \label{decision problems}
 Decision problems are problems were the solution is either a yes or a no. \normalfont{\cite{cormen_leiserson_rivest_stein}}
 \end{definition}
-In \cite{cormen_leiserson_rivest_stein} it is argued that given an optimisation problem, one can construct a related decision problem such that the decision problem is easier to reason about than the optimisation problem. Therefore, if some optimisation problem is easy to be solved, it's related decision problem is easy aswell \cite{cormen_leiserson_rivest_stein}. On the other hand, if the decision problem is hard to solve then this would mean that the related optimization problem is also hard to solve \cite{cormen_leiserson_rivest_stein}. Before going into harder computational theory, an example is given to undestand the difference between optimisation problems and decision problems and how one can be converted to another.
+In \cite{cormen_leiserson_rivest_stein} it is argued that, given an optimisation problem, one can transform this optimisation problem into a decision problem such that, the decision problem is easier to reason about than the optimisation problem. Therefore, if some optimisation problem is easy to solve, the decision problem version is easy to solve aswell \cite{cormen_leiserson_rivest_stein}. On the other hand, if the decision problem is hard to solve then this would mean that the original optimization problem is also hard to solve \cite{cormen_leiserson_rivest_stein}. Before going into harder computational theory, an example is given to undestand how an optimisation problem can be transformed into a decision problem.
 \begin{example}
 \label{example decision/optimization}
 {\normalfont{Two optimisation problems are:\\
 1. The shortest path problem\\
 2. The minimum spanning tree problem\\
-Given a connected weighted graph}} G{\normalfont{, the shortest path problem is the task of finding a path}} P {\normalfont{in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths in }}G {\normalfont{\cite{hackerearth_blog}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the minimum spanning tree problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{geeksforgeeks}.}}
-\end{example}   
+Given a connected weighted graph}} G{\normalfont{, the shortest path problem is the task of finding a path}} P {\normalfont{between 2 vertices in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths joining these 2 vertices in }}G {\normalfont{\cite{hackerearth_blog}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the minimum spanning tree problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{geeksforgeeks}.}}\\
+{\normalfont{The decision problems related to these optimisation problems are the following:}}\\
+{\normalfont{1. Given a connected weighted graph}} G, {\normalfont{2 vertices}} u {\normalfont{and}} v, {\normalfont{and an integer}} k,{\normalfont{ does a path exist from}} u {\normalfont{to}} v {\normalfont{in}} G {\normalfont{of weight at most}} k?\\
+{\normalfont{2. Given a connected weighted graph}} G, {\normalfont{and an integer}} k {\normalfont{, does}} G {\normalfont{contain a spanning tree of weight at most}} k?\\
+{\normalfont{Therefore, to convert an optimisation problem into a decision problem, a bound must be specified on the value to be optimized.}}
+\end{example}
+
 \newpage
 \section{The Travelling Salesman Problem}
 \subsection{Heuristics}
