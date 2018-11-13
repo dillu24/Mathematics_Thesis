@@ -371,9 +371,9 @@ It is important to note that the above proof uses the fact that $K_n$ is Hamilto
 \end{tikzpicture}\\
 $C_5$ {\normalfont{above is Hamiltonian because it contains the Hamiltonian cycle}} $v_1, v_2, v_4, v_5, v_3, v_1$. {\normalfont{However,}} deg($v_1$) + deg($v_5$) = 4 $<$ 5 = n. {\normalfont{Therefore, the condition in Ore's Theorem is not a necessary condition}}.
 \end{example} 
-To conclude, these facts seem to indicate that determining whether a graph is Hamiltonian is a very difficult problem. In addition to that this means that there are certain problems that are harder than other problems. In order to reason about such problems, some computational theory must first be established. This is done in the next subsection.
+To conclude, these facts seem to indicate that determining whether a graph is Hamiltonian is a very difficult problem and that there are certain problems that are harder than other problems. In order to reason about such problems, some computational theory must first be established. This is done in the next subsection.
 \subsection{Some Computational Theory}
-After defining some important graph theoretic concepts, it is now time to discuss some important computational theory that is relevant to this thesis. The discussion will now proceed by defining different types of problems and describe the relationship between them.
+After defining some important graph theoretic concepts, it is now to present some important computational theory that will be used throughout. The discussion will now proceed by defining two different types of problems and describe the relationship between them.
 \begin{definition}
 \label{optimization problems}
 An optimisation problem is a problem were the goal is to find the best solution out of all possible solutions. \normalfont{\cite{black_2009}}
@@ -381,21 +381,36 @@ An optimisation problem is a problem were the goal is to find the best solution 
 Definition \ref{optimization problems} indicates that when solving an optimisation problem, each solution has an associated value. The aim of the algorithm solving this optimisation problem would then be to find the solution with the best (min/max) value. Another type of problems are decision problems.
 \begin{definition}
 \label{decision problems}
-Decision problems are problems were the solution is either a yes or a no. \normalfont{\cite{cormen_leiserson_rivest_stein}}
+Decision problems are problems whose solutions are either a yes or a no. \normalfont{\cite{cormen_leiserson_rivest_stein}}
 \end{definition}
 In \cite{cormen_leiserson_rivest_stein} it is argued that, given an optimisation problem, one can transform this optimisation problem into a decision problem such that, the decision problem is easier to reason about than the optimisation problem. Therefore, if some optimisation problem is easy to solve, the decision problem version is easy to solve aswell \cite{cormen_leiserson_rivest_stein}. On the other hand, if the decision problem is hard to solve then this would mean that the original optimization problem is also hard to solve \cite{cormen_leiserson_rivest_stein}. Before going into harder computational theory, an example is given to undestand how an optimisation problem can be transformed into a decision problem.
 \begin{example}
 \label{example decision/optimization}
 {\normalfont{Two optimisation problems are:\\
 1. The shortest path problem\\
-2. The minimum spanning tree problem\\
-Given a connected weighted graph}} G{\normalfont{, the shortest path problem is the task of finding a path}} P {\normalfont{between 2 vertices in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths joining these 2 vertices in }}G {\normalfont{\cite{hackerearth_blog}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the minimum spanning tree problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{geeksforgeeks}.}}\\
+2. The minimum weight spanning tree problem\\
+Given a connected weighted graph}} G{\normalfont{, the shortest path problem is the task of finding a path}} P {\normalfont{between 2 vertices in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths joining these 2 vertices in }}G {\normalfont{\cite{hackerearth_blog}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the minimum weight spanning tree problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{geeksforgeeks}. The shortest path problem is an optimsation problem because, from all the possible paths in the graph, the best path is chosen. In this case the best path is the path with minimum weight. Similarly, using the same reasoning, the minimum weight spanning tree problem is an optimisation problem }}\\
 {\normalfont{The decision problems related to these optimisation problems are the following:}}\\
 {\normalfont{1. Given a connected weighted graph}} G, {\normalfont{2 vertices}} u {\normalfont{and}} v, {\normalfont{and an integer}} k,{\normalfont{ does a path exist from}} u {\normalfont{to}} v {\normalfont{in}} G {\normalfont{of weight at most}} k?\\
 {\normalfont{2. Given a connected weighted graph}} G, {\normalfont{and an integer}} k {\normalfont{, does}} G {\normalfont{contain a spanning tree of weight at most}} k?\\
-{\normalfont{Therefore, to convert an optimisation problem into a decision problem, a bound must be specified on the value to be optimized.}}
+{\normalfont{The above 2 problems are decision problems because the answer to these problems is either a yes or a no.}}
 \end{example}
-
+Reasoning about computational problems is usally done by looking at the properties that are possed by the algorithms that solve these problems. One property that is sometimes looked at is called the running time of an algorithm. This is defined in definition \ref{running_time} below.
+\begin{definition}
+\label{running_time}
+The running time of an algorithm is the number of elementary steps taken by the algorithm to execute given a particular input. The running time is represented by the function T $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ were the domain represents the size of the input, and the co domain reresents the amount of steps taken by the algorithm to execute given a particular input size. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
+\end{definition}
+The following is an example on how the running time of an algorithm can be constructed.
+\begin{example}
+\label{example_running}
+{\normalfont{Consider the addition of 2 bits. Then if the addition of 2 bits takes}} a {\normalfont{computational steps, the addition of 2}} $\mathit{n-}${\normalfont{bit integers will take}} a $\times$ n {\normalfont{steps. Therefore the running time of this algorithm for an input of size n is}} T(n) = a $\times$ n. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
+\end{example}
+Expressing the running time in this way seems pretty easy to understand, however it can create problems. Typically, the running time of an algorithm is fixed for any given input, however, the running time function is not defined on the actual inputs but on the input sizes. This means that since the same input size might represent different inputs, the running time function may be different for the same input size $\mathit{n}$, as this depends on which input is given. Therefore to solve this problem, the worst-case running time is usually used when reasoning about the running time of an algorithm. The worst-case running time is the longest running time for any input of size $\mathit{n}$. This would solve the problem because, the worst-case running time of an algorithm is an upper bound to all other running times for any input of size $\mathit{n}$, therefore, this assures that the algorithm will never get a longer running time for any input of size $\mathit{n}$. This avoid making guesses about the running times and hoping that it would never get worse.\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}\\\\
+Another problem is that, the running time can be difficult to compute precisely because it may differ on different computers. This informally means that the running time of a particular algorithm would need a different amount of computational steps on different computers. For example the addition of 2 bits as seen in example \ref{example_running}, might take a different number of computational steps on different computers resulting into different running times. To get around this problem, the algorithms are analyzed asymptotically. This means making the input size increase without bound so that in the running time function, only the order of growth of the function is relevant. This can only be done because as the input size increases, the lower-order terms and multiplicative constants of the running time get effected by the size of the input itself. This means that given any running time function, the lower order terms and multiplicative constants of the function can be ignored. As a result in a running time function, the highest order term is the most relevant because it gives the order of growth of the function, i.e. how will the function behave as the input size growst without bound. For example, given the running time function $\mathit{T(n) = an^2+bn+c}$, what remains in the asymptotic analysis of this running time function is $\mathit{n^2}$. To express the asymptotic behaviour of functions, asymptotic notations are normally used. One of these notations is called the Big O Notation, whose exact definition is given below. \cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}
+\begin{definition}
+\label{bigonotation}
+Give big o definition , example of it , what it means , give some running time functions and go to np ..check what is time complexity exactly
+\end{definition}
 \newpage
 \section{The Travelling Salesman Problem}
 \subsection{Heuristics}
