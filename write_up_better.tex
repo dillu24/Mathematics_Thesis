@@ -424,7 +424,7 @@ More definitions will now be introduced were the aim is to represent discussed c
 \label{time_complexity}
 Given a function g(n) and an algorithm A having a running time function T(n), A is said to have a time complexity of O(g(n)) if T(n) = O(g(n)). \normalfont{\cite{adamchik_2009}} 
 \end{definition}
-Definition \ref{time_complexity} does not specify that the running time function of an algorithm must be the worst case running time function. However, recall that when discussing running time functions it was said that it can be assumed that the worst-case running time function is taken. Therefore, it can be assumed that the worst-case running time function is taken when saying that an algorithm has time complexity $\mathit{O(g(n))}$. This will sometimes also be termed as the worst-case time complexity of the algorithm.\\\\
+Definition \ref{time_complexity} does not specify that the running time function of an algorithm must be the worst case running time function. However, recall that when discussing running time functions it was said that it can be assumed that the worst-case running time function is taken. Therefore, it can be assumed that the worst-case running time function is taken when saying that an algorithm has time complexity $\mathit{O(g(n))}$. This will sometimes also be termed as the worst-case time complexity of the algorithm. Note that when it is said that a problem can be solved in time $\mathit{O(g(n))}$ this means the problem can be solved by an algorithm that has a worst-case time complexity $\mathit{O(g(n))}$\\\\
 The following table summarizes some of the most common time complexities encountered in computational theory and what they are commonly known as. The table was adapted using information from \cite{big_o_notation_explained} and \cite{carter_1999}.\\
 \begin{table}[h!]
   \begin{center}
@@ -444,16 +444,56 @@ The following table summarizes some of the most common time complexities encount
     \end{tabular}
   \end{center}
 \end{table}
-In table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that for example, constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute and therefore, the less efficient it is. In general, problems that can be solved at worst by polynomial time algorithms are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}.
+In table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that for example, constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute and therefore, the less efficient it is. In general, problems that can be solved at worst by polynomial time algorithms are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve.
 \\\\The following is an example to wrap-up all the running-time concepts discussed so far.
 \begin{example}
 \label{time_complexity_example}
 {\normalfont{In example \ref{bigonotationexample},}} T(n) = O(n). {\normalfont{Therefore according to definition \ref{time_complexity}, the}} n-{\normalfont{bit addition algorithm has a time complexity of}} O(n). {\normalfont{Therefore by table \ref{tab:table1}, the}} n-{\normalfont{addition algorithm has a linear time complexity, or simply is a linear-time algorithm. As a result, this algorithm is tractable}}.
 \end{example}
-In what has been presented so far in this section, it has always been assumed that the problems presented have an algorithm that solves them. However, this is not the case because there are computational problems that cannot be solved by any computer, no matter how much processing power and time is dedicated to them. In addition to that, there are problems which can be solved by a polynomial time algorithm and others which are not. This seems to indicate that there are several classes of problems. One of these classes is the class P defined below. \cite{cormen_leiserson_rivest_stein}
+In what has been presented so far in this section, it has always been assumed that any problem has an algorithm that solves it. However, this is not the case because there are computational problems that cannot be solved by any computer, no matter how much processing power and time is dedicated to them. In addition to that, there are problems that can be solved by a polynomial time algorithm and others which cannot. This seems to indicate that there are several classes of problems. One of these classes is the class P defined below. \cite{cormen_leiserson_rivest_stein}
 \begin{definition}
 \label{P}
+The class P consists of all the problems that can can be solved in polynomial time. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
 \end{definition}
+Therefore according to definition \ref{P}, the class P consists of tractable problems. One problem in this class is the $\mathit{n-}$bit addition problem defined in example \ref{example_running}. The $\mathit{n-}$ bit addition problem is in the class P because, it can be solved by an algorithm having a worst-case linear time complexity. Apart from the class P, there is also the class NP. The following definition helps in defining the class NP.
+\begin{definition}
+\label{polynomial_time_verification}
+A problem can be verified in polynomial time if given a solution to the problem, the solution can be checked by an algorithm if it is correct or not in polynomial time. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
+\end{definition}
+The following example explains the concept of polynomial time verification.
+\begin{example}
+\label{example_polynomial_time_verification}
+{\normalfont{To explain polynomial time verification, the Hamiltonian Cycle problem is going to be used. Given a graph}} G(V,E){\normalfont{, the Hamiltonian cycle problem is the task of determing whether}} G {\normalfont{has a Hamiltonian cycle \cite{cormen_leiserson_rivest_stein}. A solution to the Hamiltonian cycle problem is a cycle}} S = $v_1$, ..., $v_n$ {\normalfont{of }}$|$V$|$ = n {\normalfont{vertices. Therefore to confirm that the Hamiltonian cycle problem is verifiable in polynomial time, }}S {\normalfont{must be checked if it is a Hamiltonian cycle or not in polynomial time. This can be done by creating an algorithm that checks if }} $\forall$ i $\in$ [n-1], \{$v_i, v_{i+1}\} \in$ E and \{$v_n$, $v_1\} \in$ E. {\normalfont{Therefore, the checker algorithm takes at worst}} O(n) {\normalfont{time because it must check all edges in the cycle. Hence the checker algorithm takes polynomial time to execute. As a result, the Hamiltonian cycle problem can be verified in polynomial time.}}
+\end{example}
+Now the class NP can be defined.
+\begin{definition}
+\label{NP}
+The class NP consists of all decision problems that can be verified in polynomial time. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
+\end{definition}
+ It is important to note that according to definition \ref{NP}, for a problem $\mathit{A}$ to be in the class NP, A must be a decision problem. This will not limit the discussion because as discussed before, every optimization problem can be transformed into a related decision problem by specifying a bound on the solution to be optimized (see example \ref{example decision/optimization}). Reasoning about decision problems is easier because the related decision problem is not harder than the original optimisation problem. As a result, one can prove that an optimisation problem cannot be solved in polynomial time by showing that the related decision problem cannot be solved in polynomial time.\cite{cormen_leiserson_rivest_stein}\\\\
+Another importantc class of problems is the class of NP-Complete problems. To define this class, the concept of reduction algorithm must first be defined.
+\begin{definition}
+\label{reduction_algorithm}
+Suppose that A and B are two decision problems. A reduction algorithm is an algorithm that transforms any instance (input) $\alpha$ of A into an instance $\beta$ of B with the following properties:
+\begin{itemize}
+   \item The reduction algorithm takes polynomial time to execute
+   \item The solution to $\alpha$ is yes $\iff$ the solution to $\beta$ is yes. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
+\end{itemize} 
+\end{definition}
+A reduction algorithm has important applications in computational theory. In fact, suppose that there are two decision problems $\mathit{A}$ and $\mathit{B}$ such that an instance $\mathit{\alpha}$ of the problem $\mathit{A}$ needs to be solved in polynomial time. Suppose also that, $\mathit{B}$ can be solved in polynomial time using algorithm $\mathit{B^\star}$ and $\exists$ a reduction algorithm $\mathit{R}$ from $\mathit{A}$ to $\mathit{B}$. Then $\mathit{A}$ can be solved in polynomial time in the following way :
+ \begin{itemize}
+	\item Use $\mathit{R}$ to transform $\mathit{\alpha}$ into an instance $\mathit{\beta}$ of $\mathit{B}$
+	\item Execute $\mathit{B^\star}$ on the input $\beta$ to get answer $\gamma$ = yes/no
+	\item Give $\mathit{\gamma}$ as an answer for $\mathit{\alpha}$.
+\end{itemize} 
+It is important to note that A can be solved in polynomial time because the total time of the above procedure is polynomial. The above procedure is polynomial because the total time of executing two polynomial time algorithms is the summation of two polynomials, which by properties of polynomials is still polynomial. It is important to note that the above could only be done because the solution to $\alpha$ is yes $\iff$ the solution to $\beta$ is yes. \cite{cormen_leiserson_rivest_stein}\\\\
+Another important application of reduction algorithms is to show that a polynomial time algorithm does not exist for a particular decision problem. Let $\mathit{A}$ and $\mathit{B}$ be decision problems such that $\mathit{A}$ cannot be solved in polynomial time. Suppose that $\exists$ a reduction algorithm $\mathit{P}$ from $\mathit{A}$ to $\mathit{B}$. Then it can be shown that $\mathit{B}$ cannot be solved in polynomial time because, if $\mathit{B}$ can be solved in polynomial time, then $\mathit{P}$ can be used to transform any instance $\alpha$ of $\mathit{A}$ into an instance $\beta$ of $\mathit{B}$ were again $\alpha$ can be solved in polynomial time as discussed in the previous paragraph, contradicting the assumption that A cannot be solved in polynomial time. Therefore, when using a reduction algorithm from a decision problem A to a decision problem B, one implicitly makes the statement that decision problem B is as hard (in terms of computational time) as decision problem A. If not, this would contradict properties that belong to the problem A. \cite{cormen_leiserson_rivest_stein}\\\\
+After defining reduction algorithms, the class of NP-Complete problems can now be defined.
+\begin{definition}
+\label{NPC}
+The decision problem P is in NPC if it is in NP and it is as hard as any problem in NP. {\normalfont{\cite{cormen_leiserson_rivest_stein}} }
+\end{definition}
+In other words, definition \ref{NPC} states that for a problem $\mathit{P}$ to be in NPC, then $\mathit{P}$ must be in NP and that any problem in NP can be transformed using a reduction algorithm into $\mathit{P}$. ..describe how to proof that a problem is in npc using geeks source, P=NP problem using other papers in cormen bookand ready
 \newpage
 \section{The Travelling Salesman Problem}
 \subsection{Heuristics}
@@ -464,5 +504,4 @@ In what has been presented so far in this section, it has always been assumed th
 \section{Conclusion}
 \newpage
 \bibliography{bibliography}
-\bibliographystyle{IEEEtran}
 \end{document}
