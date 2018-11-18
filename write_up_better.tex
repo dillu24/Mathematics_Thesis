@@ -507,6 +507,26 @@ The classes P, NP and NPC have very important implications in computational theo
 After defining the important computational theory, it is now time to define the Travelling Salesman Problem, and present important properties about it. This will all lead to showing that the Travelling Salesman Problem is NP-Complete, hence, showing that no polynomial time algorithm has yet been discovered to solve the Travelling Salesman Problem. All of this will be done in the next section.
 \newpage
 \section{The Travelling Salesman Problem}
+After defining all the graph theoretic concepts and computational theory required, it is now time to define the Travelling Salesman Problem. The Travelling Salesman Problem is defined in definition \ref{TSP} below.
+\begin{definition}
+\label{TSP}
+Given a complete weighted graph G, the Travelling Salesman Problem (TSP) is the task of finding a minimum weight Hamiltonian cycle in G. {\normalfont{\cite{bondy_murty_1982}}}
+\end{definition}
+According to definition \ref{TSP}, for the TSP to be defined on a weighted graph $\mathit{G}$, $\mathit{G}$ must be complete. However, this is not a limiting factor because, every weighted graph $\mathit{G^\prime}$ can be converted into a complete weighted graph, by adding the missing edges in $\mathit{G^\prime}$ with a very large weight. As a result, if $\mathit{G^\prime}$ is an incomplete weighted Hamiltonian graph, the minimum weight Hamiltonian cycle in $\mathit{G^\prime}$ would never be effected when transforming $\mathit{G^\prime}$ into a complete graph, because, since the missing edges have a very large weight, they can never be part of the minimum weight Hamiltonian cyle when added. Note that if $\mathit{G^\prime}$ is not Hamiltonian, the minimum weight Hamiltonian cycle after transforming $\mathit{G^\prime}$ into a complete graph would be very large. Therefore, since there is no loss of generality, it can be assumed that complete graphs are always being considered when discussing the TSP.\\\\
+Definition \ref{TSP} also specifies indirectly that, if $\mathit{G}$ is a complete weighted graph then $\mathit{G}$ is Hamiltonian, otherwise, if not, no Hamiltonian cycle can be found. This is true because, considering the complete graph $\mathit{K_n}$ on $\mathit{ n \geq 3}$ vertices, every Hamiltonian cycle consisting of $\mathit{n}$ vertices is in $\mathit{K_n}$. This property holds because, any two disinct vertices in $\mathit{K_n}$ are adjacent. Note that in this case $K_2$ and $K_1$ are excluded because, by definition \ref{cycle}, cycles are defined on graphs having at least 3 vertices.\\ 
+\\
+The following example is used to clearly explain what the TSP defined in definition \ref{TSP} is all about.
+\begin{example}
+\label{example_2.1}
+{\normalfont{Consider the complete graph}} $K_4$ {\normalfont{with the weight function}} f {\normalfont{defined in example \ref{example4}. The distinct Hamiltonian cycles (Hamiltonian cycles that differ in at least one edge of}} G{\normalfont{) in }}G {\normalfont{are:}}
+\begin{itemize}
+   \item $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ {\normalfont{with weight}} 23
+   \item $v_1$, $v_3$, $v_4$, $v_2$, $v_1$ {\normalfont{with weight}} 23
+   \item $v_1$, $v_3$, $v_2$, $v_4$, $v_1$ {\normalfont{with weight}} 18
+\end{itemize} 
+{\normalfont{Therefore, by definition \ref{TSP}, the solution to the TSP on the instance}} G {\normalfont{would be the minimum weight Hamiltonian cycle}} $v_1$, $v_3$, $v_2$, $v_4$, $v_1$. {\normalfont{Note that}} $K_4$ {{\normalfont{has}}} 3 {\normalfont{distinct Hamiltonian cycles. This fact is a special case of lemma \ref{lemma_disinct_hamiltonian_cycles} for any}} $K_n$.
+\end{example}
+
 \subsection{Heuristics}
 \subsection{The Ant Colony Algorithm}
 \newpage
