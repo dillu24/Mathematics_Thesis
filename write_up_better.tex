@@ -30,15 +30,20 @@ Graph theory is the study of a structure called a graph. A graph can be defined 
 A graph G is a pair (V,E) were V is any non empty finite set called the set of vertices of G, and E $\subseteq$ \{$\{u,v\}$ $:$ $\forall$ u,v $\in$ V and u $\neq$ v\} is called the set of edges of G {\normalfont{\cite{black_tanenbaum_2017}}}. A graph G defined by the pair (V,E) is denoted by G(V,E) or G.
 \end{definition}
 A graph defined using definition \ref{Graph} is called an undirected graph. There is also the concept of a directed graph were $\mathit{E \subseteq \{(u,v) : \forall u,v \in V, u \neq v\}}$ \cite{black_tanenbaum_2017}. However, in this thesis it can be assumed that any graph that will be considered is undirected unless otherwise stated. It can also be assumed that there are no edges between same vertices unless otherwise stated. It must also be noted that by this definition, there cannot be multiple edges joining any 2 vertices. The reason is that sets do not allow repetition of elements. Thus, each element in the edge set is unique. The discussion will now proceed by introducing more graph theoretic terminology, with examples that illustrate these terminologies.\\
-\\When 2 vertices are joined by an edge, they are said to be adjacent. This is defined formally in definition \ref{adjacent} below.
+\\When two vertices are joined by an edge, they are said to be adjacent. This is defined formally in definition \ref{adjacent} below.
 \begin{definition}
 \label{adjacent}
-Given a graph G(V,E), $\forall$ u,v $\in$ V, u and v are said to be adjacent if \{$u,v\}$ $\in$ E. \normalfont{\cite{weisstein_2018_3}}
+Given a graph G(V,E), $\forall$ u,v $\in$ V, u and v are said to be adjacent if \{$u,v\}$ $\in$ E. Also, if u and v are adjacent, then u and v are said to be end vertices of the edge \{$u,v\}$. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
 \end{definition}
-It is sometimes also required to know how many vertices are adjacent to a specific vertex in a graph.
+There is also a special name associated with the case when a vertex is an end vertex of an edge.
+\begin{definition}
+\label{incident}
+A vertex v in a graph G is incident to an edge e in G if v is an end vertex of e. {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}
+\end{definition}
+It is sometimes also required to know how many edges are incident to a specific vertex in a graph.
 \begin{definition}
 \label{degree}
-The degree of a vertex v in a graph G is the number of adjacent vertices to v in G {\normalfont{\cite{weisstein_eric}}}. The degree of a vertex v is denoted as deg(v).
+The degree of a vertex v in a graph G denoted by deg(v) is, the number of edges incident with v in G. {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}
 \end{definition}
 Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the vertices of $\mathit{G}$ using circles, and by drawing the edges of $\mathit{G}$ using lines between adjacent vertices. As a result, in this thesis a graph is sometimes given formally using sets or as a pictorial representation, assuming that one can be converted into another. Example \ref{Example 1} below depicts how a graph can be represented pictorially.
 \begin{example}
@@ -70,15 +75,15 @@ Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the v
     \path[->] (v3) edge  node[]{}(v4);
     \path[->] (v4) edge  node[]{}(v1);
 \end{tikzpicture}\\
-{\normalfont{Using definition \ref{adjacent}, 2 adjacent vertices in }}G {\normalfont{are}} $v_1$ {\normalfont{and}} $v_2$. {\normalfont{On the other hand, 2 non adjacent vertices in }}G {\normalfont{are}} $v_1$ {\normalfont{and}} $v_3.$\\
+{\normalfont{Using definition \ref{adjacent}, two adjacent vertices in }}G {\normalfont{are}} $v_1$ {\normalfont{and}} $v_2$.{\normalfont{ On the other hand, two non adjacent vertices in }}G {\normalfont{are}} $v_1$ {\normalfont{and}} $v_3.$\\ {\normalfont{By definition \ref{incident}}}, $v_1$ {\normalfont{and}} $v_2$ {\normalfont{are incident to the edge}} \{$v_1, v_2\}$.\\
 {\normalfont{Using definition \ref{degree}, the degree of every vertex in}} G {\normalfont{is 2}}.
 \end{example}
 There are many other examples of graphs, one of them being the complete graph on $\mathit{n}$ vertices.
 \begin{definition}
 \label{Complete Graph}
-A graph G(V,E) is said to be complete if $\forall$ v,w $\in$ V v $\neq$ w, v is adjacent to w. The complete graph on n vertices is denoted by $K_n$. \normalfont{\cite{complete_graphs}}
+A graph G(V,E) is said to be complete if $\forall$ v,w $\in$ V v $\neq$ w, v is adjacent to w. The complete graph on n vertices is denoted by $K_n$. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
 \end{definition}
-Given any graph $\mathit{G(V,E)}$, one can also define graph theoretic terminologies that lie within $\mathit{G}$, one of them being a path.
+Given any graph $\mathit{G(V,E)}$, one can also define graph theoretic structures that lie within $\mathit{G}$, one of them being a path.
 \begin{definition}
 \label{Path}
 Given a graph G(V,E), a path in G joining any 2 vertices u, v $\in$ V, is a sequence of vertices u = $u_1$, $u_2$, ...,$u_n$ = v in which no vertex is repeated and, $\forall$ 0 $<$  i $<$ n, \{$u_i, u_{i+1}\}$ $\in$ E. {\normalfont{\cite{thompson}}}
@@ -86,7 +91,7 @@ Given a graph G(V,E), a path in G joining any 2 vertices u, v $\in$ V, is a sequ
 Definition \ref{Path} can now be used to define cycles and connectivity in a graph.
 \begin{definition}
 \label{connectedgraph}
-A graph G(V,E) is said to be connected if $\forall$ u,v $\in$ V u $\neq$ v, u and v are joined by a path. \normalfont{\cite{connected}}
+A graph G(V,E) is said to be connected if $\forall$ u,v $\in$ V u $\neq$ v, u and v are joined by a path. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
 \end{definition}
 \begin{definition}
 \label{cycle}
@@ -142,8 +147,9 @@ Given a graph G(V,E) and a graph H($V^\prime$,$E^\prime$), H is a subgraph of G 
 After defining some important concepts, the next step is to extend definition \ref{Graph} to define another class of graphs called weighted graphs. It must be noted that all definitions presented so far apply also to weighted graphs.
 \begin{definition}
 \label{Weighted Function}
-Given a graph G(V,E), a weight function is a function f : E $\mapsto$ $\real$ {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. The real numbers assigned to each edge are called weights.
+Given a graph G(V,E), a weight function is a function f : E $\mapsto$ $\real^+$ {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. The real numbers assigned to each edge are called weights.
 \end{definition}
+Note that in definition \ref{Weighted Function}, the weights are taken to be positive. According to \cite{harris_hirst_mossinghoff_2008}, there could be cases were negative weights would be appropiate. However, unless otherwise stated, it is to be assumed that when considering a weight function, the weights are positive.
 \begin{definition}
 \label{Weighted Graph}
 A weighted graph is a graph G(V,E) with a weight function f {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. This is denoted by the triple G(V,E,f) or G. 
@@ -191,7 +197,7 @@ f(\{$v_4, v_1\}$) = 7\\
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
 \end{tikzpicture}\\
- {\normalfont{Also according to definition \ref{subgraph}, the above graph is a subgraph of itself. Therefore it's weight can be calculated, were by definition \ref{weightofasubgraph}, the weight of}} G {\normalfont{is 32.}}\\
+ {\normalfont{Also according to definition \ref{subgraph}, the above graph is a subgraph of itself. Therefore it's weight can be calculated, where by definition \ref{weightofasubgraph}, the weight of}} G {\normalfont{is 32.}}\\
 \\
 According to Guichard \cite{guichard_2018}, trees are another useful class of graphs.
 \begin{definition}
@@ -210,12 +216,12 @@ A graph H is a spanning tree of G if H is a tree and H is a spanning subgraph of
 \end{definition}
 \begin{definition}
 \label{hamiltonian cycle}
-Given a graph G, c is a Hamiltonian cycle in G if c is a cycle and c is a spanning subgraph of G. Also, a graph that contains a Hamiltonian cycle is called a Hamiltonian graph. \normalfont{\cite{weisstein_2018}}
+Given a graph G, C is a Hamiltonian cycle in G if C is a cycle and C is a spanning subgraph of G. Also, a graph that contains a Hamiltonian cycle is called a Hamiltonian graph. \normalfont{\cite{ray_2013}}
 \end{definition}
 It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cycles can be represented by Cycle graphs due to the construction discussed earlier. What follows now is an example that illustrates better definitions \ref{spanning subgraph}, \ref{spanning tree} and \ref{hamiltonian cycle}. 
 \begin{example}
 \label{example5}
-{\normalfont{Let}} G {\normalfont{be the graph in example \ref{example4}. Then, according to definition \ref{spanning subgraph}, the 2 graphs below are 2 spanning subgraphs of}} G {\normalfont{because, they contain all the vertices of}} G {\normalfont{and are subgraphs of }}G .\\
+{\normalfont{Let}} G {\normalfont{be the graph in example \ref{example4}. Then, according to definition \ref{spanning subgraph}, the two graphs below are two spanning subgraphs of}} G {\normalfont{because, they contain all the vertices of}} G {\normalfont{and are subgraphs of }}G .\\
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -265,8 +271,8 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
 \end{tikzpicture}\\
-{\normalfont{It must also be said that by definition \ref{hamiltonian cycle}, the above 2 graphs are Hamiltonian cycles in}} G {\normalfont{because, they are spanning subgraphs of}} G {\normalfont{and are Cycle sub-graphs of}} G. {\normalfont{Since the above graphs are subgraphs of }}G{\normalfont{, by definition \ref{weightofasubgraph}, their weight can be calculated by summing up the weights of the edges. Thus, the Hamiltonian cycles above have weight 23 and 18 respectively.}}\\
-{\normalfont{Given the same graph }}G{\normalfont{ in example \ref{example4}, the 2 graphs below are spanning trees of }}G{\normalfont{ of weight 18 and 19 respectively.}}\\
+{\normalfont{It must also be said that by definition \ref{hamiltonian cycle}, the above two graphs are Hamiltonian cycles in}} G {\normalfont{because, they are spanning subgraphs of}} G {\normalfont{and are Cycle sub-graphs of}} G. {\normalfont{Since the above graphs are subgraphs of }}G{\normalfont{, by definition \ref{weightofasubgraph}, their weight can be calculated by summing up the weights of the edges. Thus, the Hamiltonian cycles above have weight 23 and 18 respectively.}}\\
+{\normalfont{Given the same graph }}G{\normalfont{ in example \ref{example4}, the two graphs below are spanning trees of }}G{\normalfont{ of weight 18 and 19 respectively.}}\\
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -324,10 +330,10 @@ A graph G has a spanning tree $\iff$ it is connected.
 ($\implies$) Let $\mathit{G(V,E)}$ be a graph having a spanning tree $\mathit{T(V^\prime,E^\prime)}$ as one of it's subgraphs. Let $\mathit{v1, v2}$ $\in$ $\mathit{V}$. Since, $\mathit{T}$ is a spanning tree of $\mathit{G}$, then, $\mathit{T}$ is a spanning subgraph of $\mathit{G}$. Thus, $\mathit{v1, v2}$ $\in$ $V^\prime$. Also, since $\mathit{T}$ is a tree, $\mathit{T}$ must be connected. Therefore, $\exists$ a path $\mathit{P}$ joining vertices $\mathit{v_1}$ and $\mathit{v_2}$ in $\mathit{T}$. But since $\mathit{T}$ is a subgraph of G, then $\mathit{P}$ is also a path in $\mathit{G}$. Therefore $\mathit{G}$ must be connected.\\
 ($\Leftarrow$) Conversely, let $\mathit{G(V,E)}$ be a connected graph. Then, if $\mathit{G}$ has no cycles, $\mathit{G}$ itself must be a spanning tree. If $\mathit{G}$ has cycles, delete an edge from a cycle in $\mathit{G}$. Clearly, the resultant graph is still connected and contains one less cycle. Repeat this procedure untill no more cycles are left in the graph. Then, the resultant graph $\mathit{G^\prime}$ would be a connected subgraph of $\mathit{G}$ having no cycles(i.e a tree). Also, since by the deletion procedure, no vertex was deleted from $\mathit{G}$, $\mathit{G^\prime}$ is a spanning subgraph of $\mathit{G}$. Therefore $\mathit{G^\prime}$ is a spanning tree of $\mathit{G}$. \normalfont{\cite{ray_2013}}
 \end{proof}
-Theorem \ref{spanningtreetheorem} confirms that for a graph to have a spanning tree, the graph must be connected and vice-versa. Thus, for spanning trees, the necessary and sufficient condition is connectivity. However, the same cannot be said about Hamiltonian cycles because, no necessary and sufficient conditions are known for a graph to be Hamiltonian. In fact, there are sufficient conditions for a graph to be Hamiltonian, however, these conditions are not necessary. According to Guichard \cite{guichard_2018}, these sufficient conditions typically say that for a graph to be Hamiltonian it must have a lot of edges. But it is also argued in \cite{guichard_2018}, that these conditions are not necessary, because, there are Hamiltonian graphs that have few edges. For example, $\mathit{C_n}$ has only $\mathit{n-1}$ edges but is Hamiltonian. One such sufficient but not necessary condition for Hamiltonianicity is Ore's Theorem below.
+Theorem \ref{spanningtreetheorem} confirms that for a graph to have a spanning tree, the graph must be connected and vice-versa. Thus, for spanning trees, the necessary and sufficient condition is connectivity. However, the same cannot be said about Hamiltonian cycles because, no necessary and sufficient conditions are known for a graph to be Hamiltonian. In fact, there are sufficient conditions for a graph to be Hamiltonian, however, these conditions are not necessary. There are also necessary conditions, some of which are trivial, such as, if $\mathit{G}$ is Hamiltonian then G must be connected, but this is not necessary and sufficient. According to Guichard \cite{guichard_2018}, these sufficient conditions typically say that for a graph to be Hamiltonian it must have a lot of edges. But it is also argued in \cite{guichard_2018}, that these conditions are not necessary, because, there are Hamiltonian graphs that have few edges. For example, $\mathit{C_n}$ has only $\mathit{n}$ edges but is Hamiltonian. One such sufficient but not necessary condition for Hamiltonianicity is Ore's Theorem below.
 \begin{theorem}[Ore's Theorem]
 \label{ore's theorem}
-Let G be a graph on n $\geq$ 3 vertices such that if v and w are not adjacent in G $\implies$ deg(v) + deg(w) $\geq$ n, then G is Hamiltonian.
+Let G be a graph on n $\geq$ 3 vertices such that if v and w are not adjacent in G then deg(v) + deg(w) $\geq$ n. Then G is Hamiltonian.
 \end{theorem}
 \begin{proof}
 Suppose that $\mathit{G(V,E)}$ is a graph satisfying all the conditions in the theorem statement but is not Hamiltonian. Then since $\mathit{G}$ is not Hamiltonian and $K_n$ is Hamiltonian, $\mathit{G}$ must be a subgraph of $\mathit{K_n}$ having fewer edges than $\mathit{K_n}$. Therefore, add edges to $\mathit{G}$ between non adjacent vertices to obtain a subgraph $\mathit{H(V^\prime,E^\prime)}$ of $\mathit{K_n}$ such that adding an edge to $\mathit{H}$ would create a subgraph of $\mathit{K_n}$ which is Hamiltonian. Let $\mathit{u, v}$ $\in$ $V^\prime$ be 2 non-adjecent vertices in H. Since by construction $\mathit{G}$ is a subgraph of $\mathit{H}$, $\mathit{u, v}$ must be non-adjcent in $\mathit{G}$. Therefore $\mathit{deg(u) + deg(v) \geq n}$ in both G and H. Since adding an edge to $\mathit{H}$ creates a resultant graph that is Hamiltonian, then, adding an edge between $\mathit{u}$ and $\mathit{v}$ creates a Hamiltonian graph. Therefore, in $\mathit{H}$ there must be a path joining $\mathit{u}$ and $\mathit{v}$ containing all the vertices of $\mathit{H}$. Let the path be $\mathit{u = v_1, v_2, ..., v_n = v}$.\\
@@ -428,8 +434,8 @@ The following definition is used to avoid a lot of writing.
 Given a function g(n) and an algorithm A having a running time function T(n), A is said to have a time complexity of O(g(n)) if T(n) = O(g(n)). \normalfont{\cite{adamchik_2009}} 
 \end{definition}
 Definition \ref{time_complexity} does not specify that the running time function of an algorithm must be the worst case running time function. However, recall that when discussing running time functions it was said that it can be assumed that, the worst-case running time function is taken. Therefore, it can be assumed that the worst-case running time function is taken when saying that an algorithm has an $\mathit{O(g(n))}$ time complexity, or when saying that an algorithm is an $\mathit{O(g(n))}$ algorithm. This will sometimes also be termed as, the worst-case time complexity of the algorithm. Note that when it is said that a problem can be solved in $\mathit{O(g(n))}$ time, this means the problem can be solved by an algorithm that has an $\mathit{O(g(n))}$ worst-case time complexity.\\\\
-The following table summarizes some of the most common time complexities encountered in computational theory, and what they are commonly known as. The table was adapted using information from \cite{big_o_notation_explained} and \cite{carter_1999}.\newpage
-\begin{table}[]
+The following table summarizes some of the most common time complexities encountered in computational theory, and what they are commonly known as. The table was adapted using information from \cite{big_o_notation_explained} and \cite{carter_1999}.
+\begin{table}[!htbp]
   \begin{center}
     \caption{Time Complexities and Terminology Used.}
     \label{tab:table1}
@@ -447,7 +453,7 @@ The following table summarizes some of the most common time complexities encount
     \end{tabular}
   \end{center}
 \end{table}
-In table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that, for example constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute for any input and therefore, the less efficient it is. In general, problems that can be solved in polynomial time are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general, tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve.
+\\In table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that, for example constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute for any input and therefore, the less efficient it is. In general, problems that can be solved in polynomial time are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general, tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve.
 \\\\The following is an example to wrap-up all the time complexity concepts discussed so far.
 \begin{example}
 \label{time_complexity_example}
