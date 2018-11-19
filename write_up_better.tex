@@ -526,7 +526,9 @@ The following example is used to clearly explain what the TSP defined in definit
 \end{itemize} 
 {\normalfont{Therefore, by definition \ref{TSP}, the solution to the TSP on the instance}} G {\normalfont{would be the minimum weight Hamiltonian cycle}} $v_1$, $v_3$, $v_2$, $v_4$, $v_1$. {\normalfont{Note that}} $K_4$ {{\normalfont{has}}} 3 {\normalfont{distinct Hamiltonian cycles. This fact is a special case of lemma \ref{lemma_disinct_hamiltonian_cycles} for any}} $K_n$.
 \end{example}
-
+Example \ref{example_2.1} may show that, to solve the TSP on a graph instance, one can do it by a brute-force algorithm. A brute-force algorithm for TSP is one that computes all the Hamiltonian cycles in a graph and chooses the one of least weight as a soltution. However, a brute-force algorithm is inefficient because a complete graph on at least three vertices contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles and hence, since, the brute-force algorithm must generate all the distinct Hamiltonian cycles in the graph, the brute-force algorithm must take factorial time to generate all Hamiltonian cycles. This means that the brute-force algorithm is a factorial time algorithm. \cite{Sanchit}, \cite{mathematics_stack_exchange_2012}
+\\\\The following lemma confirms that the complete graph $\mathit{K_n, n\geq 3}$, contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, confirming that a brute-force algorithm cannot efficiently solve the TSP.
+we can either try and find an algorthm or show that tsp is np complete after theorem
 \subsection{Heuristics}
 \subsection{The Ant Colony Algorithm}
 \newpage
