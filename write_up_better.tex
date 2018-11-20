@@ -323,7 +323,7 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
 \end{example}
 Having defined Hamiltonian cycles and spanning trees, it is natural to ask whether there are necessary and sufficient conditions in a graph that guarantee it is Hamiltonian or that it contains a spanning tree as subgraph. In fact, theorem \ref{spanningtreetheorem} gives a necessary and sufficient condition for a graph to have a spanning tree.
 \begin{theorem}
-A graph G has a spanning tree $\iff$ it is connected.
+A graph G has a spanning tree $\iff$ it is connected {\normalfont{\cite{ray_2013}}}.
 \label{spanningtreetheorem}
 \end{theorem} 
 \begin{proof}
@@ -333,7 +333,7 @@ A graph G has a spanning tree $\iff$ it is connected.
 Theorem \ref{spanningtreetheorem} confirms that for a graph to have a spanning tree, the graph must be connected and vice-versa. Thus, for spanning trees, the necessary and sufficient condition is connectivity. However, the same cannot be said about Hamiltonian cycles because, no necessary and sufficient conditions are known for a graph to be Hamiltonian. In fact, there are sufficient conditions for a graph to be Hamiltonian, however, these conditions are not necessary. There are also necessary conditions, some of which are trivial, such as, if $\mathit{G}$ is Hamiltonian then G must be connected, but this is not necessary and sufficient. According to Guichard \cite{guichard_2018}, these sufficient conditions typically say that for a graph to be Hamiltonian it must have a lot of edges. But it is also argued in \cite{guichard_2018}, that these conditions are not necessary, because, there are Hamiltonian graphs that have few edges. For example, $\mathit{C_n}$ has only $\mathit{n}$ edges but is Hamiltonian. One such sufficient but not necessary condition for Hamiltonianicity is Ore's Theorem below.
 \begin{theorem}[Ore's Theorem]
 \label{ore's theorem}
-Let G be a graph on n $\geq$ 3 vertices such that if v and w are not adjacent in G then deg(v) + deg(w) $\geq$ n. Then G is Hamiltonian.
+Let G be a graph on n $\geq$ 3 vertices such that if v and w are not adjacent in G then deg(v) + deg(w) $\geq$ n. Then G is Hamiltonian. {\normalfont{\cite{ray_2013}}}
 \end{theorem}
 \begin{proof}
 Suppose that $\mathit{G(V,E)}$ is a graph satisfying all the conditions in the theorem statement but is not Hamiltonian. Then since $\mathit{G}$ is not Hamiltonian and $K_n$ is Hamiltonian, $\mathit{G}$ must be a subgraph of $\mathit{K_n}$ having fewer edges than $\mathit{K_n}$. Therefore, add edges to $\mathit{G}$ between non adjacent vertices to obtain a subgraph $\mathit{H(V^\prime,E^\prime)}$ of $\mathit{K_n}$ such that adding an edge to $\mathit{H}$ would create a subgraph of $\mathit{K_n}$ which is Hamiltonian. Let $\mathit{u, v}$ $\in$ $V^\prime$ be 2 non-adjecent vertices in H. Since by construction $\mathit{G}$ is a subgraph of $\mathit{H}$, $\mathit{u, v}$ must be non-adjcent in $\mathit{G}$. Therefore $\mathit{deg(u) + deg(v) \geq n}$ in both G and H. Since adding an edge to $\mathit{H}$ creates a resultant graph that is Hamiltonian, then, adding an edge between $\mathit{u}$ and $\mathit{v}$ creates a Hamiltonian graph. Therefore, in $\mathit{H}$ there must be a path joining $\mathit{u}$ and $\mathit{v}$ containing all the vertices of $\mathit{H}$. Let the path be $\mathit{u = v_1, v_2, ..., v_n = v}$.\\
@@ -513,7 +513,7 @@ After defining all the graph theoretic concepts and computational theory require
 Given a complete weighted graph G, the Travelling Salesman Problem (TSP) is the problem of finding a minimum weight Hamiltonian cycle in G. {\normalfont{\cite{bondy_murty_1982}}}
 \end{definition}
 According to definition \ref{TSP}, for the TSP to be defined on a weighted graph $\mathit{G}$, $\mathit{G}$ must be complete. However, this is not a limiting factor because, every weighted graph $\mathit{G^\prime}$ can be converted into a complete weighted graph, by adding the missing edges in $\mathit{G^\prime}$ with a very large weight. As a result, if $\mathit{G^\prime}$ is an incomplete weighted Hamiltonian graph, the minimum weight Hamiltonian cycle in $\mathit{G^\prime}$ would never be effected when transforming $\mathit{G^\prime}$ into a complete graph, because, since the missing edges have a very large weight, they can never be part of the minimum weight Hamiltonian cyle when added. Note that if $\mathit{G^\prime}$ is not Hamiltonian, the minimum weight Hamiltonian cycle after transforming $\mathit{G^\prime}$ into a complete graph would be very large. Therefore, since there is no loss of generality, it can be assumed that complete graphs are always being considered when discussing the TSP.\\\\
-Definition \ref{TSP} also specifies indirectly that, if $\mathit{G}$ is a complete weighted graph then $\mathit{G}$ is Hamiltonian, otherwise, if not, no Hamiltonian cycle can be found. This is true because, considering the complete graph $\mathit{K_n}$ on $\mathit{ n \geq 3}$ vertices, every Hamiltonian cycle consisting of $\mathit{n}$ vertices is in $\mathit{K_n}$. This property holds because, any two disinct vertices in $\mathit{K_n}$ are adjacent. Note that for the TSP, $K_2$ and $K_1$ are excluded because, by definition \ref{cycle}, cycles are defined on graphs having at least 3 vertices.\\ 
+Definition \ref{TSP} also specifies indirectly that, if $\mathit{G}$ is a complete weighted graph then $\mathit{G}$ is Hamiltonian, otherwise, if not, no Hamiltonian cycle can be found. This is true because, considering the complete graph $\mathit{K_n}$ on $\mathit{ n \geq 3}$ vertices, every Hamiltonian cycle consisting of $\mathit{n}$ vertices is in $\mathit{K_n}$. This property holds because, any two disinct vertices in $\mathit{K_n}$ are adjacent. Note that for the TSP, $K_2$ and $K_1$ are implicitly excluded because, by definition \ref{cycle}, cycles are defined on graphs having at least 3 vertices.\\ 
 \\
 The following example is used to clearly explain what the TSP defined in definition \ref{TSP} is all about.
 \begin{example}
@@ -526,8 +526,14 @@ The following example is used to clearly explain what the TSP defined in definit
 \end{itemize} 
 {\normalfont{Therefore, by definition \ref{TSP}, the solution to the TSP on the instance}} G {\normalfont{would be the minimum weight Hamiltonian cycle}} $v_1$, $v_3$, $v_2$, $v_4$, $v_1$. {\normalfont{Note that}} $K_4$ {{\normalfont{has}}} 3 {\normalfont{distinct Hamiltonian cycles. This fact is a special case of lemma \ref{lemma_disinct_hamiltonian_cycles} for any}} $K_n$.
 \end{example}
-Example \ref{example_2.1} may show that, to solve the TSP on a graph instance, one can do it by a brute-force algorithm. A brute-force algorithm for TSP is one that computes all the Hamiltonian cycles in a graph and chooses the one of least weight as a soltution. However, a brute-force algorithm is inefficient because a complete graph on at least three vertices contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles and hence, since, the brute-force algorithm must generate all the distinct Hamiltonian cycles in the graph, the brute-force algorithm must take factorial time to generate all Hamiltonian cycles. This means that the brute-force algorithm is a factorial time algorithm. \cite{Sanchit}, \cite{mathematics_stack_exchange_2012}
-\\\\The following lemma confirms that the complete graph $\mathit{K_n, n\geq 3}$, contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, confirming that a brute-force algorithm cannot efficiently solve the TSP.
+Example \ref{example_2.1} may show that, to solve the TSP on a graph instance, one can do it by a brute-force algorithm. A brute-force algorithm for TSP is one that computes all the Hamiltonian cycles in a graph and chooses the one of least weight as a soltution \cite{Sanchit}. However, according to Krivelevich \cite{Krivelevich}, $\mathit{K_n}$ contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, a brute-force algorithm is inefficient because it must generate all the distinct Hamiltonian cycles in the graph taking factorial time to do so \cite{Sanchit}. This means that the brute-force algorithm is a factorial time algorithm.
+\\\\Lemma \ref{distinct_hamiltonian_cycles} below confirms that, the complete graph $\mathit{K_n}$ on $\mathit{n\geq 3}$ vertices contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, it confirms that a brute-force algorithm cannot efficiently solve the TSP.
+\begin{lemma}
+\label{distinct_hamiltonian_cycles}
+\end{lemma}
+\begin{proof}
+\end{proof}
+ctite theorem statements
 we can either try and find an algorthm or show that tsp is np complete after theorem
 \subsection{Heuristics}
 \subsection{The Ant Colony Algorithm}
