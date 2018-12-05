@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {subsection}{\numberline {1.1}Some Graph Theory}{3}
+\contentsline {subsection}{\numberline {1.2}Some Computational Theory}{11}
+\contentsline {section}{\numberline {2}The Travelling Salesman Problem}{21}
+\contentsline {subsection}{\numberline {2.1}Approximation Algorithms}{26}
+\contentsline {subsubsection}{\numberline {2.1.1}Nearest Neighbour Approximation Algorithm}{26}
+\contentsline {subsubsection}{\numberline {2.1.2}Twice Around the Minimum Spanning Tree Approximation Algorithm}{26}
+\contentsline {subsection}{\numberline {2.2}The Ant Colony Algorithm}{26}
+\contentsline {section}{\numberline {3}Experimental Data}{27}
+\contentsline {section}{\numberline {4}Conclusion}{28}
