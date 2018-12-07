@@ -454,7 +454,7 @@ The following table summarizes some of the most common time complexities encount
     \end{tabular}
   \end{center}
 \end{table}
-\\In Table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that, for example, constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute for any input and therefore, the less efficient it is. In general, problems that can be solved in polynomial time are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general, tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve. Table \ref{tab:table2} below is constructed to show why problems that can be solved in polynomial time are tractable, whilst, problems that cannot be solved in polynomial time are intractable. Table \ref{tab:table2} gives the execution time of any algorithm given an input of size $\mathit{10}$, $\mathit{100}$ or $\mathit{1000}$, provided that the algorithm's time complexity is $\mathit{O(n)}$, $\mathit{O(n^2)}$, $\mathit{O(2^n)}$ or $\mathit{O(n!)}$.
+\\In Table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that, for example, constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute for any input and therefore, the less efficient it is. In general, problems that can be solved in polynomial time are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general, tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve. Table \ref{tab:table2} below is constructed to show why problems that can be solved in polynomial time are tractable, whilst, problems that cannot be solved in polynomial time are intractable. Table \ref{tab:table2} gives the execution time of any algorithm given an input of size $\mathit{10}$ or $\mathit{100}$, provided that the algorithm's time complexity is $\mathit{O(n)}$, $\mathit{O(n^2)}$, $\mathit{O(2^n)}$ or $\mathit{O(n!)}$.
 \begin{table}[!htbp]
   \begin{center}
     \caption{Execution Time Given Input Size and Time Complexity}
@@ -486,17 +486,17 @@ Therefore according to Definition \ref{P}, the class P consists of tractable pro
 \label{certificate}
 A certificate of a solution is an object that guarantees the solution. {\normalfont{\cite{computer_science_stack_exchange}}}
 \end{definition}
-It can be deduced from Definition \ref{certificate} that if a certificate is correct, then the solution is correct. Therefore, one can verify if a solution is correct by actually verifying that the certificate is correct. Note that Definition \ref{certificate} is not the exact mathematical definition of a certificate. The exact mathematical definition of a certificate is not given because, it requires discussing concepts which are beyond the scope of this project.
+It can be deduced from Definition \ref{certificate} that if a certificate is correct, then the solution is correct. Therefore, one can verify if a solution is correct by actually verifying that the certificate is correct. For convenience, in this thesis, `verifying a solution/certificate if it is correct' will be referred to as `verifying a solution'. Note that Definition \ref{certificate} is not the exact mathematical definition of a certificate. The exact mathematical definition of a certificate is not given because, it requires discussing concepts which are beyond the scope of this project.
 \begin{definition}
 \label{polynomial_time_verification}
-Suppose that S is an arbitrary solution to a problem A. Then, A can be verified in polynomial time if given a certificate C of S, $\exists$ a polynomial time algorithm such that, when supplied an instance (input) of A and C as inputs, the algorithm can verify if C is correct. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
+Suppose that S is an arbitrary solution to a problem A. Then, A can be verified in polynomial time if given a certificate C of S, $\exists$ a polynomial time algorithm such that, when supplied C and an instance (input) of A as inputs, the algorithm can verify if C is correct. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
 \end{definition}
-In other words, Definition \ref{polynomial_time_verification} states that, a problem can be verified in polynomial time if the certificate that lead to the solution can be checked if it is correct by a polynomial time algorithm. Note that as discussed before, when checking that the certificate is correct, we are implicitly checking that the solution is correct. What follows now is an example that explains Definition \ref{certificate} and Definition \ref{polynomial_time_verification}.
+In other words, Definition \ref{polynomial_time_verification} states that, a problem can be verified in polynomial time if the certificate that lead to the solution can be verified by a polynomial time algorithm. Note that as discussed before, when verifying a certificate, we are implicitly verifying the solution. What follows now is an example that explains Definition \ref{certificate} and Definition \ref{polynomial_time_verification}.
 \begin{example}
 \label{example_polynomial_time_verification}
-{\normalfont{To explain Definition \ref{certificate} and Definition \ref{polynomial_time_verification}, the Hamiltonian Cycle problem is going to be used. Given a graph}} G(V,E){\normalfont{, the Hamiltonian cycle problem is the task of determing whether}} G {\normalfont{has a Hamiltonian cycle \cite{cormen_leiserson_rivest_stein}. A certificate of a solution to the Hamiltonian cycle problem can be a sequence of vertices}} S = $v_1$, ..., $v_n$ {\normalfont{on }}$|$V$|$ = n {\normalfont{vertices. Note that if the solution to the Hamiltonian cycle problem is `yes then, the certificate would guarantee the solution if it is a Hamiltonian cycle in}} G{\normalfont{. On the other hand, if the solution to the Hamiltonian cycle problem is a `no', then, any certificate given guarantees the solution. The solution is guaranteed because, since there is no Hamiltonian cycle in}} G{\normalfont{, there is no certificate that represent a Hamiltonian cycle in}} G{\normalfont{. Therefore, for the Hamiltonian cycle problem to be verifiable in polynomial time, we must have a polynomial time algorithm that checks whether the certificate is a Hamiltonian cycle when the answer is `yes'. This can be done by creating an algorithm that checks if }} $\forall$ i $\in$ [n-1], \{$v_i, v_{i+1}\} \in$ E and \{$v_n$, $v_1\} \in$ E. {\normalfont{Therefore, the checker algorithm has a worst case}} O(n) {\normalfont{time complexity because, it must check all edges in the cycle. Hence, the checker algorithm takes polynomial time to execute. As a result, the Hamiltonian cycle problem can be verified in polynomial time.}}
+{\normalfont{To explain Definition \ref{certificate} and Definition \ref{polynomial_time_verification}, the Hamiltonian Cycle problem is going to be used. Given a graph}} G(V,E){\normalfont{, the Hamiltonian cycle problem is the task of determing whether}} G {\normalfont{has a Hamiltonian cycle \cite{cormen_leiserson_rivest_stein}. A certificate of a solution to the Hamiltonian cycle problem can be a sequence of vertices}} S = $v_1$, ..., $v_n$ {\normalfont{on }}$|$V$|$ = n {\normalfont{vertices. Note that if the solution to the Hamiltonian cycle problem is `yes' then, the certificate would guarantee the solution if it is a Hamiltonian cycle in}} G{\normalfont{. On the other hand, if the solution to the Hamiltonian cycle problem is a `no', then, any certificate given guarantees the solution. The solution is guaranteed because, since there is no Hamiltonian cycle in}} G{\normalfont{, there is no certificate that represent a Hamiltonian cycle in}} G{\normalfont{. Therefore, for the Hamiltonian cycle problem to be verifiable in polynomial time, we must have a polynomial time algorithm that checks whether the certificate is a Hamiltonian cycle when the answer is `yes'. This can be done by creating an algorithm that checks if }} $\forall$ i $\in$ [n-1], \{$v_i, v_{i+1}\} \in$ E and \{$v_n$, $v_1\} \in$ E. {\normalfont{Therefore, the checker algorithm has a worst case}} O(n) {\normalfont{time complexity because, it must check all edges in the cycle. Hence, the checker algorithm takes polynomial time to execute. As a result, the Hamiltonian cycle problem can be verified in polynomial time.}}
 \end{example}
-From Example \ref{example_polynomial_time_verification} it can be deduced that, a problem can be verified in polynomial time if a certificate for a solution to the problem can be checked it is correct in polynomial time. Note that, as shown in Example \ref{example_polynomial_time_verification}, it is only needed to be shown that the certificate can be verified in polynomial time when the solution to a problem is `yes'. This is because, any certificate is correct when the answer is `no'. Now the class NP can be defined.
+Note that, as shown in Example \ref{example_polynomial_time_verification}, to show that a problem is verifiable in polynomial time, it is only needed to be shown that a certificate of the solution `yes' can be verified in polynomial time'. This is because, any certificate is correct when the answer is `no'. Now the class NP can be defined.
 \begin{definition}
 \label{NP}
 The class NP consists of all decision problems that can be verified in polynomial time. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{geeksforgeeks_2018_2}}}
@@ -524,7 +524,7 @@ After defining reduction algorithms, the class of NP-Complete problems can now b
 \label{NPC}
 A decision problem A is in the class NP-Complete (NPC) if A is in NP and A is as hard as any problem in NP. {\normalfont{\cite{cormen_leiserson_rivest_stein}} }
 \end{definition}
-In other words, definition \ref{NPC} states that for a problem $\mathit{A}$ to be in NPC, $\mathit{A}$ must be in NP and that any problem in NP can be transformed using a reduction algorithm into $\mathit{A}$. Therefore, to show that a problem $\mathit{A}$ is in NPC, one must show that it is in NP, and that every problem in NP can be reduced to $\mathit{A}$. Showing that $\mathit{A}$ is in NP is not difficult because, it only requires to show that an alleged solution for an instance of A can be verified if it is correct in polynomial time. As discussed before, this can be done by checking that a certificate which confirms the solution `yes' can be verified in polynomial time. On the other hand, showing that every problem in NP is reducible to $\mathit{A}$ may seem diffcult because, this requires checking that every problem in NP can be reduced to $\mathit{A}$ \cite{geeksforgeeks_2018_2}. However, this is not the case because reduction algorithms are transitive \cite{geeksforgeeks_2018_2}. Hence, considering a known NP-Complete problem $\mathit{H}$, since $\mathit{H}$ is NP-Complete, every problem in NP can be reduced to $\mathit{H}$. Therefore, if one can find a reduction algorithm from $\mathit{H}$ to $\mathit{A}$, then by transitivity of reduction algorithms, every problem in NP can be reduced to $\mathit{A}$ using a reduciton algorithm \cite{geeksforgeeks_2018_2}.\\\\
+In other words, definition \ref{NPC} states that for a problem $\mathit{A}$ to be in NPC, $\mathit{A}$ must be in NP and that any problem in NP can be transformed using a reduction algorithm into $\mathit{A}$. Therefore, to show that a problem $\mathit{A}$ is in NPC, one must show that it is in NP, and that every problem in NP can be reduced to $\mathit{A}$. Showing that $\mathit{A}$ is in NP is not difficult because, it only requires to show that an alleged solution for an instance of A can be verified in polynomial time. As discussed before, this can be done by checking that a certificate for the solution `yes' can be verified in polynomial time. On the other hand, showing that every problem in NP is reducible to $\mathit{A}$ may seem diffcult because, this requires checking that every problem in NP can be reduced to $\mathit{A}$ \cite{geeksforgeeks_2018_2}. However, this is not the case because reduction algorithms are transitive \cite{geeksforgeeks_2018_2}. Hence, considering a known NP-Complete problem $\mathit{H}$, since $\mathit{H}$ is NP-Complete, every problem in NP can be reduced to $\mathit{H}$. Therefore, if one can find a reduction algorithm from $\mathit{H}$ to $\mathit{A}$, then by transitivity of reduction algorithms, every problem in NP can be reduced to $\mathit{A}$ using a reduciton algorithm \cite{geeksforgeeks_2018_2}.\\\\
 The classes P, NP and NPC have very important implications in computational theory. One of the most important problems in computational theory is whether P = NP. It is known that P $\subseteq$ NP. This is true because, since every problem in P can be solved in polynomial time, then implicitly the polynomial time verification has been done by the algorithm solving the problem. Therefore, every problem in P is in NP and hence, P $\subseteq$ NP. Note that this could be done because, every problem can be converted into a decision problem. Showing that NP $\subseteq$ P may seem to be easy as well. In fact, to show that NP $\subseteq$ P, one only needs to show that $\exists$ an NP-Complete problem $\mathit{C}$ that can be solved in polynomial time, because, by the NP-Completness of $\mathit{C}$, every problem in NP can be reduced using a reduction algorithm to $\mathit{C}$ and hence, every problem in NP could be solved in polynomial time since the reduction algorithm and the algorithm solving $\mathit{C}$, would take a total time that is still polynomial. However, no polynomial time algorithm has yet been discovered for any problem in NPC. In addition to this, no one has yet been able to prove that such polynomial time algorithms do not exist for NP-Complete problems. This essentially means that, the NP $\subseteq$ P problem is still an open question. \cite{cormen_leiserson_rivest_stein}\\\\
 After defining the important computational theory, it is now time to define the Travelling Salesman Problem, and present important properties about it. This will all lead to showing that the Travelling Salesman Problem is NP-Complete, hence, showing that no polynomial time algorithm has yet been discovered to solve the Travelling Salesman Problem. All of this will be done in the next section.
 \newpage
@@ -546,19 +546,9 @@ The following example is used to clearly explain what the TSP defined in Definit
    \item $v_1$, $v_3$, $v_4$, $v_2$, $v_1$ {\normalfont{with weight}} 23
    \item $v_1$, $v_3$, $v_2$, $v_4$, $v_1$ {\normalfont{with weight}} 18
 \end{itemize} 
-{\normalfont{Therefore, by definition \ref{TSP}, the solution to the TSP given the graph}} $K_4$ {\normalfont{with weight function}} f {\normalfont{would be, the minimum weight Hamiltonian cycle}} $v_1$, $v_3$, $v_2$, $v_4$, $v_1$. {\normalfont{Note that}} $K_4$ {{\normalfont{has}}} 3 {\normalfont{distinct Hamiltonian cycles. This fact is a special case of lemma \ref{distinct_hamiltonian_cycles} for any}} $K_n$.
+{\normalfont{Therefore, by definition \ref{TSP}, the solution to the TSP given the graph}} $K_4$ {\normalfont{with weight function}} f {\normalfont{would be, the minimum weight Hamiltonian cycle}} $v_1$, $v_3$, $v_2$, $v_4$, $v_1$. 
 \end{example}
-Example \ref{example_2.1} suggests implicitly that, to solve the TSP on any complete weighted graph, one can do it by a brute-force algorithm. A brute-force algorithm for the TSP is one that computes all the Hamiltonian cycles in a graph and chooses the one of least weight as a soltution \cite{Sanchit}. However, $\mathit{K_n}$ contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, a brute-force algorithm is inefficient because, it must generate all the distinct Hamiltonian cycles in the graph taking factorial time to do so \cite{Sanchit}.
-\\\\Lemma \ref{distinct_hamiltonian_cycles} below states that, the complete graph $\mathit{K_n}$ on $\mathit{n\geq 3}$ vertices contains, $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, it confirms that a brute-force algorithm cannot efficiently solve the TSP.
-\begin{lemma}
-\label{distinct_hamiltonian_cycles}
-For n $\geq$ 3, the complete graph on n vertices has $\frac{(n-1)!}{2}$ distinct Hamiltonian cycles \cite{mathematics_stack_exchange_2012}.
-\end{lemma}
-\begin{proof}
-Let $G(V,E)$ = $K_n$ be the complete graph on $n \geq 3$ vertices. Since $\forall$ $u$,$v$ $\in$ $V$, $u$ $\ne$ $v$ $\implies$ $\{u,v\}$ $\in$ $E$, then, every permutation of the set $V$ must represent a path in $K_n$ containing every vertex of $K_n$ and vice-versa (1-1 correspondence). Let $A$ be the set of all permutations of the set $V$, and $B$ be the set of all paths in $K_n$ containing every vertex of $K_n$. Now, let $H$ be the set of all Hamiltonian cycles in $K_n$. Each Hamiltonian cycle in $H$ can be transformed into a path in $B$ by removing the last vertex from the sequence representing the cycle. On the other hand, each Hamiltonian path can be transformed into a Hamiltonian cycle by repeating the first vertex as the last vertex without removing any vertices. Therefore, there is a 1-1 correspondence between $H$ and $B$. As a result, by the transitivity of 1-1 correspondence, there is a 1-1 correspondence between $A$ and $H$. Hence, the number of Hamiltonian cycles in $K_n$ is equal to the number of permutations of $V$. However , different permutations of the set $V$ may represent the same Hamiltonian Cycle in $K_n$ since, the same edges would be used from $E$ but in a different order of the vertices. In fact, consider the Hamiltonian Cycle $C$ represented by the permutation $v_1$, $v_2$, ..., $v_n$. In terms of Hamiltonian cycles, the permutation $v_1$, $v_2$, ..., $v_n$ is the same as the permutation $v_2$, ..., $v_n$, $v_1$ because, the same edges in $E$ are used. Therefore, for each Hamiltonian cycle in $K_n$, we can have $n$ permutations representing the same Hamiltonian cycle each starting from a different vertex, but using the same edges. Also, for each of these $n$ permutation representations, the reverse of each of these permutations represent the same Hamiltonian Cycle, with the difference being that the cycle is traversed in reverse order. Therefore, there are $2n$ permutations representing the same Hamiltonian Cycle. Therefore, there are $\frac{n!}{2n}$ = $\frac{(n-1)!}{2}$ distinct Hamiltonian cycles in $K_n$.
-\end{proof}
-Note that the proof for Lemma \ref{distinct_hamiltonian_cycles} was constructed using ideas in \cite{mathematics_stack_exchange_2012}.\\\\
-As discussed in previous paragraphs, Lemma \ref{distinct_hamiltonian_cycles} confirms that a brute-force algorithm will not be efficient enough to solve the TSP for large instance sizes. This means that, we can either try and design a new algorithm that solves the TSP in polynomial time, or try and prove that TSP is an NP-Complete problem. As discussed in section 1.2, the latter would confirm that no polynomial time algorithm is known for the TSP. It is important to note that, this does not mean that TSP cannot be solved in polynomial time.\\\\ In what follows, it will be proven that the TSP is an NP-Complete problem. Therefore, first it will be shown that TSP is in NP, and secondly, that TSP is as hard as any problem in NP (as discussed in section 1.2). It is important to note that, to prove that TSP is in NP, TSP must be converted into a decision problem. This is needed because in Definition \ref{TSP}, TSP was presented as an optimisation problem, and because, by Definition \ref{NP}, the class NP contains decision problems. The TSP's related decision problem is the following :\\\\
+Example \ref{example_2.1} suggests implicitly that, to solve the TSP on any complete weighted graph, one can do it by a brute-force algorithm. A brute-force algorithm for the TSP is one that computes all the Hamiltonian cycles in a graph and chooses the one of least weight as a soltution \cite{Sanchit}. However, $\mathit{K_n}$ contains $\mathit{\frac{(n-1)!}{2}}$ distinct Hamiltonian cycles. Therefore, a brute-force algorithm is inefficient because, it must generate all the distinct Hamiltonian cycles in the graph taking factorial time to do so \cite{Sanchit}. This means that, we can either try and design a new algorithm that solves the TSP in polynomial time, or try and prove that TSP is an NP-Complete problem. As discussed in section 1.2, the latter would confirm that no polynomial time algorithm is known for the TSP. It is important to note that, this does not mean that TSP cannot be solved in polynomial time.\\\\ In what follows, it will be proven that the TSP is an NP-Complete problem. Therefore, first it will be shown that TSP is in NP, and secondly, that TSP is as hard as any problem in NP (as discussed in section 1.2). It is important to note that, to prove that TSP is in NP, TSP must be converted into a decision problem. This is needed because in Definition \ref{TSP}, TSP was presented as an optimisation problem, and because, by Definition \ref{NP}, the class NP contains decision problems. The TSP's related decision problem is the following :\\\\
 \underline{\textbf{TSP defined as a decision problem:}}\\\\
 \textit{Given an instance $(G,k)$ where $G$ is a complete weighted graph and $k$ is an integer, does $G$ contain a Hamiltonian cycle of weight at most $k$} \cite{cormen_leiserson_rivest_stein}?\\\\
 Having converted the TSP in Definition \ref{TSP} into a decision problem, it is now time to show that TSP is in NP. This is shown in Lemma \ref{TSP_in_NP} below.
@@ -582,7 +572,7 @@ TSP is an NP-Complete problem {\normalfont{\cite{cormen_leiserson_rivest_stein}}
 \begin{proof}
 Consider the TSP decision version. To show that TSP is an NP-Complete problem, we must show that it is in NP, and that TSP is as hard as any problem in NP. By Theorem \ref{TSP_in_NP} TSP is in NP. Therefore, it remains to be shown that TSP is hard as any problem in NP. This can be done as discussed in section 1.2, by taking a known NP-Complete problem and reducing it to TSP. Consider the Hamiltonian cycle problem  defined in Example \ref{example_polynomial_time_verification}. By Theorem 34.13 in \cite{cormen_leiserson_rivest_stein}, the Hamiltonian cycle problem is NP-Complete. Let $G(V,E)$ be an arbitrary instance to the Hamiltonian cycle problem such that $\abs{V} = n$ . An instance of the TSP can be constructed from $G$ as follows. From $G$ construct the the complete weighted graph $G^\prime(V^\prime,E^\prime,f)$ such that, $V^\prime=V$, $E^\prime=\{(u, v) : u, v \in V$ and $u \neq v\}$ and \\
 $f\colon V^\prime \times V^\prime \to \{0,1\}, f(u, v) = \begin{cases} 0& \text{if } (u, v) \in E\\ 1              & \text{otherwise} \end{cases}$\\
-Therefore, an instance to the TSP's can be the pair (G',0). From Definition \ref{reduction_algorithm}, one can show that the above transformation is a reduction algorithm if the transformation can be carried in polynomial time and that, the solution to the Hamiltonian cycle problem given $G$ is yes $\iff$ the solution to the TSP given $(G^\prime,0)$ is yes. According to \cite{ray_2013}, $K_n$ contains $\frac{n(n-1)}{2}$ edges. Therefore, the algorithm implementing the above transformation has an $O(n^2)$ worst-case time complexity because, it needs to create $\frac{n(n-1)}{2}$ edges between $n$ vertices at worst. Now, for the above transformation to be a reduction algorithm, there remains to show that the solution to the Hamiltonian cycle problem given $G$ is yes $\iff$ the solution to the TSP given $(G^\prime,0)$ is yes. Therefore, we need to show that $G$ has a Hamiltonian cycle $\iff$ $G^\prime$ has a Hamiltonian cycle of weight at most 0. Suppose that $G$ contains some Hamiltonian cycle $h$. Since $h$ is a Hamiltonian cycle in $G$, each edge of $h$ is in $E$, therefore $h$ has weight 0 in $G^\prime$. Therefore, h must be a Hamiltonian cycle in $G^\prime$ of weight at most 0. Suppose that $G^\prime$ contains a Hamiltonian cycle $C$ of weight at most 0. Then, each edge of the $C$ must belong to $G$. Therefore, $C$ must be a Hamiltonian cycle in $G$. Therefore, we have shown that there is a reduction algorithm from the Hamiltonian cycle problem to the TSP. Therefore, TSP is as hard as the Hamiltonian cycle problem. Now since the Hamiltonian cycle problem is NP-Complete, it is as hard as any problem in NP. This means that by transitivity, the TSP is as hard as any problem in NP. Therefore, TSP must be NP-Complete. \cite{cormen_leiserson_rivest_stein}
+Therefore, an instance to the TSP constructed as a decision problem, can be the pair $(G^\prime,0)$ where $G^\prime$ is the complete weighted graph, and $k =0$. From Definition \ref{reduction_algorithm}, one can show that the above transformation is a reduction algorithm if the transformation can be carried in polynomial time and that, the solution to the Hamiltonian cycle problem given $G$ is yes $\iff$ the solution to the TSP given $(G^\prime,0)$ is yes. According to \cite{ray_2013}, $K_n$ contains $\frac{n(n-1)}{2}$ edges. Therefore, the algorithm implementing the above transformation has an $O(n^2)$ worst-case time complexity because, it needs to create $\frac{n(n-1)}{2}$ edges between $n$ vertices at worst. Now, for the above transformation to be a reduction algorithm, there remains to show that the solution to the Hamiltonian cycle problem given $G$ is yes $\iff$ the solution to the TSP given $(G^\prime,0)$ is yes. Therefore, we need to show that $G$ has a Hamiltonian cycle $\iff$ $G^\prime$ has a Hamiltonian cycle of weight at most 0. Suppose that $G$ contains some Hamiltonian cycle $h$. Since $h$ is a Hamiltonian cycle in $G$, each edge of $h$ is in $E$, therefore $h$ has weight 0 in $G^\prime$. Therefore, h must be a Hamiltonian cycle in $G^\prime$ of weight at most 0. Suppose that $G^\prime$ contains a Hamiltonian cycle $C$ of weight at most 0. Then, each edge of the $C$ must belong to $G$. Therefore, $C$ must be a Hamiltonian cycle in $G$. Therefore, we have shown that there is a reduction algorithm from the Hamiltonian cycle problem to the TSP. Therefore, TSP is as hard as the Hamiltonian cycle problem. Now since the Hamiltonian cycle problem is NP-Complete, it is as hard as any problem in NP. This means that by transitivity, the TSP is as hard as any problem in NP. Therefore, TSP must be NP-Complete. \cite{cormen_leiserson_rivest_stein}
 \end{proof}
 Theorem \ref{TSP_NP-Complete} confirms that no polynomial time algorithm is known for the TSP. However, according to \cite{cormen_leiserson_rivest_stein}, there are three ways to get around NP-Completeness. Firstly, if the input to an NP-Complete problem is small, an exponential algorithm may be good enough \cite{cormen_leiserson_rivest_stein}. Secondly, there could be special cases of the problem that could be solved in polynomial time \cite{cormen_leiserson_rivest_stein}. Thirdly, there are algorithms that can be designed to find near-optimal solutions in polynomial time \cite{cormen_leiserson_rivest_stein}. Algorithms that return near-optimal solutions to a problem are called approximation algorithms \cite{cormen_leiserson_rivest_stein}. The discussion will now proceed by presenting some important terminologies about approximation algorithms, and then present some approximation algorithms that can be used for the TSP.
 \begin{definition}
@@ -590,9 +580,176 @@ Theorem \ref{TSP_NP-Complete} confirms that no polynomial time algorithm is know
 Suppose that A is an optimisation problem with postive values assigned to each solution, and X is an approximation algorithm for A. Let $C^\star$ be the value of an optimal solution of A, and C be the value of the solution returned by X. The algorithm X is said to have an approximation ratio p(n) if, for any input of size n, max($\frac{C}{C^\star}$, $\frac{C^\star}{C}$) $\leq$ p(n). If an X has an approximation ratio p(n) then, X is said to be a p(n)-approximation algorithm. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
 \end{definition}
 Using definition \ref{p(n)-approximation algorithm}, if an optimisation problem is a maximisation problem then, 0 $\le$ $C$ $\leq$ $C^\star$. Hence, the approximation ratio is $\frac{C^\star}{C}$, which gives the factor of how large is the optimal value to the approximate solution value. On the other hand, if an optimisation problem is a minimization problem then 0 $\le$ $C^\star$ $\leq$ C. Hence, the approximation ratio is $\frac{C^\star}{C}$, which gives the factor of how large is the approximate solution value to the optimal value. Note that, a 1-approximation algorithm is an algorithm that produces the optimal solution since, $\frac{C^\star}{C} = 1$ and $\frac{C}{C^\star} = 1 \implies C = C^\star$. \cite{cormen_leiserson_rivest_stein}
-\\\\In the following subsection, two approximation algorithms suitable for the TSP will be presented along with theoratic results about them. These are the nearest neighbour approximation algorithm and the twice around the minimum spanning tree approximation algorithm.
+\\\\In the following subsection, two approximation algorithms suitable for the TSP will be presented along with theoratic results about them. These are the Nearest Neighbour Approximation Algorithm and the Twice Around The Minimum Spanning Tree Approximation Algorithm.
 \subsection{Approximation Algorithms}
 \subsubsection{Nearest Neighbour Approximation Algorithm}
+The Nearest Neighbour Algorithm (NNA) is a simple algorithm that finds near-optimal solutions for the TSP \cite{arora_agarwal_tanwar_2016}. The NNA takes as input an instance of the TSP defined as an optimization problem, and outputs the sequence of vertices in the order of how they were visited \cite{arora_agarwal_tanwar_2016}. According to \cite{arora_agarwal_tanwar_2016}, the steps performed by the NNA are the following:\\\\
+\underline{\textbf{NNA Procedure:}}
+\begin{itemize}
+\itemsep0em
+\item Randomly select any vertex $u$ as starting vertex, mark it as visited, and call it $current\_vertex$.
+\item Find an edge of least weight between vertex $current\_vertex$ and an unvisited vertex $v$.
+\item Mark $v$ as visited and set $current\_vertex$ to be equal to $v$.
+\item If all vertices have been visited, move to vertex $u$ and go to bullet point five, otherwise go to bullet point two.
+\item Return the sequence of vertices in the order of how they were visited.
+\end{itemize}
+The idea behind the NNA is to try and find a minimum weight Hamiltonian cycle by always moving from one vertex to another using the edges of least weight. This means that the NNA tries to choose an edge which looks the best at that point in time, hoping that it would lead to a minimum weight Hamiltonian cycle. However, this does not mean that the optimal solution for the TSP will be found. It is important to note that by Definition \ref{hamiltonian cycle}, the sequence of vertices outputted by the NNA are always a Hamiltonian cycle. This is true because, all the vertices in the graph must be visited before the algorithm terminates. Also, excluding the starting vertex, each vertex cannot be visited more than once because, by bullet point number two in the above procedure, the algorithm only chooses edges that lead to unvisited vertices. The following example is constructed to show how the NNA constructs an approximate solution to the TSP.
+\begin{example}
+\label{example_nna_explanation}
+\normalfont{Consider the graph} $G$ in \ref{example4}. By Example \ref{example_2.1}, the solution to the TSP given $G$ is the Hamiltonian cycle $C$ = $v_1$, $v_3$, $v_2$, $v_4$, $v_1$ with weight 18. Suppose that we try to find $C$ using the NNA. Suppose that randomly the NNA has chosen to start from vertex $v_1$. The following pictorial graphs represent how the NNA will progress step by step using the NNA procedure described above. In these graphs, the blue vertices are the visited vertices, and black vertices are the unvisited vertices. Also, the chosen edges will be coloured red whilst the unchosen edges will be coloured black.\\\\
+\underline{Step 1:}\\\\
+Mark the starting vertex $v_1$ as visited\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}
+\\\\
+\underline{Step 2:}\\\\
+Edge $\{v_1, v_2\}$ is chosen because it has the least weight amongst all edges that $v_1$ is adjacent to. Therefore, move to $v_2$ and mark $v_2$ as visited.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state, blue] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[red]  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}
+\\\\
+\underline{Step 3:}\\\\
+Since not all vertices are visited, steps 1 and 2 above are repeated and thus, edge $\{v_2, v_3\}$ is chosen. Therefore, move to vertex $v_3$ and mark $v_3$ as visited.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state,blue] (v2) [right=of v1] {$v_2$};
+    \node[state,blue] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[red]  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge[red]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}
+\\\\
+\underline{Step 4:}\\\\
+Since not all vertices are visited, steps 1 and 2 above are repeated and thus, edge $\{v_3, v_4\}$ is chosen. Therefore, move to vertex $v_4$ and mark $v_4$ as visited.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state,blue] (v2) [right=of v1] {$v_2$};
+    \node[state,blue] (v3) [below =of v1] {$v_3$};
+    \node[state,blue] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[red]  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge[red]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge[red]  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}
+\\\\
+\underline{Step 5:}\\\\
+Since all vertices are visited, the NNA moves to the starting vertex.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state,blue] (v2) [right=of v1] {$v_2$};
+    \node[state,blue] (v3) [below =of v1] {$v_3$};
+    \node[state,blue] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[red]  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge[red]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge[red]  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge[red]  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}\\\\
+Finally, the NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight 23. Clearly this cycle is not the minimum weight Hamiltonian cycle. The minimum weight Hamiltonian cycle would have been found if the NNA was made to start from vertex $v_2$
+\end{example}
+Example \ref{example_nna_explanation} seems to indicate that the approximate solution returned by the NNA is good enough. In fact, the difference in weight between the approximate solution returned by the NNA and the optimal solution is just five. However, there could be cases where the NNA could fail badly. The following example shows where the NNA can give bad approximate results
+\begin{example}
+\label{nna_fail}
+\end{example}
+Therefore, from the above example it can be concluded that, the quality of the result returned by the NNA depends heavily on which vertex the algorithm starts on, especially when the edges differ a lot in weight. 
+
+An easy fix to this problem would be to restart the algorithm from different vertices and choosing the vertex, time complexity before Is better, then define metric tsp and bounds on it. Maybe mention there is no constant approx algorithm known
 \subsubsection{Twice Around the Minimum Spanning Tree Approximation Algorithm}
 \subsection{The Ant Colony Algorithm}
 \newpage
@@ -601,5 +758,6 @@ Using definition \ref{p(n)-approximation algorithm}, if an optimisation problem 
 \section{Conclusion}
 \newpage
 \bibliography{bibliography}
+\nocite{*}
 \bibliographystyle{IEEEtran}
 \end{document}
