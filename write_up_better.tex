@@ -16,6 +16,7 @@
 \newtheorem{lemma}[definition]{Lemma}
 \newtheorem*{remark}{Remark}
 \newtheorem{example}[definition]{Example}
+\newtheorem{case}{Case}
 
 \begin{document}
 \maketitle
@@ -571,16 +572,38 @@ TSP is an NP-Complete problem {\normalfont{\cite{cormen_leiserson_rivest_stein}}
 \end{theorem}
 \begin{proof}
 Consider the TSP decision version. To show that TSP is an NP-Complete problem, we must show that it is in NP, and that TSP is as hard as any problem in NP. By Theorem \ref{TSP_in_NP} TSP is in NP. Therefore, it remains to be shown that TSP is hard as any problem in NP. This can be done as discussed in section 1.2, by taking a known NP-Complete problem and reducing it to TSP. Consider the Hamiltonian cycle problem  defined in Example \ref{example_polynomial_time_verification}. By Theorem 34.13 in \cite{cormen_leiserson_rivest_stein}, the Hamiltonian cycle problem is NP-Complete. Let $G(V,E)$ be an arbitrary instance to the Hamiltonian cycle problem such that $\abs{V} = n$ . An instance of the TSP can be constructed from $G$ as follows. From $G$ construct the the complete weighted graph $G^\prime(V^\prime,E^\prime,f)$ such that, $V^\prime=V$, $E^\prime=\{(u, v) : u, v \in V$ and $u \neq v\}$ and \\
-$f\colon V^\prime \times V^\prime \to \{0,1\}, f(u, v) = \begin{cases} 0& \text{if } (u, v) \in E\\ 1              & \text{otherwise} \end{cases}$\\
+$f\colon V^\prime \times V^\prime \to \{0,1\}, f(\{u, v\}) = \begin{cases} 0& \text{if } \{u, v\} \in E\\ 1              & \text{otherwise} \end{cases}$\\
 Therefore, an instance to the TSP constructed as a decision problem, can be the pair $(G^\prime,0)$ where $G^\prime$ is the complete weighted graph, and $k =0$. From Definition \ref{reduction_algorithm}, one can show that the above transformation is a reduction algorithm if the transformation can be carried in polynomial time and that, the solution to the Hamiltonian cycle problem given $G$ is yes $\iff$ the solution to the TSP given $(G^\prime,0)$ is yes. According to \cite{ray_2013}, $K_n$ contains $\frac{n(n-1)}{2}$ edges. Therefore, the algorithm implementing the above transformation has an $O(n^2)$ worst-case time complexity because, it needs to create $\frac{n(n-1)}{2}$ edges between $n$ vertices at worst. Now, for the above transformation to be a reduction algorithm, there remains to show that the solution to the Hamiltonian cycle problem given $G$ is yes $\iff$ the solution to the TSP given $(G^\prime,0)$ is yes. Therefore, we need to show that $G$ has a Hamiltonian cycle $\iff$ $G^\prime$ has a Hamiltonian cycle of weight at most 0. Suppose that $G$ contains some Hamiltonian cycle $h$. Since $h$ is a Hamiltonian cycle in $G$, each edge of $h$ is in $E$, therefore $h$ has weight 0 in $G^\prime$. Therefore, h must be a Hamiltonian cycle in $G^\prime$ of weight at most 0. Suppose that $G^\prime$ contains a Hamiltonian cycle $C$ of weight at most 0. Then, each edge of the $C$ must belong to $G$. Therefore, $C$ must be a Hamiltonian cycle in $G$. Therefore, we have shown that there is a reduction algorithm from the Hamiltonian cycle problem to the TSP. Therefore, TSP is as hard as the Hamiltonian cycle problem. Now since the Hamiltonian cycle problem is NP-Complete, it is as hard as any problem in NP. This means that by transitivity, the TSP is as hard as any problem in NP. Therefore, TSP must be NP-Complete. \cite{cormen_leiserson_rivest_stein}
 \end{proof}
-Theorem \ref{TSP_NP-Complete} confirms that no polynomial time algorithm is known for the TSP. However, according to \cite{cormen_leiserson_rivest_stein}, there are three ways to get around NP-Completeness. Firstly, if the input to an NP-Complete problem is small, an exponential algorithm may be good enough \cite{cormen_leiserson_rivest_stein}. Secondly, there could be special cases of the problem that could be solved in polynomial time \cite{cormen_leiserson_rivest_stein}. Thirdly, there are algorithms that can be designed to find near-optimal solutions in polynomial time \cite{cormen_leiserson_rivest_stein}. Algorithms that return near-optimal solutions to a problem are called approximation algorithms \cite{cormen_leiserson_rivest_stein}. The discussion will now proceed by presenting some important terminologies about approximation algorithms, and then present some approximation algorithms that can be used for the TSP.
+Theorem \ref{TSP_NP-Complete} confirms that no polynomial time algorithm is known for the TSP. However, according to \cite{cormen_leiserson_rivest_stein}, there are three ways to get around NP-Completeness. Firstly, if the input to an NP-Complete problem is small, an exponential algorithm may be good enough \cite{cormen_leiserson_rivest_stein}. Secondly, there could be special cases of the problem that could be solved in polynomial time \cite{cormen_leiserson_rivest_stein}. Thirdly, there are algorithms that can be designed to find near-optimal solutions in polynomial time \cite{cormen_leiserson_rivest_stein}. Algorithms that return near-optimal solutions to a problem are called approximation algorithms \cite{cormen_leiserson_rivest_stein}. The discussion will now proceed by presenting some important terminologies about approximation algorithms.
 \begin{definition}
 \label{p(n)-approximation algorithm}
 Suppose that A is an optimisation problem with postive values assigned to each solution, and X is an approximation algorithm for A. Let $C^\star$ be the value of an optimal solution of A, and C be the value of the solution returned by X. The algorithm X is said to have an approximation ratio p(n) if, for any input of size n, max($\frac{C}{C^\star}$, $\frac{C^\star}{C}$) $\leq$ p(n). If an X has an approximation ratio p(n) then, X is said to be a p(n)-approximation algorithm. {\normalfont{\cite{cormen_leiserson_rivest_stein}}}
 \end{definition}
-Using definition \ref{p(n)-approximation algorithm}, if an optimisation problem is a maximisation problem then, 0 $\le$ $C$ $\leq$ $C^\star$. Hence, the approximation ratio is $\frac{C^\star}{C}$, which gives the factor of how large is the optimal value to the approximate solution value. On the other hand, if an optimisation problem is a minimization problem then 0 $\le$ $C^\star$ $\leq$ C. Hence, the approximation ratio is $\frac{C^\star}{C}$, which gives the factor of how large is the approximate solution value to the optimal value. Note that, a 1-approximation algorithm is an algorithm that produces the optimal solution since, $\frac{C^\star}{C} = 1$ and $\frac{C}{C^\star} = 1 \implies C = C^\star$. \cite{cormen_leiserson_rivest_stein}
-\\\\In the following subsection, two approximation algorithms suitable for the TSP will be presented along with theoratic results about them. These are the Nearest Neighbour Approximation Algorithm and the Twice Around The Minimum Spanning Tree Approximation Algorithm.
+Using definition \ref{p(n)-approximation algorithm}, if an optimisation problem is a maximisation problem then, 0 $\le$ $C$ $\leq$ $C^\star$. Hence, the approximation ratio is $\frac{C^\star}{C}$, which gives the factor of how large is the optimal value to the approximate solution value. On the other hand, if an optimisation problem is a minimization problem then 0 $\le$ $C^\star$ $\leq$ C. Hence, the approximation ratio is $\frac{C}{C^\star}$, which gives the factor of how large is the approximate solution value to the optimal value. Note that, a 1-approximation algorithm is an algorithm that produces the optimal solution since, $\frac{C^\star}{C} = 1$ and $\frac{C}{C^\star} = 1 \implies C = C^\star$. \cite{cormen_leiserson_rivest_stein}
+\\\\
+It is important to note that, many problems have polynomial time approximation algorithms with a small constant approximation ratio. However, this is not always the case because, there are problems whose best known polynomial time approximation algorithms have approximation ratios that grow as the size of the input increases. It is natural to now ask whether the TSP has a polynomial time approximation algorithm with a small constant approximation ratio. Theorem \ref{no_approx_tsp} states that, a polynomial time approximation algorithm with a small constant approximation ratio for the TSP exists if P=NP. \cite{cormen_leiserson_rivest_stein}
+\begin{theorem}
+Suppose that P $\neq$ NP, then, for any constant p $\geq$ 1, no polynomial time approximation algorithm with approximation ratio p exists for the TSP {\normalfont{\cite{cormen_leiserson_rivest_stein}}}.
+\label{no_approx_tsp}
+\end{theorem}
+\begin{proof}
+Consider the TSP defined in Definition \ref{TSP}. Suppose that P $\neq$ NP and that there exists a constant $p$ $\geq$ 1 such that, $A$ is a polynomial time $p$-approximation algorithm for the TSP. WLOG assume that $p$ is an integer, if not round it to the nearest integer. Let $G(V,E)$, $\abs{V} = n$ be an instance of the Hamiltonian cycle problem defined in Example \ref{example_polynomial_time_verification}. Construct from $G$ an instance $G^\prime(V^\prime,E^\prime,f)$ of the TSP such that, $V^\prime = V$, $E^\prime = \{ \{u, v\} : u, v \in V$ and $u \neq v\}$ and \\ 
+$f\colon V^\prime \times V^\prime \to \{1, p\abs{V} + 1\},$ $f(\{u, v\}) = \begin{cases} 1& \text{if } \{u, v\} \in E\\ p\abs{V} + 1              & \text{otherwise} \end{cases}$\\
+As discussed in Theorem \ref{TSP_NP-Complete}, this construction can be done in polynomial time. Now consider the TSP defined on the graph $G^\prime$. If $G$ contains a Hamiltonian cycle $h$, then $f$ assigns a weight of $1$ to each edge of $h$ in $G^\prime$. Therefore, by Definition \ref{weightofasubgraph}, $h$ has weight $\abs{V}$. If $G$ is not Hamiltonian, any Hamiltonian cycle in $G^\prime$ must contain edges which are not in $E$. As a result, the weight of any Hamiltonian cycle in $G^\prime$ is at least $p\abs{V} + 1 + \abs{V} - 1 = p\abs{V} + \abs{V} = (p+1)\abs{V} > p\abs{V} > \abs{V}$ $(\star)$.  Now, apply the approximation algorithm $A$ on $G^\prime$, and let $w^\star$ be the optimal value. 
+\begin{case}
+$G$ is Hamiltonian 
+\end{case}
+Let $h^\prime$ be a Hamiltonian cycle in $G^\prime$. By the previous paragraph, since $G$ is Hamiltonian, $h^\prime$ either consists only of edges that are in $E$ or consists of edges some of which are in $E$ and some of which are not. As a result, $h^\prime$ can either have weight $\abs{V}$ or weight at least $p\abs{V} + \abs{V}$. Since the Hamiltonian cycles in $G^\prime$ can only have weights of $\abs{V}$ or $p\abs{V} + \abs{V}$, and $p\abs{V} + \abs{V} > \abs{V}$, the minimum weight Hamiltonian cycle in $G^\prime$ has weight $\abs{V}$. Therefore, $w^\star = \abs{V}$. Also, since $A$ is a $p$-approximation algorithm, $A$ guarantees that it will return a Hamiltonian cycle of weight less or equal to $pw^\star = p\abs{V}$. Therefore, since by $(\star)$ $ p\abs{V} + \abs{V} > p\abs{V}$, the approximation algorithm will never return a Hamiltonian cycle of weight $p\abs{V} + \abs{V}$. As a result, whenever $G$ is Hamiltonian, $A$ will return a Hamiltonian cycle of weight $\abs{V}$.
+\begin{case}
+$G$ is not Hamiltonian
+\end{case}
+By the previous paragraph, since $G$ is not Hamiltonian, every Hamiltonian cycle in $G^\prime$ has at least a weight of $p\abs{V} + \abs{V}$. Therefore, the minimum weight Hamiltonian cycle in $G^\prime$ has at least a weight of $p\abs{V} + \abs{V} > p\abs{V}$. Now, since the TSP is a minimization problem, any solution returned by $A$ must have a value greater than or equal to the the optimal value. Therefore, since in ($\star$) $p\abs{V} + \abs{V} > p\abs{V}$, $A$ must return a Hamiltonian cycle of weight greater than $p\abs{V}$. As a result, whenever $G$ is not Hamiltonian, $A$ must return a Hamiltonian cycle having weight greater than $p\abs{V}$ \\\\
+From Case 1 and Case 2 above it can be concluded that $A$ can determine whether $G$ is Hamiltonian or not. This can be done by checking the weight of the Hamiltonian cycle returned by $A$. As discussed in Theorem \ref{TSP_in_NP}, this checking procedure can be done in polynomial time. Therefore, since $A$ is a polynomial time algorithm, the Hamiltonian Cycle Problem can be solved in polynomial time. As discussed in Section 1.2, if one NP-Complete problem can be solved in polynomial time then P=NP. By Theorem 34.4 in \cite{cormen_leiserson_rivest_stein}, the Hamiltonian Cycle problem is NP-Complete, therefore P=NP. Contradiction. \\
+$\therefore$ There is no polynomial time approximation algorithm with a constant approximation ratio for the TSP.
+\end{proof}
+The proof for Theorem \ref{no_approx_tsp} was constructed using ideas in \cite{cormen_leiserson_rivest_stein}.\\\\
+Since we do not know whether P=NP, Theorem \ref{no_approx_tsp} implies that no approximation algorithm with a constant approximation ratio for the TSP is known. In addition to that, we are not able to show that such an algorithm does not exist. In the following subsection, two approximation algorithms suitable for the TSP will be presented along with theoratic results about them. These are the Nearest Neighbour Approximation Algorithm and the Twice Around The Minimum Spanning Tree Approximation Algorithm.
 \subsection{Approximation Algorithms}
 \subsubsection{Nearest Neighbour Approximation Algorithm}
 The Nearest Neighbour Algorithm (NNA) is a simple algorithm that finds near-optimal solutions for the TSP \cite{arora_agarwal_tanwar_2016}. The NNA takes as input an instance of the TSP defined as an optimization problem, and outputs the sequence of vertices in the order of how they were visited \cite{arora_agarwal_tanwar_2016}. According to \cite{arora_agarwal_tanwar_2016}, the steps performed by the NNA are the following:\\\\
@@ -743,13 +766,42 @@ Since all vertices are visited, the NNA moves to the starting vertex.\\\\
 \end{tikzpicture}\\\\
 Finally, the NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight 23. Clearly this cycle is not the minimum weight Hamiltonian cycle. The minimum weight Hamiltonian cycle would have been found if the NNA was made to start from vertex $v_2$
 \end{example}
-Example \ref{example_nna_explanation} seems to indicate that the approximate solution returned by the NNA is good enough. In fact, the difference in weight between the approximate solution returned by the NNA and the optimal solution is just five. However, there could be cases where the NNA could fail badly. The following example shows where the NNA can give bad approximate results
+Example \ref{example_nna_explanation} seems to indicate that the approximate solution returned by the NNA is good enough. In fact, the difference in weight between the approximate solution returned by the NNA and the optimal solution is just five. However, there could be cases where the NNA returns very bad approximations. The following example shows when the NNA can give bad approximate results
 \begin{example}
 \label{nna_fail}
-\end{example}
-Therefore, from the above example it can be concluded that, the quality of the result returned by the NNA depends heavily on which vertex the algorithm starts on, especially when the edges differ a lot in weight. 
+\normalfont{Let} $M \in \mathbb{Z}^+$ such that $M$ is a very large number. Consider the graph $G$ below:
+\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
 
-An easy fix to this problem would be to restart the algorithm from different vertices and choosing the vertex, time complexity before Is better, then define metric tsp and bounds on it. Maybe mention there is no constant approx algorithm known
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v3) edge[]  node[]{M}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+    \path[->] (v4) edge[]  node[pos=0.2,below left]{7}(v1);
+\end{tikzpicture}\\\\
+Clearly the minimum weight Hamiltonian cycle of $G$ is $v_2, v_3, v_1, v_4, v_2$ of weight 18. \\It is important to note that, if the edges differ a lot in the weight assigned, the NNA might give a bad approximation of the minimum weight Hamiltonian cycle. In fact, if the NNA starts from vertex $v_2$ the minimum weight Hamiltonian cycle is found. On the other hand, if the algorithm starts from vertex $v_1$, the NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight $M + 13$. This means that, since $M$ is a very large number, the NNA would return an approximate result that differs a lot in weight compared to the optimal solution.
+\end{example}
+Therefore, due to Example \ref{nna_fail}, it can be concluded that the result returned by the NNA depends heavily on which vertex the algorithm starts with. As discussed in Example \ref{nna_fail}, this dependency is mostly seen when the weights differ a lot in size.
+
+An easy fix to this problem would be to restart the algorithm from different vertices and choosing the vertex (algorithm good with small number of vertices, easy to program, time complexity before Is better, then define metric tsp and bounds on it.
 \subsubsection{Twice Around the Minimum Spanning Tree Approximation Algorithm}
 \subsection{The Ant Colony Algorithm}
 \newpage
