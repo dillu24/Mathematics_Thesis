@@ -17,6 +17,7 @@
 \newtheorem*{remark}{Remark}
 \newtheorem{example}[definition]{Example}
 \newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
 
 \begin{document}
 \maketitle
@@ -582,7 +583,7 @@ Suppose that A is an optimisation problem with postive values assigned to each s
 \end{definition}
 Using definition \ref{p(n)-approximation algorithm}, if an optimisation problem is a maximisation problem then, 0 $\le$ $C$ $\leq$ $C^\star$. Hence, the approximation ratio is $\frac{C^\star}{C}$, which gives the factor of how large is the optimal value to the approximate solution value. On the other hand, if an optimisation problem is a minimization problem then 0 $\le$ $C^\star$ $\leq$ C. Hence, the approximation ratio is $\frac{C}{C^\star}$, which gives the factor of how large is the approximate solution value to the optimal value. Note that, a 1-approximation algorithm is an algorithm that produces the optimal solution since, $\frac{C^\star}{C} = 1$ and $\frac{C}{C^\star} = 1 \implies C = C^\star$. \cite{cormen_leiserson_rivest_stein}
 \\\\
-It is important to note that, many problems have polynomial time approximation algorithms with a small constant approximation ratio. However, this is not always the case because, there are problems whose best known polynomial time approximation algorithms have approximation ratios that grow as the size of the input increases. It is natural to now ask whether the TSP has a polynomial time approximation algorithm with a small constant approximation ratio. Theorem \ref{no_approx_tsp} states that, a polynomial time approximation algorithm with a small constant approximation ratio for the TSP exists if P=NP. \cite{cormen_leiserson_rivest_stein}
+It is important to note that many problems have polynomial time approximation algorithms with a small constant approximation ratio. However, this is not always the case because, there are problems whose best known polynomial time approximation algorithms have approximation ratios that grow as the size of the input increases. It is natural to now ask whether the TSP has a polynomial time approximation algorithm with a small constant approximation ratio. Theorem \ref{no_approx_tsp} states that, a polynomial time approximation algorithm with a small constant approximation ratio for the TSP exists if P=NP. \cite{cormen_leiserson_rivest_stein}
 \begin{theorem}
 Suppose that P $\neq$ NP, then, for any constant p $\geq$ 1, no polynomial time approximation algorithm with approximation ratio p exists for the TSP {\normalfont{\cite{cormen_leiserson_rivest_stein}}}.
 \label{no_approx_tsp}
@@ -602,8 +603,13 @@ By the previous paragraph, since $G$ is not Hamiltonian, every Hamiltonian cycle
 From Case 1 and Case 2 above it can be concluded that $A$ can determine whether $G$ is Hamiltonian or not. This can be done by checking the weight of the Hamiltonian cycle returned by $A$. As discussed in Theorem \ref{TSP_in_NP}, this checking procedure can be done in polynomial time. Therefore, since $A$ is a polynomial time algorithm, the Hamiltonian Cycle Problem can be solved in polynomial time. As discussed in Section 1.2, if one NP-Complete problem can be solved in polynomial time then P=NP. By Theorem 34.4 in \cite{cormen_leiserson_rivest_stein}, the Hamiltonian Cycle problem is NP-Complete, therefore P=NP. Contradiction. \\
 $\therefore$ There is no polynomial time approximation algorithm with a constant approximation ratio for the TSP.
 \end{proof}
-The proof for Theorem \ref{no_approx_tsp} was constructed using ideas in \cite{cormen_leiserson_rivest_stein}.\\\\
-Since we do not know whether P=NP, Theorem \ref{no_approx_tsp} implies that no approximation algorithm with a constant approximation ratio for the TSP is known. In addition to that, we are not able to show that such an algorithm does not exist. In the following subsection, two approximation algorithms suitable for the TSP will be presented along with theoratic results about them. These are the Nearest Neighbour Approximation Algorithm and the Twice Around The Minimum Spanning Tree Approximation Algorithm.
+The proof of Theorem \ref{no_approx_tsp} was constructed using ideas in \cite{cormen_leiserson_rivest_stein}.\\\\
+As discussed in Section 1.2, the P=NP problem is an open problem. Therefore, we do not know of a polynomial time approximation algorithm with a constant approximation ratio for the TSP, otherwise, the contrappositve of Theorem \ref{no_approx_tsp} would imply that P=NP, contradicting the fact that the P=NP problem is an open problem. It is important to note that, it is not easy to determine the approximation ratio of an approximation algorithm. In fact, an approximation ratio may only apply to specific instances of the problem the approximation algorithm is designed for. One of the specific instances of the TSP that will be considered in the following section is called the Metric-TSP defined below.
+\begin{definition}
+\label{Metric-TSP}
+The Metric-TSP is the TSP defined on a complete weighted graph $G(V,E,f)$ on at least 3 vertices with the additional property that $\forall$ u,v,w $\in$ V, $f(\{u,v\}) \leq f(\{u,w\}) + f(\{w,v\})$. This additional property is called the triangle inequality. {\normalfont{\cite{vazirani_2003}}}
+\end{definition}
+ What follows is a subsection on two approximation algorithms that are suitable for the TSP. These approximation algorithms are the Nearest Neighbour Approximation Algorithm and the Twice Around The Minimum Spanning Tree Approximation Algorithm.
 \subsection{Approximation Algorithms}
 \subsubsection{Nearest Neighbour Approximation Algorithm}
 The Nearest Neighbour Algorithm (NNA) is a simple algorithm that finds near-optimal solutions for the TSP \cite{arora_agarwal_tanwar_2016}. The NNA takes as input an instance of the TSP defined as an optimization problem, and outputs the sequence of vertices in the order of how they were visited \cite{arora_agarwal_tanwar_2016}. According to \cite{arora_agarwal_tanwar_2016}, the steps performed by the NNA are the following:\\\\
@@ -616,10 +622,12 @@ The Nearest Neighbour Algorithm (NNA) is a simple algorithm that finds near-opti
 \item If all vertices have been visited, move to vertex $u$ and go to bullet point five, otherwise go to bullet point two.
 \item Return the sequence of vertices in the order of how they were visited.
 \end{itemize}
-The idea behind the NNA is to try and find a minimum weight Hamiltonian cycle by always moving from one vertex to another using the edges of least weight. This means that the NNA tries to choose an edge which looks the best at that point in time, hoping that it would lead to a minimum weight Hamiltonian cycle. However, this does not mean that the optimal solution for the TSP will be found. It is important to note that by Definition \ref{hamiltonian cycle}, the sequence of vertices outputted by the NNA are always a Hamiltonian cycle. This is true because, all the vertices in the graph must be visited before the algorithm terminates. Also, excluding the starting vertex, each vertex cannot be visited more than once because, by bullet point number two in the above procedure, the algorithm only chooses edges that lead to unvisited vertices. The following example is constructed to show how the NNA constructs an approximate solution to the TSP.
+From the NNA procedure it can be deduced that, the idea behind the NNA is to try and find a minimum weight Hamiltonian cycle by always moving from one vertex to another using the edges of least weight. This means that the NNA tries to choose an edge which looks the best at that point in time, hoping that it would lead to a minimum weight Hamiltonian cycle. It is important to note that, although the goal is to find a minimum weight Hamiltonian cycle, the goal is not guaranteed \cite{khan_agrawal_2016}.
+\\\\What we must guarantee is that the sequence of vertices returned by the NNA forms a Hamiltonian cycle. This guarantee is given because, all the vertices in the graph must be visited before the algorithm terminates. In addition to that, excluding the starting vertex, each vertex cannot be visited more than once because by bullet point number two in the NNA Procedure, the algorithm only chooses edges that lead to unvisited vertices. Therefore, by Definition \ref{hamiltonian cycle}, the sequence of vertices outputted by the algorithm forms a Hamiltonian Cycle.
+\\\\It is also important to check that the NNA can execute in polynomial time. Otherwise, for large inputs we cannot give approximations in feasible time. According to \cite{article}, the NNA has a quadratic time complexity. This is true because, suppose that the $current\_vertex$ variable in the NNA Procedure above is set to vertex $u$. Then, the NNA determines the next vertex $v$ to move to by checking every vertex adjacent to $u$. Therefore, since each vertex is adjacent to $n-1$ other vertices, the NNA must perform $n-1$ steps for each of the $n$ vertices, which yields a quadratic time complexity. What follows is an example to show how the NNA constructs an approximate solution for the TSP.
 \begin{example}
 \label{example_nna_explanation}
-\normalfont{Consider the graph} $G$ in \ref{example4}. By Example \ref{example_2.1}, the solution to the TSP given $G$ is the Hamiltonian cycle $C$ = $v_1$, $v_3$, $v_2$, $v_4$, $v_1$ with weight 18. Suppose that we try to find $C$ using the NNA. Suppose that randomly the NNA has chosen to start from vertex $v_1$. The following pictorial graphs represent how the NNA will progress step by step using the NNA procedure described above. In these graphs, the blue vertices are the visited vertices, and black vertices are the unvisited vertices. Also, the chosen edges will be coloured red whilst the unchosen edges will be coloured black.\\\\
+\normalfont{Consider the graph} $G$ in Example \ref{example4}. The NNA constructs a solution to the TSP defined on $G$ in the following way. Assume that randomly the NNA has chosen to start from vertex $v_1$. The following pictorial graphs represent how the NNA will progress step by step using the NNA Procedure above. In these graphs, the blue vertices are the visited vertices, and black vertices are the unvisited vertices. Also, the chosen edges will be coloured red whilst the unchosen edges will be coloured black.\\\\
 \underline{Step 1:}\\\\
 Mark the starting vertex $v_1$ as visited\\\\
 \begin{tikzpicture}[
@@ -764,12 +772,12 @@ Since all vertices are visited, the NNA moves to the starting vertex.\\\\
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge[red]  node[pos=0.2,below left]{7}(v1);
 \end{tikzpicture}\\\\
-Finally, the NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight 23. Clearly this cycle is not the minimum weight Hamiltonian cycle. The minimum weight Hamiltonian cycle would have been found if the NNA was made to start from vertex $v_2$
+Finally, the NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight 23.
 \end{example}
-Example \ref{example_nna_explanation} seems to indicate that the approximate solution returned by the NNA is good enough. In fact, the difference in weight between the approximate solution returned by the NNA and the optimal solution is just five. However, there could be cases where the NNA returns very bad approximations. The following example shows when the NNA can give bad approximate results
+It is important to note that in Example \ref{example_nna_explanation}, the minimum weight Hamiltonian cycle was not found. In fact, according to Example \ref{example_2.1}, the solution for the TSP given $G$ is the Hamiltonian cycle $v_1$, $v_3$, $v_2$, $v_4$, $v_1$ of weight 18. This seems to indicate that the NNA returns good approximations. However, this is not the case because, there could be instances where the NNA returns very bad approximations. The following example is constructed to show when the NNA can give bad approximations.
 \begin{example}
 \label{nna_fail}
-\normalfont{Let} $M \in \mathbb{Z}^+$ such that $M$ is a very large number. Consider the graph $G$ below:
+\normalfont{Let} $M \in \mathbb{Z}^+$. Consider the graph $G$ below:
 \\\\
 \begin{tikzpicture}[
     > = , % arrow head style
@@ -797,11 +805,32 @@ Example \ref{example_nna_explanation} seems to indicate that the approximate sol
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge[]  node[pos=0.2,below left]{7}(v1);
 \end{tikzpicture}\\\\
-Clearly the minimum weight Hamiltonian cycle of $G$ is $v_2, v_3, v_1, v_4, v_2$ of weight 18. \\It is important to note that, if the edges differ a lot in the weight assigned, the NNA might give a bad approximation of the minimum weight Hamiltonian cycle. In fact, if the NNA starts from vertex $v_2$ the minimum weight Hamiltonian cycle is found. On the other hand, if the algorithm starts from vertex $v_1$, the NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight $M + 13$. This means that, since $M$ is a very large number, the NNA would return an approximate result that differs a lot in weight compared to the optimal solution.
+Assuming that $M$ is a very large number, the minimum weight Hamiltonian cycle of $G$ is $v_2, v_3, v_1, v_4, v_2$ of weight 18. This minimum weight Hamiltonian cycle is found if the NNA starts from vertex $v_2$. Now suppose that the NNA starts from vertex $v_1$. Then, NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight $M + 13$. This means that, since $M$ is a very large number, the NNA would return an approximate result that differs a lot in weight compared to the optimal solution. Therefore, in this case, the NNA returns a very bad approximation.
 \end{example}
-Therefore, due to Example \ref{nna_fail}, it can be concluded that the result returned by the NNA depends heavily on which vertex the algorithm starts with. As discussed in Example \ref{nna_fail}, this dependency is mostly seen when the weights differ a lot in size.
-
-An easy fix to this problem would be to restart the algorithm from different vertices and choosing the vertex (algorithm good with small number of vertices, easy to program, time complexity before Is better, then define metric tsp and bounds on it.
+It can be concluded from Example \ref{nna_fail} that the quality of the result returned by the NNA depends heavily on which vertex the algorithm starts with, especially when the weights differ a lot.\\\\
+Since the NNA is an approximation algorithm, it is natural to ask what is it's approximation ratio. As discussed in Section 2.0, we can already confirm from Theorem \ref{no_approx_tsp} that it is not known whether the NNA has a constant approximation rato. In addition to this, the approximation ratio of the NNA applied to the TSP defined in Definition \ref{TSP} is not known. However, as discussed in Section 2.0, there are approximation ratios that are known for some specific instances of the problem. In fact, in Theorem \ref{log_bound_thrm} it will be shown that when the NNA is applied to an instance $G$ of the Metric-TSP, the approximation ratio of the NNA is logarithmic in the number of vertices in $G$. The following Lemma helps in showing that when the NNA is applied to the Metric-TSP, it has a logarithmic approximation ratio. 
+\begin{lemma}
+\label{to_proove_bound}
+Let G(V,E,f) be a complete weighted graph on $n$ vertices, and $C^\star$ be the optimal value of the Metric-TSP defined on G. Suppose that there exists a mapping f : V $\mapsto$ $\real$, f(v) = $l_v$, such that the following  two conditions hold:
+\begin{itemize}
+\item $f(\{u, v\})$ $\geq$ min( $l_u$, $l_v$) $\forall$ $u$,$v$ 
+\item $l_u$ $\leq$ $\frac{1}{2}C^\star$ $\forall$u $\in$ V
+\end{itemize}
+Then $\sum_{u \in V} l_u \leq \frac{1}{2}(\lceil log_2 n \rceil + 1)C^\star$. {\normalfont{\cite{Rosenkrantz}}}
+\end{lemma}
+\begin{proof}
+WLOG let $V=\{i | 1 \leq i \leq n\}$ such that $\forall$ $i$, $j$ $\in$ V, if $i$ $\leq$ $j$ then $l_i$ $\geq$ $l_j$. 
+\begin{claim}
+$C^\star$ $\geq$ 2 $\sum_{i = k+1}^{min(2k, n)} l_i$, $\forall$ $k$ $\in$ $\mathbb{N}$ satisfying 1 $\leq$ $k$ $\leq$ $n$.
+\end{claim}
+Let $H(V^\prime,E^\prime)$ be the complete subgraph of $G$ such that, $V^\prime$ = $\{i | 1 \leq i \leq min(2k, n)\}$.
+\end{proof}
+\begin{theorem}
+\label{log_bound_thrm}
+\end{theorem}
+\begin{proof}
+\end{proof}
+Theorem \ref{log_bound_thrm} implies that when applying the NNA on the Metric-TSP, the quality of the solution depends on the number of vertices in the inputted graph. In fact, as the number of vertices increases, the quality of the approximation returned by the NNA decreases. One way of solving this problem is to try and find an approximation algorithm that has a constant approximation ratio when applied to the Metric-TSP. This solves the problem because, as the number of vertices increases, the quality of the approximation remains within a constant of the optimal value. One approximation algorithm with this property is called the Twice Around the Minimum Spanning Tree Approximation Algorithm, and is presented in the next subsection.
 \subsubsection{Twice Around the Minimum Spanning Tree Approximation Algorithm}
 \subsection{The Ant Colony Algorithm}
 \newpage
