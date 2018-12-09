@@ -811,7 +811,7 @@ It can be concluded from Example \ref{nna_fail} that the quality of the result r
 Since the NNA is an approximation algorithm, it is natural to ask what is it's approximation ratio. As discussed in Section 2.0, we can already confirm from Theorem \ref{no_approx_tsp} that it is not known whether the NNA has a constant approximation rato. In addition to this, the approximation ratio of the NNA applied to the TSP defined in Definition \ref{TSP} is not known. However, as discussed in Section 2.0, there are approximation ratios that are known for some specific instances of the problem. In fact, in Theorem \ref{log_bound_thrm} it will be shown that when the NNA is applied to an instance $G$ of the Metric-TSP, the approximation ratio of the NNA is logarithmic in the number of vertices in $G$. The following Lemma helps in showing that when the NNA is applied to the Metric-TSP, it has a logarithmic approximation ratio. 
 \begin{lemma}
 \label{to_proove_bound}
-Let G(V,E,f) be a complete weighted graph on $n$ vertices, and $C^\star$ be the optimal value of the Metric-TSP defined on G. Suppose that there exists a mapping f : V $\mapsto$ $\real$, f(v) = $l_v$, such that the following  two conditions hold:
+Let G(V,E,f) be a complete weighted graph on $n$ vertices, and $C^\star$ be the optimal value of the Metric-TSP defined on G. Suppose that there exists a mapping g : V $\mapsto$ $\real$, g(v) = $l_v$, such that the following  two conditions hold:
 \begin{itemize}
 \item $f(\{u, v\})$ $\geq$ min( $l_u$, $l_v$) $\forall$ $u$,$v$ 
 \item $l_u$ $\leq$ $\frac{1}{2}C^\star$ $\forall$u $\in$ V
@@ -823,7 +823,6 @@ WLOG let $V=\{i | 1 \leq i \leq n\}$ such that $\forall$ $i$, $j$ $\in$ V, if $i
 \begin{claim}
 $C^\star$ $\geq$ 2 $\sum_{i = k+1}^{min(2k, n)} l_i$, $\forall$ $k$ $\in$ $\mathbb{N}$ satisfying 1 $\leq$ $k$ $\leq$ $n$.
 \end{claim}
-Let $H(V^\prime,E^\prime)$ be the complete subgraph of $G$ such that, $V^\prime$ = $\{i | 1 \leq i \leq min(2k, n)\}$.
 \end{proof}
 \begin{theorem}
 \label{log_bound_thrm}
