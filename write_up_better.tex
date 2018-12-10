@@ -811,18 +811,20 @@ It can be concluded from Example \ref{nna_fail} that the quality of the result r
 Since the NNA is an approximation algorithm, it is natural to ask what is it's approximation ratio. As discussed in Section 2.0, we can already confirm from Theorem \ref{no_approx_tsp} that it is not known whether the NNA has a constant approximation rato. In addition to this, the approximation ratio of the NNA applied to the TSP defined in Definition \ref{TSP} is not known. However, as discussed in Section 2.0, there are approximation ratios that are known for some specific instances of the problem. In fact, in Theorem \ref{log_bound_thrm} it will be shown that when the NNA is applied to an instance $G$ of the Metric-TSP, the approximation ratio of the NNA is logarithmic in the number of vertices in $G$. The following Lemma helps in showing that when the NNA is applied to the Metric-TSP, it has a logarithmic approximation ratio. 
 \begin{lemma}
 \label{to_proove_bound}
-Let G(V,E,f) be a complete weighted graph on $n$ vertices, and $C^\star$ be the optimal value of the Metric-TSP defined on G. Suppose that there exists a mapping g : V $\mapsto$ $\real$, g(v) = $l_v$, such that the following  two conditions hold:
+Let G(V,E,f) be a complete weighted graph on $n$ vertices, and $W^\star$ be the optimal value of the Metric-TSP defined on G. Suppose that there exists a mapping g : V $\mapsto$ $\real$, g(v) = $l_v$, such that the following  two conditions hold:
 \begin{itemize}
-\item $f(\{u, v\})$ $\geq$ min( $l_u$, $l_v$) $\forall$ $u$,$v$ 
-\item $l_u$ $\leq$ $\frac{1}{2}C^\star$ $\forall$u $\in$ V
+\item $f(\{u, v\})$ $\geq$ min( $l_u$, $l_v$) $\forall$ $u$,$v$ $\in$ $V$
+\item $l_u$ $\leq$ $\frac{1}{2}W^\star$ $\forall$u $\in$ V
 \end{itemize}
-Then $\sum_{u \in V} l_u \leq \frac{1}{2}(\lceil log_2 n \rceil + 1)C^\star$. {\normalfont{\cite{Rosenkrantz}}}
+Then $\sum_{u \in V} l_u \leq \frac{1}{2}(\lceil log_2 n \rceil + 1)W^\star$. {\normalfont{\cite{Rosenkrantz}}}
 \end{lemma}
 \begin{proof}
 WLOG let $V=\{i | 1 \leq i \leq n\}$ such that $\forall$ $i$, $j$ $\in$ V, if $i$ $\leq$ $j$ then $l_i$ $\geq$ $l_j$. 
 \begin{claim}
-$C^\star$ $\geq$ 2 $\sum_{i = k+1}^{min(2k, n)} l_i$, $\forall$ $k$ $\in$ $\mathbb{N}$ satisfying 1 $\leq$ $k$ $\leq$ $n$.
+$W^\star$ $\geq$ 2 $\sum_{i = k+1}^{min(2k, n)} l_i$, $\forall$ $k$ $\in$ $\mathbb{N}$ satisfying 1 $\leq$ $k$ $\leq$ $n$.
 \end{claim}
+Let $H(V^\prime,E^\prime,f)$ be a complete weighted subgraph of $G$ such that, $V^\prime$ = $\{i | 1 \leq i \leq min(2k, n)\}$. Let $T$ = $v_1$, $v_2$, ..., $v_{min(2k, n)}$, $v_1$ be a Hamiltonian cycle in $H$ whose sequence of vertices are in the same order as they would appear in a minimum weight Hamiltonian cycle of $G$. Let $T^\star$ be the weight of $T$ when constructed as a cycle subgraph $C(V^\prime, E^{\prime\prime}, f)$ of $H$. By the triangle inequality, for all $\{v_i, v_j\}$ in $E^{\prime\prime}$, $f(\{v_i, v_j\})$ is less than or equal to the weight of the path from $u$ to $v$ in a minimum weight Hamiltonian cycle of $G$. Therefore, $T^\star$ $\leq$ $W^\star$. Now, $T^\star$ =  $\sum_{\{i, j\} \in E^{\prime\prime}} f(\{i, j\})$. Therefore, by the first bullet point in Lemma \ref{to_proove_bound},  $T^\star$ = $\sum_{\{i, j\} \in E^{\prime\prime}} f(\{i, j\})$ $\geq$  $\sum_{\{i, j\} \in E^{\prime\prime}} min(l_i, l_j)$. Let $\alpha_i$ be the number of edges in $E^{\prime\prime}$ for which $i > j$ ( i.e $l_i$ = $min(l_i, l_j)$). Then $\sum_{\{i, j\} \in E^{\prime\prime}} min(l_i, l_j)$ = $\sum_{i \in E^\prime} \alpha_il_i$\\
+$\implies$ $T^\star$ $\geq$ $\sum_{i \in E^\prime} \alpha_i l_i$ = $\sum_{i =1}^{min(2k, n)} \alpha_i l_i$ $\geq$ $\sum_{i = k+1}^{min(2k, n)} \alpha_i l_i$. Now, for all $i$ $\in$ [$min(2k, n)$], $\alpha_i$ $\leq$ 2. This is because, there are exactly two edges incident to each vertex $i$ in $C$. In addition to this, $\alpha_1$ + .. + $\alpha_{min(2k, n)}$ = $\abs{E^{\prime\prime}}$  .. now suppose min(2k, n) = k u kompli kif tigi l bound.. tigi greater or equal it tnjen suppost
 \end{proof}
 \begin{theorem}
 \label{log_bound_thrm}
