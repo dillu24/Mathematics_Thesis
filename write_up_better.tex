@@ -86,10 +86,14 @@ There are many other examples of graphs, one of them being the complete graph on
 \label{Complete Graph}
 A graph G(V,E) is said to be complete if $\forall$ v,w $\in$ V v $\neq$ w, v is adjacent to w. The complete graph on n vertices is denoted by $K_n$. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
 \end{definition}
-Given any graph $\mathit{G(V,E)}$, one can also define graph theoretic structures that lie within $\mathit{G}$, one of them being a path.
+Given any graph $\mathit{G(V,E)}$, one can also define graph theoretic structures that lie within $\mathit{G}$ such as walks and paths.
+\begin{definition}
+\label{walk}
+Given a graph G(V,E), a walk is a sequence of vertices (not necessarily distinct) u= $u_1$, $u_2$, ...,$u_n$ = v such that, $\forall$ i $\in$ [n-1], $\{u_i, u_{i+1}\}$ $\in$ E. Such a walk is usually referred to as a u-v walk, were u and v are the end vertices of the walk. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
+\end{definition}
 \begin{definition}
 \label{Path}
-Given a graph G(V,E), a path in G joining any 2 vertices u, v $\in$ V, is a sequence of vertices u = $u_1$, $u_2$, ...,$u_n$ = v in which no vertex is repeated and, $\forall$ 0 $<$  i $<$ n, \{$u_i, u_{i+1}\}$ $\in$ E. {\normalfont{\cite{thompson}}}
+Given a graph G(V,E), a path in G joining any 2 vertices u, v $\in$ V, is a u-v walk with no repeated vertices.
 \end{definition}
 Definition \ref{Path} can now be used to define cycles and connectivity in a graph.
 \begin{definition}
@@ -100,7 +104,7 @@ A graph G(V,E) is said to be connected if $\forall$ u,v $\in$ V u $\neq$ v, u an
 \label{cycle}
 Given a graph G(V,E), a cycle in G is a path on n $\geq$ 4 vertices, such that, the first vertex and the last vertex are equal. \normalfont{\cite{cycle}} 
 \end{definition}
-By definitions \ref{Path}, \ref{cycle} above, it is clear that a cycle is a special instance of a path, with the only difference being that in a cycle, the first vertex and the last vertex are equal. Another thing worth mentioning is that, according to definitions \ref{Path} and \ref{cycle}, cycles and paths are sequences of vertices and not actual graphs. However, this is not the case because they can be represented easily as graphs. For example, given the path/cycle $\mathit{u_1, u_2, ...,u_n}$ a new graph $\mathit{G(V,E)}$ can be created such that, $\mathit{V= \{ u_1, u_2, ..., u_n\}}$ and $\mathit{E = \{ \{u_i, u_{i+1}\} : \forall i, 0 < i < n\}}$. For example, consider the cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$, then the graph depicted in example \ref{Example 1}, is the graph representing this cycle. Such graphs are known as Cycle/Path graphs and are denoted by $\mathit{C_n/P_n}$ respecitvely, $\mathit{n}$ being the number of vertices in the graph. Since this construction can be done, cycles/paths will be treated as both graphs and sequences throughout this project. This will later be useful when defining Hamiltonian cycles. For better understanding of definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph} and \ref{cycle}, example \ref{example3} is constructed.
+By Definitions \ref{walk}, \ref{Path} above, it is clear that a path is a special instance of a walk. Similarly from Definitions \ref{Path} and \ref{cycle}, a cycle is a special instance of a path, with the only difference being that in a cycle, the first vertex and the last vertex are equal. Another thing worth mentioning is that, according to definitions \ref{walk}, \ref{Path} and \ref{cycle}, since cycles and paths are formulated in terms of walks, then they are sequences of vertices and not actual graphs. However, this is not the case because they can be represented easily as graphs. For example, given the path/cycle $\mathit{u_1, u_2, ...,u_n}$ a new graph $\mathit{G(V,E)}$ can be created such that, $\mathit{V= \{ u_1, u_2, ..., u_n\}}$ and $\mathit{E = \{ \{u_i, u_{i+1}\} : \forall i, 0 < i < n\}}$. For example, consider the cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$, then the graph depicted in example \ref{Example 1}, is the graph representing this cycle. Such graphs are known as Cycle/Path graphs and are denoted by $\mathit{C_n/P_n}$ respecitvely, $\mathit{n}$ being the number of vertices in the graph. Since this construction can be done, cycles/paths will be treated as both graphs and sequences throughout this project. This will later be useful when defining Hamiltonian cycles. For better understanding of definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph} and \ref{cycle}, example \ref{example3} is constructed.
 \begin{example}
 \label{example3}
 {\normalfont{Consider the graph}} G(V,E) {\normalfont{below:}}\\
@@ -133,6 +137,10 @@ By definitions \ref{Path}, \ref{cycle} above, it is clear that a cycle is a spec
 \end{tikzpicture}
 \\
 {\normalfont{Since every vertex in}} G {\normalfont{is adjacent to every other vertex, }}G {\normalfont{must be complete. Therefore}} G {\normalfont{must be}} $K_4$. {\normalfont{Since}} G {\normalfont{is complete, it must also be connected because, there is a path}} $P_2$ {\normalfont{between any two distinct vertices of}} G.\\
+{\normalfont{Some examples of walks in}} G {\normalfont{are:}}\\
+1. $v_1$ $v_2$ $v_3$ $v_4$ $v_1$ $v_2$\\
+2. $v_1$ $v_4$ $v_2$ $v_3$ $v_1$ $v_3$\\
+3. $v_4$ $v_3$ $v_1$ $v_4$ $v_1$\\
 {\normalfont{Some examples of paths in}} G {\normalfont{are:}}\\
 1. $v_1$ $v_2$ $v_3$ $v_4$\\
 2. $v_1$ $v_4$\\
@@ -817,7 +825,7 @@ It is important to note that in Example \ref{example_nna_explanation}, the minim
 Assuming that $M$ is a very large number, the minimum weight Hamiltonian cycle of $G$ is $v_2, v_3, v_1, v_4, v_2$ of weight 18. This minimum weight Hamiltonian cycle is found if the NNA starts from vertex $v_2$. Now suppose that the NNA starts from vertex $v_1$. Then, NNA returns the Hamiltonian cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$ of weight $M + 13$. This means that, since $M$ is a very large number, the NNA would return an approximate result that differs a lot in weight compared to the optimal solution. Therefore, in this case, the NNA returns a very bad approximation.
 \end{example}
 It can be concluded from Example \ref{nna_fail} that the quality of the result returned by the NNA depends heavily on which vertex the algorithm starts with, especially when the weights differ a lot. As seen in Example \ref{nna_fail}, this happens when the edge with a very large weight has to be used in order to complete the Hamiltonian cycle, or when all other vertices have been visited. In fact in Example \ref{nna_fail}, edge $\{v_3, v_4\}$ has to be used because, $current\_vertex$ was equal to $v_3$ but only $v_4$ was unvisited.\\\\
-Since the NNA is an approximation algorithm, it is natural to ask what is it's approximation ratio when applied to the TSP. As discussed in Section 2.0, we can already confirm from Theorem \ref{no_approx_tsp} that it is not known whether the NNA has a constant approximation rato. In addition to this, the approximation ratio of the NNA applied to the TSP defined in Definition \ref{TSP} is not known. However, Rosenkrantz, Stearns and Lewis \cite{Rosenkrantz}, proved that, the NNA applied to an instance $G$ of the Metric-TSP has an approximation ratio that is logarithmic in the number of vertices in $G$. In what follows, a lemma will be proved. This will help in proving that the approximation ratio of the NNA applied to an instance $G$ of the Metric-TSP, is logarithmic in the number of vertices in $G$ . 
+Since the NNA is an approximation algorithm, it is natural to ask what is it's approximation ratio when applied to the TSP. As discussed in Section 2.0, we can already confirm from Theorem \ref{no_approx_tsp} that it is known that the NNA does not have a constant approximation ratio unless P=NP. As a result, the approximation ratio of the NNA applied to the TSP defined in Definition \ref{TSP} is not known, otherwise, P=NP. However, Rosenkrantz, Stearns and Lewis \cite{Rosenkrantz}, proved that, the NNA applied to an instance $G$ of the Metric-TSP has an approximation ratio that is logarithmic in the number of vertices in $G$. In what follows, a lemma will be proved. This will help in proving that the approximation ratio of the NNA applied to an instance $G$ of the Metric-TSP, is logarithmic in the number of vertices in $G$ . 
 \begin{lemma}
 \label{to_proove_bound}
 Let G(V,E,f) be a complete weighted graph on $n$ vertices, and $W^\star$ be the optimal value of the Metric-TSP defined on G. Suppose that there exists a mapping g : V $\mapsto$ $\real^+$ such that, for all v $\in$ V, g(v) = $l_v$ and that the following  two conditions hold:
@@ -861,8 +869,137 @@ The implication of Theorem \ref{log_bound_thrm} is that, when applying the NNA o
 \label{no_proof}
 For all m $>$ 3, m $\in$ $\mathbb{N}$, there is an instance $G(V,E,f)$ of the Metric-TSP such that, $\abs{V}$ = $2^m - 1$ and $\frac{W}{W^\star}$ $>$ $\frac{1}{3}$($log_2 (n+1))$ $+$ $\frac{4}{9}$, where $W$ is the optimal value of $G$, and $W^\star$ is the value of the approximation returned by the NNA when it is applied to $G$.{\normalfont{\cite{Rosenkrantz}}}
 \end{theorem}
-Theorem \ref{log_bound_thrm} and \ref{no_proof} imply that in general the NNA cannot have a constant approximation ratio when applied ot the Metric-TSP. However, this does not mean that the Metric-TSP cannot be approximated using an approximation algorithm that has a constant approximation ratio. In fact, an approximation algorithm that is known to have a contstant approximation ratio when applied to the Metric-TSP is the Twice Around the Minimum Spanning Tree Approximation Algorithm. The Twice Around the Minimum Spanning Tree Approximation Algorithm will be presented in the next subsection.    
+Theorem \ref{log_bound_thrm} and \ref{no_proof} imply that in general the NNA cannot have a constant approximation ratio when applied to the Metric-TSP. However, this does not mean that the Metric-TSP cannot be approximated using an approximation algorithm that has a constant approximation ratio. In fact, an approximation algorithm that is known to have a contstant approximation ratio when applied to the Metric-TSP is the Twice Around the Minimum Spanning Tree Approximation Algorithm. The Twice Around the Minimum Spanning Tree Approximation Algorithm will be presented in the next subsection.    
 \subsubsection{Twice Around the Minimum Spanning Tree Approximation Algorithm}
+Similarly to the NNA, the Twice Around the Minimum Spanning Tree Algorithm (TAMSA) is an approximation algorithm that can find near-optimal solutions for the TSP. Before describing the internal workings of the TAMSA, two algorithms that are used by the TAMSA need to be briefly described. Note that, the internal workings of these algorithms will not be described because, it is out of the scope of this section.\\\\
+The first algorithm used by the TAMSA is Prim's algorithm. Prim's algorithm takes a weighted graph $G(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, and returns a minimum weight spanning tree $T(V^\prime,E^\prime,f)$ of G. T is computed by starting with an empty set of edges and an empty set of vertices. Then, starting by adding $r$ to $V^\prime$, vertices and edges are added to $V^\prime$ and $E^\prime$ respectively such that, the edges added are always the least possible connecting two distinct vertices were one vertex is already in the $V^\prime$, and the other is not in $V^\prime$. This procedure continues until all vertices are added to $V^\prime$.  \cite{cormen_leiserson_rivest_stein}\\\\
+What follows is an example that demonstrates how Prim's algorithm constructs a minimum weight spanning tree for an arbitrary graph.
+\begin{example}
+\normalfont{Consider} the graph $G$ in Example \ref{example4}. Let $T(V^\prime,E^\prime)$ be an empty graph. Assuming the starting vertex is $v_1$, Prim's algorithm starts by adding $v_1$ to $V^\prime$ which results in the following graph.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+\end{tikzpicture}\\\\
+The algorithm now proceeds by adding the edge of least weight from $E$ to $E^\prime$ connecting a vertex $v$ $\in$ $V$ to a vertex $v^\prime$ $\in$ $V^\prime$. Also, $v$ is added to $V^\prime$. In this example, these properties are satisfied by the edge $\{v_1, v_2\}$, hence, resulting in the following graph.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+\end{tikzpicture}\\\\
+Since not all vertices in $V$ have been added to $V^\prime$, the same procedure is repeated. Hence, the edge $\{v_2, v_3\}$ is chosen because, it is the least weight edge connecting a vertex in $V$ to a vertex in $V^\prime$. This results in the following graph\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+\end{tikzpicture}\\\\
+Again, since not all vertices in $V$ have been added to $V^\prime$, the same procedure is repeated, were the edge $\{v_2, v_4\}$ is the edge of least weight connecting a vertex in $V$ to a vertex in $V^\prime$.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}\\\\
+Since all vertices in $V$ have been added to $V^\prime$, the algorithm now terminates by returning the spanning tree above.
+\end{example}
+The second algorithm used by the TAMSA is the preorder tree traversal algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ as inputs, the preorder traversal algorithm returns a sequence of vertices ordered in the order the vertices were visited. The algorithm then starts from $r$ and performs the following steps. At some vertex $u$, the algorithm first adds $u$ to the sequence of vertices. Then, it recursively adds all the neighbours of $u$ to the sequence of vertices in the order they are visited. This procedure is repeated until all vertices have been added to the sequence of vertices. For example, a preorder traversal of the tree below results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 1.5cm, % distance between nodes
+    semithick, % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [below left=of v1] {$v_2$};
+    \node[state] (v5) [right=of v2] {$v_5$};
+    \node[state] (v9) [right =of v5] {$v_9$};
+    \node[state] (v3) [below left =of v2]{$v_3$};
+    \node[state] (v4) [right=of v3] {$v_4$};
+    \node[state] (v6) [below left =of v9] {$v_6$};
+    \node[state] (v7) [right=of v6] {$v_7$};
+    \node[state] (v8) [right =of v7] {$v_8$};
+  
+    \path[->] (v1) edge[]  node[]{}(v2);
+    \path[->] (v2) edge[]  node[]{} (v3);
+    \path[->] (v2) edge  node[]{}(v4);
+    \path[->] (v1) edge[]  node[]{}(v5);
+    \path[->] (v1) edge[]  node[]{} (v9);
+    \path[->] (v9) edge  node[]{}(v6);
+    \path[->] (v9) edge  node[]{}(v7);
+    \path[->] (v9) edge  node[]{}(v8);
+\end{tikzpicture}\\\\
+Having briefly described important algorithms that will be used by the TAMSA algorithm, now it is time to present the pseudocode that describes the TAMSA algorithm. This pseudocode was adapted from \cite{cormen_leiserson_rivest_stein}.\\\\
+\textbf{TAMSA($G(V,E,f)$):}
+\begin{itemize}
+\itemsep0em
+\item
+\end{itemize}
 \subsection{The Ant Colony Algorithm}
 \newpage
 \section{Experimental Data}
