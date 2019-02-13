@@ -872,9 +872,10 @@ For all m $>$ 3, m $\in$ $\mathbb{N}$, there is an instance $G(V,E,f)$ of the Me
 Theorem \ref{log_bound_thrm} and \ref{no_proof} imply that in general the NNA cannot have a constant approximation ratio when applied to the Metric-TSP. However, this does not mean that the Metric-TSP cannot be approximated using an approximation algorithm that has a constant approximation ratio. In fact, an approximation algorithm that is known to have a contstant approximation ratio when applied to the Metric-TSP is the Twice Around the Minimum Spanning Tree Approximation Algorithm. The Twice Around the Minimum Spanning Tree Approximation Algorithm will be presented in the next subsection.    
 \subsubsection{Twice Around the Minimum Spanning Tree Approximation Algorithm}
 Similarly to the NNA, the Twice Around the Minimum Spanning Tree Algorithm (TAMSA) is an approximation algorithm that can find near-optimal solutions for the TSP. Before describing the internal workings of the TAMSA, two algorithms that are used by the TAMSA need to be briefly described. Note that, the internal workings of these algorithms will not be described because, it is out of the scope of this section.\\\\
-The first algorithm used by the TAMSA is Prim's algorithm. Prim's algorithm takes a weighted graph $G(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, and returns a minimum weight spanning tree $T(V^\prime,E^\prime,f)$ of G. T is computed by starting with an empty set of edges and an empty set of vertices. Then, starting by adding $r$ to $V^\prime$, vertices and edges are added to $V^\prime$ and $E^\prime$ respectively such that, the edges added are always the least possible connecting two distinct vertices were one vertex is already in the $V^\prime$, and the other is not in $V^\prime$. This procedure continues until all vertices are added to $V^\prime$.  \cite{cormen_leiserson_rivest_stein}\\\\
+The first algorithm used by the TAMSA is Prim's algorithm. Prim's algorithm takes a weighted graph $G(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, and returns a minimum weight spanning tree $T(V^\prime,E^\prime,f)$ of G. T is computed by starting with an empty set of edges and an empty set of vertices. Then, starting by adding $r$ to $V^\prime$, vertices and edges are added to $V^\prime$ and $E^\prime$ respectively such that, the edges added are always the least possible connecting two distinct vertices were one vertex is already in the $V^\prime$, and the other is not in $V^\prime$. This procedure continues until all vertices are added to $V^\prime$. Note that, choosing a different starting vertex from $G$ does not change the minimum weight spanning tree computed by Prim's algorithm.  \cite{cormen_leiserson_rivest_stein}\\\\
 What follows is an example that demonstrates how Prim's algorithm constructs a minimum weight spanning tree for an arbitrary graph.
 \begin{example}
+\label{example_prim}
 \normalfont{Consider} the graph $G$ in Example \ref{example4}. Let $T(V^\prime,E^\prime)$ be an empty graph. Assuming the starting vertex is $v_1$, Prim's algorithm starts by adding $v_1$ to $V^\prime$ which results in the following graph.\\\\
 \begin{tikzpicture}[
     > = , % arrow head style
@@ -960,7 +961,9 @@ Again, since not all vertices in $V$ have been added to $V^\prime$, the same pro
 \end{tikzpicture}\\\\
 Since all vertices in $V$ have been added to $V^\prime$, the algorithm now terminates by returning the spanning tree above.
 \end{example}
-The second algorithm used by the TAMSA is the preorder tree traversal algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ as inputs, the preorder traversal algorithm returns a sequence of vertices ordered in the order the vertices were visited. The algorithm then starts from $r$ and performs the following steps. At some vertex $u$, the algorithm first adds $u$ to the sequence of vertices. Then, it recursively adds all the neighbours of $u$ to the sequence of vertices in the order they are visited. This procedure is repeated until all vertices have been added to the sequence of vertices. For example, a preorder traversal of the tree below results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}\\\\
+The second algorithm used by the TAMSA is the preorder tree walk algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ as inputs, the preorder tree walk algorithm returns a walk $S$ of $T$ containing all vertices in $V$, ordered according to how the vertices were visited during the walk. The preorder tree walk algorithm computes a walk $S$ in the following way. At the start of the algorithm, $S$ is empty. Then, starting from $r$, at any vertex $u$ the algorithm adds $u$ to $S$, and recursively calls itself on all neighbours of $u$. The entire procedure is repeated until all vertices in $V$ have been added to $S$. Note that in this section, the execution of the preorder tree walk algorithm on an arbitrary tree will be termed as a preorder walk. For example, a preorder walk of the tree in Example \ref{tree_example} below, results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}
+\begin{example}
+\label{tree_example}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -994,12 +997,156 @@ The second algorithm used by the TAMSA is the preorder tree traversal algorithm.
     \path[->] (v9) edge  node[]{}(v7);
     \path[->] (v9) edge  node[]{}(v8);
 \end{tikzpicture}\\\\
-Having briefly described important algorithms that will be used by the TAMSA algorithm, now it is time to present the pseudocode that describes the TAMSA algorithm. This pseudocode was adapted from \cite{cormen_leiserson_rivest_stein}.\\\\
+\end{example}
+Having briefly described important algorithms that will be used by the TAMSA algorithm, now it is time to describe the actual TAMSA. The TAMSA takes as input an instance of the TSP, and returns a sequence of vertices representing a Hamiltonian cycle \cite{cormen_leiserson_rivest_stein}. The TAMSA algorithm can be described using the pseudocode adapted from \cite{cormen_leiserson_rivest_stein} below.\\\\
 \textbf{TAMSA($G(V,E,f)$):}
 \begin{itemize}
 \itemsep0em
-\item
+\item Choose an arbitrary vertex $r$ $\in$ V as starting vertex.
+\item Starting from $r$, compute a minimum weight spanning tree $T$ of $G$ using Prim's algorithm.
+\item Perform a preorder tree walk of T starting from $r$, and let $S$ be the walk returned by the preorder tree walk algorithm.
+\item Add $r$ to $S$ as a final vertex and return S.
 \end{itemize}
+For the TAMSA to be a useful approximation algorithm it must be checked that it does compute a Hamiltonian cycle, and that the Hamiltonian cycle is computed in polynomial time. Let $G$ be an instance of the TSP, and let $T$ and $S$ be the minimum weight spanning tree of $G$, and the walk returned by the preorder tree walk algorithm respectively. Now, since $T$ has no cycles, a preorder tree walk of $T$ can never result into a walk with repetition of vertices. Hence, $S$ has no repetiton of vertices. In addition to that, the preorder tree walk algorithm terminates when all vertices of $G$ have been added to $S$, hence, since $T$ is connected, it must contain all vertices of $G$. Therefore, $S$ must be a path containing all vertices of $G$. Therefore, for $S$ to be a Hamiltonian cycle, the first vertex in $S$ must be repeated as a final vertex. This is done by bullet point number four in the TAMSA pseudocode. Hence $S$ must be a Hamiltonian cycle. The next step is to check that the TAMSA computes a Hamiltonian cycle in polynomial time.\\\\
+Given a TSP instance $G(V,E,f)$, the time complexity of the TAMSA is $O(|V|^2)$ \cite{cormen_leiserson_rivest_stein}. This is true because of the following. Consider the TAMSA pseudocode above. Clearly, the largest amount of work to be done by the TAMSA algorithm is to compute a minimum weight spanning tree $T$ from $G$, and perform a preorder tree walk of $T$. The preorder tree walk of $T$ takes $|V|$ steps because, it requires to visit the entire set of vertices. Hence, bullet point number three takes $O(|V|)$ time. Now, according to Exercise 23.2-2 in \cite{cormen_leiserson_rivest_stein}, Prim's algorithm takes $O(|V^2|)$ time to compute a minimum spanning tree. Thus, the total time complexity of the TAMSA is $O(|V^2|)+ O(|V|) = O(|V^2|)$. However, in \cite{cormen_leiserson_rivest_stein} it is argued that the asymptotic time complexity of Prim's algorithm can be improved to $O(|E|+|V| log(|V|))$. Hence, this would mean that the time complexity of the TAMSA is no longer $O(|V^2|)$, but is $O(|E|+|V| log(|V|))$. This means that, the TAMSA has a log-linear time complexity. Therefore, using Table \ref{tab:table1} and and the fact that the NNA has a quadratic time complexity (discussed in Section 2.1.1), the TAMSA is more efficient asymptotically, because it has a smaller order of growth. Note that the analysis of the time complexity of Prim's algorithm is not given because, it requires deeper theory on data structures such as Fibonacci Heaps which is out of the scope of this project. What follows is an example demonstrating how the TAMSA computes a minimum weight Hamiltonian cycle.
+\begin{example}
+\label{tamsa_demonstration}
+\normalfont{Consider} the graph $G$ in Example \ref{example4}, and the TAMSA pseudocode presented in this section. Assume that randomly, the TAMSA chooses vertex $v_1$ as starting vertex. From Example \ref{example_prim}, the minimum spanning tree $T$ returned by Prim's algorithm starting from vertex $v_1$ is the graph below.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}\\\\
+Now, according to bullet point number three in the TAMSA pseudocode, the TAMSA must perform a preorder tree walk on $T$. Refering to the brief description on the preorder tree walk algorithm, a preorder walk is computed in the following way. Note in the following graphs, the blue vertices are the visited vertices, whilst the black vertices are the unvisited vertices.\\
+The algorithm first starts by visiting the starting vertex $v_1$ and adding it to $S$. Therefore, $S = v_1$.
+\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}\\\\
+Since not all vertices have been visited, the algorithm recursively calls itself on the neighbours of $v_1$, which in this case is only $v_2$. Hence, $v_2$ is visited and added to $S$. Therefore $S= v_1, v_2$.
+\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state,blue] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}\\\\
+Since not all vertices have been visited, the algorithm recursively calls itself on the neighbours of $v_2$, which in this case are $v_3$ and $v_4$. Assuming that $v_3$ is visited before $v_4$, $v_3$ is marked as visited and added to $S$. Therefore $S= v_1, v_2, v_3$.
+\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state,blue] (v2) [right=of v1] {$v_2$};
+    \node[state,blue] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}\\\\
+Since not all vertices have been visited, and $v_3$ has no neighbours, the algorithm now visits another neighbour of $v_2$ which in this case is $v_4$. Hence $v_4$ is marked as visited and added to $S$. Therefore $S= v_1, v_2, v_3, v_4$.
+\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state,blue] (v1) {$v_1$};
+    \node[state,blue] (v2) [right=of v1] {$v_2$};
+    \node[state,blue] (v3) [below =of v1] {$v_3$};
+    \node[state,blue] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}\\\\
+Since all vertices have been visited, the TAMSA adds $v_1$ to $S$ and returns it. Hence the TAMSA returns the Hamiltonian cycle $v_1, v_2, v_3, v_4, v_1$ of weight 23.
+\end{example}
+From Example \ref{tamsa_demonstration} and Example \ref{example_nna_explanation}, one can observe that in this case both algorithms returned the same Hamiltonian cycle. In addition to this, similarly to the NNA, the TAMSA returns bad approximations for the graph presented in Example \ref{nna_fail}. This is true because of the following. Suppose that $G(V,E,f)$ is the TSP instance in Example \ref{nna_fail}, and $v_1$ is the vertex chosen randomly by the TAMSA as starting vertex. Then, since $M$ is a very large number, it will never be included in the minimum spanning tree produced by Prim's algorithm. In addition to this, since the weights on the other edges did not change, the minimum spanning tree produced by Prim's algorithm for $G$ is the same as that in Example \ref{tamsa_demonstration}. Hence the TAMSA, will return the Hamiltonian cycle $ H = v_1, v_2, v_3, v_4, v_1$. Now, since $f(\{v_3, v_4\})$ is very large, the weight of $H$ would be very large, hence differing a lot from the optimal solution. Note that this problem would not happen if the preorder traversal is started from vertex $v_4$. In fact, the Hamiltonian cycle returned by the TAMSA would be $H = v_4, v_2, v_3, v_1, v_4$ (assuming $v_3$ is visited before $v_1$ when considering $v_2$), where $H$ does not contain the edge $\{v_3, v_4\}$ of weight $M$. Therefore, again it can be concluded that the quality of the approximation returned by the TAMSA algorithm depends on the starting vertex.\\\\
+Consider the TSP as defined in Definition \ref{TSP}. Similarly to the NNA, the approximation ratio of the TAMSA when applied to the TSP is not known. In addition to that, by Theorem \ref{no_approx_tsp}, it is known that the TAMSA is not a constant approximation algorithm for the TSP, unless P=NP. Therefore, since it is not known whether P=NP, it is not known whether the TAMSA is a constant approximation algorithm for the TSP. However, what is known is that, the TAMSA is a 2-approximation algorithm for the Metric-TSP \cite{cormen_leiserson_rivest_stein}. This fact is proved in Theorem \ref{2_approx} below. Before proving Theorem \ref{2_approx}, the concept of a full walk will be explained because, it is going to be used in the proof.\\\\
+Consider the preorder tree walk description provided in this section. Let $S$ be the Hamiltonian cycle to be returned by the preorder tree walk algorithm. Suppose that the preorder tree walk algorithm is currently at a vertex $u$. Then, after adding $u$ to S, the preorder tree walk algorithm recursively calls itself on the neighbours $v_1, ..., v_k$ of $u$. Suppose that $v_1$ is the first neighbour of $u$ that is visited. After the entire subgraph connected to $u$ is visited, the algorithm must return to the vertex $u$ to recursively call itself on the next neighbouring vertex (in this case $v_2$). In a preorder tree walk, when returning to $u$, $u$ is not added again to $S$. However, in a full walk, $u$ is again added to $S$. Therefore, a full walk of a tree lists every vertex $u$ whenever $u$ is first visited, and whenever $u$ is returned to after visiting one of the subgraph connected to $u$ \cite{cormen_leiserson_rivest_stein}. In other words, a full walk is a preorder tree walk which lists a vertex every time it is visited in the order of how the vertices are visited. For example, a full walk of the tree in Example \ref{tree_example} would result into the walk, $v_1, v_2, v_3, v_2, v_4, v_2, v_1, v_5, v_1, v_9, v_6, v_9, v_7, v_9, v_8, v_9, v_1$. Having described what a full walk is, it is now time to prove that the TAMSA is a 2-approximation algorithm when applied to the Metric-TSP.
+\begin{theorem}
+\label{2_approx}
+\end{theorem}
+\begin{proof}
+\end{proof}
+Tell implications of theorem above (hence unlike NNA we have a constant bound), refer to not practice, give an example to why, and move to ACO by saying that we need mechanisms that even though we may not know the approximation ratio, we are guaranteed to reach the optimal solution if given enough time.
 \subsection{The Ant Colony Algorithm}
 \newpage
 \section{Experimental Data}
