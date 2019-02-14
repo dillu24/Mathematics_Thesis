@@ -282,7 +282,7 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
 \end{tikzpicture}\\
-{\normalfont{It must also be said that by definition \ref{hamiltonian cycle}, the above two graphs are Hamiltonian cycles in}} G {\normalfont{because, they are spanning subgraphs of}} G {\normalfont{and are Cycle sub-graphs of}} G. {\normalfont{Since the above graphs are subgraphs of }}G{\normalfont{, by definition \ref{weightofasubgraph}, their weight can be calculated by summing up the weights of the edges. Thus, the Hamiltonian cycles above have weight 23 and 18 respectively.}}\\
+{\normalfont{It must also be said that by definition \ref{hamiltonian cycle}, the above two graphs are Hamiltonian cycles in}} G {\normalfont{because, they are spanning sub-graphs of}} G {\normalfont{and are Cycle sub-graphs of}} G. {\normalfont{Since the above graphs are sub-graphs of }}G{\normalfont{, by definition \ref{weightofasubgraph}, their weight can be calculated by summing up the weights of the edges. Thus, the Hamiltonian cycles above have weight 23 and 18 respectively.}}\\
 {\normalfont{Given the same graph }}G{\normalfont{ in example \ref{example4}, the two graphs below are spanning trees of }}G{\normalfont{ of weight 18 and 19 respectively.}}\\
 \begin{tikzpicture}[
     > = , % arrow head style
@@ -332,7 +332,7 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
 \end{tikzpicture}\\
 {\normalfont{This example also shows that within the same weighted graph, there could be multiple Hamiltonian cycles and spanning trees of different weight.}}
 \end{example}
-Having defined Hamiltonian cycles and spanning trees, it is natural to ask whether there are necessary and sufficient conditions in a graph that guarantee it is Hamiltonian or that it contains a spanning tree as subgraph. In fact, theorem \ref{spanningtreetheorem} gives a necessary and sufficient condition for a graph to have a spanning tree.
+Having defined Hamiltonian cycles and spanning trees, it is natural to ask whether there are necessary and sufficient conditions in a graph that guarantee it is Hamiltonian or that it contains a spanning tree as sub-graph. In fact, theorem \ref{spanningtreetheorem} gives a necessary and sufficient condition for a graph to have a spanning tree.
 \begin{theorem}
 A graph G has a spanning tree $\iff$ it is connected {\normalfont{\cite{ray_2013}}}.
 \label{spanningtreetheorem}
@@ -871,12 +871,21 @@ For all m $>$ 3, m $\in$ $\mathbb{N}$, there is an instance $G(V,E,f)$ of the Me
 \end{theorem}
 Theorem \ref{log_bound_thrm} and \ref{no_proof} imply that in general the NNA cannot have a constant approximation ratio when applied to the Metric-TSP. However, this does not mean that the Metric-TSP cannot be approximated using an approximation algorithm that has a constant approximation ratio. In fact, an approximation algorithm that is known to have a contstant approximation ratio when applied to the Metric-TSP is the Twice Around the Minimum Spanning Tree Approximation Algorithm. The Twice Around the Minimum Spanning Tree Approximation Algorithm will be presented in the next subsection.    
 \subsubsection{Twice Around the Minimum Spanning Tree Approximation Algorithm}
-Similarly to the NNA, the Twice Around the Minimum Spanning Tree Algorithm (TAMSA) is an approximation algorithm that can find near-optimal solutions for the TSP. Before describing the internal workings of the TAMSA, two algorithms that are used by the TAMSA need to be briefly described. Note that, the internal workings of these algorithms will not be described because, it is out of the scope of this section.\\\\
-The first algorithm used by the TAMSA is Prim's algorithm. Prim's algorithm takes a weighted graph $G(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, and returns a minimum weight spanning tree $T(V^\prime,E^\prime,f)$ of G. T is computed by starting with an empty set of edges and an empty set of vertices. Then, starting by adding $r$ to $V^\prime$, vertices and edges are added to $V^\prime$ and $E^\prime$ respectively such that, the edges added are always the least possible connecting two distinct vertices were one vertex is already in the $V^\prime$, and the other is not in $V^\prime$. This procedure continues until all vertices are added to $V^\prime$. Note that, choosing a different starting vertex from $G$ does not change the minimum weight spanning tree computed by Prim's algorithm.  \cite{cormen_leiserson_rivest_stein}\\\\
-What follows is an example that demonstrates how Prim's algorithm constructs a minimum weight spanning tree for an arbitrary graph.
+Similarly to the NNA, the Twice Around the Minimum Spanning Tree Algorithm (TAMSA) is an algorithm that can find near-optimal solutions for the TSP \cite{cormen_leiserson_rivest_stein}. The TAMSA computes an approximate solution for the TSP by using two other algorithms. In what follows, these two algorithms will be briefly described without delving into any specific details related to their implementation.\\\\
+The first algorithm used by the TAMSA is Prim's algorithm. Prim's algorithm takes a weighted graph $G(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, and returns a minimum weight spanning tree $T(V^\prime,E^\prime,f)$ of $G$. Prim's algorithm computes $T$ in the following way. The algorithm initially starts with empty $V^\prime$ and empty $E^\prime$. Then, the algorithm proceeds by adding $r$ to $V^\prime$. Afterwards, the algorithm adds to $E^\prime$, the edge of least-weight connecting a vertex $v$ in $V$ to a vertex $v^\prime$ in $V^\prime$. Following this, $v$ is added to $V^\prime$. The described procedure is then repeated until all vertices in $V$ are added to $V^\prime$. \cite{cormen_leiserson_rivest_stein}\\\\
+An important question that must be answered is whether the procedure described in the previous paragraph does return a minimum weight Hamiltonian cycle. Typically, one needs to show that the mathematical structure returned by Prim's algorithm is a spanning tree whose weight is the least possible among all possible spanning trees of an input graph. Note that this consideration is important because, if Prim's algorithm does not return a minimum weight spanning tree, the TAMSA cannot use it in it's implementation. The next two theorems confirm that for an arbitrary input graph, Prim's algorithm returns a minimum weight spanning tree for that input graph.
+\begin{theorem}
+\end{theorem}
+\begin{proof}
+\end{proof}
+\begin{theorem}
+\end{theorem}
+\begin{proof}
+\end{proof}
+What follows is an example that demonstrates how Prim's algorithm constructs a minimum spanning tree of a graph.
 \begin{example}
 \label{example_prim}
-\normalfont{Consider} the graph $G$ in Example \ref{example4}. Let $T(V^\prime,E^\prime)$ be an empty graph. Assuming the starting vertex is $v_1$, Prim's algorithm starts by adding $v_1$ to $V^\prime$ which results in the following graph.\\\\
+\normalfont{Consider} the graph $G$ in Example \ref{example4}, and the brief description of Prim's algorithm. Let $T(V^\prime,E^\prime)$ be the graph with an empty set of vertices, and an empty set of edges. Assuming that the starting vertex is $v_1$, Prim's algorithm starts by adding $v_1$ to $V^\prime$. Hence $T$ is now the following graph:\\\\
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -893,7 +902,7 @@ What follows is an example that demonstrates how Prim's algorithm constructs a m
     ]
     \node[state] (v1) {$v_1$};
 \end{tikzpicture}\\\\
-The algorithm now proceeds by adding the edge of least weight from $E$ to $E^\prime$ connecting a vertex $v$ $\in$ $V$ to a vertex $v^\prime$ $\in$ $V^\prime$. Also, $v$ is added to $V^\prime$. In this example, these properties are satisfied by the edge $\{v_1, v_2\}$, hence, resulting in the following graph.\\\\
+The algorithm now proceeds by adding the edge of least weight from $E$ to $E^\prime$ which connects a vertex $v$ $\in$ $V$ to a vertex $v^\prime$ $\in$ $V^\prime$. Also, $v$ is added to $V^\prime$. In this example, these properties are satisfied by the edge $\{v_1, v_2\}$, hence, $T$ is the following graph.\\\\
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -913,7 +922,7 @@ The algorithm now proceeds by adding the edge of least weight from $E$ to $E^\pr
   
     \path[->] (v1) edge[]  node[]{4}(v2);
 \end{tikzpicture}\\\\
-Since not all vertices in $V$ have been added to $V^\prime$, the same procedure is repeated. Hence, the edge $\{v_2, v_3\}$ is chosen because, it is the least weight edge connecting a vertex in $V$ to a vertex in $V^\prime$. This results in the following graph\\\\
+Since not all vertices in $V$ have been added to $V^\prime$, the same procedure is repeated. Hence, the edge $\{v_2, v_3\}$ is chosen because, it is the edge of least weight connecting a vertex in $V$ to a vertex in $V^\prime$. Therefore, $T$ is the following graph\\\\
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -935,7 +944,7 @@ Since not all vertices in $V$ have been added to $V^\prime$, the same procedure 
     \path[->] (v1) edge[]  node[]{4}(v2);
     \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
 \end{tikzpicture}\\\\
-Again, since not all vertices in $V$ have been added to $V^\prime$, the same procedure is repeated, were the edge $\{v_2, v_4\}$ is the edge of least weight connecting a vertex in $V$ to a vertex in $V^\prime$.\\\\
+Again, since not all vertices in $V$ have been added to $V^\prime$, the same procedure is repeated. In this case, $\{v_2, v_4\}$ is the edge of least weight connecting a vertex in $V$ to a vertex in $V^\prime$. Therefore, $T$ is the following graph.\\\\
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -959,7 +968,7 @@ Again, since not all vertices in $V$ have been added to $V^\prime$, the same pro
     \path[->] (v2) edge[]  node[pos=0.2,below right]{2} (v3);
     \path[->] (v2) edge  node[]{4}(v4);
 \end{tikzpicture}\\\\
-Since all vertices in $V$ have been added to $V^\prime$, the algorithm now terminates by returning the spanning tree above.
+Since all vertices in $V$ have been added to $V^\prime$, the algorithm now terminates by returning $T$.
 \end{example}
 The second algorithm used by the TAMSA is the preorder tree walk algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ as inputs, the preorder tree walk algorithm returns a walk $S$ of $T$ containing all vertices in $V$, ordered according to how the vertices were visited during the walk. The preorder tree walk algorithm computes a walk $S$ in the following way. At the start of the algorithm, $S$ is empty. Then, starting from $r$, at any vertex $u$ the algorithm adds $u$ to $S$, and recursively calls itself on all neighbours of $u$. The entire procedure is repeated until all vertices in $V$ have been added to $S$. Note that in this section, the execution of the preorder tree walk algorithm on an arbitrary tree will be termed as a preorder walk. For example, a preorder walk of the tree in Example \ref{tree_example} below, results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}
 \begin{example}
@@ -1140,14 +1149,38 @@ Since all vertices have been visited, the TAMSA adds $v_1$ to $S$ and returns it
 \end{example}
 From Example \ref{tamsa_demonstration} and Example \ref{example_nna_explanation}, one can observe that in this case both algorithms returned the same Hamiltonian cycle. In addition to this, similarly to the NNA, the TAMSA returns bad approximations for the graph presented in Example \ref{nna_fail}. This is true because of the following. Suppose that $G(V,E,f)$ is the TSP instance in Example \ref{nna_fail}, and $v_1$ is the vertex chosen randomly by the TAMSA as starting vertex. Then, since $M$ is a very large number, it will never be included in the minimum spanning tree produced by Prim's algorithm. In addition to this, since the weights on the other edges did not change, the minimum spanning tree produced by Prim's algorithm for $G$ is the same as that in Example \ref{tamsa_demonstration}. Hence the TAMSA, will return the Hamiltonian cycle $ H = v_1, v_2, v_3, v_4, v_1$. Now, since $f(\{v_3, v_4\})$ is very large, the weight of $H$ would be very large, hence differing a lot from the optimal solution. Note that this problem would not happen if the preorder traversal is started from vertex $v_4$. In fact, the Hamiltonian cycle returned by the TAMSA would be $H = v_4, v_2, v_3, v_1, v_4$ (assuming $v_3$ is visited before $v_1$ when considering $v_2$), where $H$ does not contain the edge $\{v_3, v_4\}$ of weight $M$. Therefore, again it can be concluded that the quality of the approximation returned by the TAMSA algorithm depends on the starting vertex.\\\\
 Consider the TSP as defined in Definition \ref{TSP}. Similarly to the NNA, the approximation ratio of the TAMSA when applied to the TSP is not known. In addition to that, by Theorem \ref{no_approx_tsp}, it is known that the TAMSA is not a constant approximation algorithm for the TSP, unless P=NP. Therefore, since it is not known whether P=NP, it is not known whether the TAMSA is a constant approximation algorithm for the TSP. However, what is known is that, the TAMSA is a 2-approximation algorithm for the Metric-TSP \cite{cormen_leiserson_rivest_stein}. This fact is proved in Theorem \ref{2_approx} below. Before proving Theorem \ref{2_approx}, the concept of a full walk will be explained because, it is going to be used in the proof.\\\\
-Consider the preorder tree walk description provided in this section. Let $S$ be the Hamiltonian cycle to be returned by the preorder tree walk algorithm. Suppose that the preorder tree walk algorithm is currently at a vertex $u$. Then, after adding $u$ to S, the preorder tree walk algorithm recursively calls itself on the neighbours $v_1, ..., v_k$ of $u$. Suppose that $v_1$ is the first neighbour of $u$ that is visited. After the entire subgraph connected to $u$ is visited, the algorithm must return to the vertex $u$ to recursively call itself on the next neighbouring vertex (in this case $v_2$). In a preorder tree walk, when returning to $u$, $u$ is not added again to $S$. However, in a full walk, $u$ is again added to $S$. Therefore, a full walk of a tree lists every vertex $u$ whenever $u$ is first visited, and whenever $u$ is returned to after visiting one of the subgraph connected to $u$ \cite{cormen_leiserson_rivest_stein}. In other words, a full walk is a preorder tree walk which lists a vertex every time it is visited in the order of how the vertices are visited. For example, a full walk of the tree in Example \ref{tree_example} would result into the walk, $v_1, v_2, v_3, v_2, v_4, v_2, v_1, v_5, v_1, v_9, v_6, v_9, v_7, v_9, v_8, v_9, v_1$. Having described what a full walk is, it is now time to prove that the TAMSA is a 2-approximation algorithm when applied to the Metric-TSP.
+Consider the preorder tree walk description provided in this section. Let $S$ be the Hamiltonian cycle to be returned by the preorder tree walk algorithm. Suppose that the preorder tree walk algorithm is currently at a vertex $u$. Then, after adding $u$ to S, the preorder tree walk algorithm recursively calls itself on the neighbours $v_1, ..., v_k$ of $u$. Suppose that $v_1$ is the first neighbour of $u$ that is visited. After the entire subgraph connected to $u$ is visited, the algorithm must return to the vertex $u$ to recursively call itself on the next neighbouring vertex (in this case $v_2$). In a preorder tree walk, when returning to $u$, $u$ is not added again to $S$. However, in a full walk, $u$ is again added to $S$. Therefore, a full walk of a tree lists every vertex $u$ whenever $u$ is first visited, and whenever $u$ is returned to after visiting one of the subgraph connected to $u$ \cite{cormen_leiserson_rivest_stein}. In other words, a full walk is a preorder tree walk which lists a vertex every time it is visited in the order of how the vertices are visited. For example, a full walk of the tree in Example \ref{tree_example} would result into the walk, $v_1, v_2, v_3, v_2, v_4, v_2, v_1, v_5, v_1, v_9, v_6, v_9, v_7, v_9, v_8, v_9, v_1$. Note that in a full walk, each edge is traversed exactly twice. This is true because, at each vertex $u$, it uses an edge $e$ to traverse to a neighbour of $u$, and uses the same edge $e$ when returning back to vertex $u$. Having described what a full walk is, it is now time to prove that the TAMSA is a 2-approximation algorithm when applied to the Metric-TSP. Note that, the proof for Theorem \ref{2_approx} below was adapted from \cite{cormen_leiserson_rivest_stein}.
 \begin{theorem}
 \label{2_approx}
+The TAMSA is a 2-approximation algorithm for the Metric-TSP {\normalfont{\cite{cormen_leiserson_rivest_stein}}}.
 \end{theorem}
 \begin{proof}
+Let $G(V,E,f)$ be an instance of the Metric-TSP, and $H^\star$ be the minimum weight Hamiltonian cycle of $G$. In addition to this denote the weight of any subgraph $H^\prime$ as $w(H^\prime)$. A spanning tree $T^\star$ can be obtained from $H^\star$ by deleting an edge from $H^\star$. This is true because, when deleting an edge from $H^\star$, no vertices of $G$ are deleted, hence, all vertices in $V$ would still be in $T^\star$. In addition to that, the cycle in $H^\star$ would be broken. Hence by Definition \ref{spanning tree}, $T^\star$ would be a spanning tree. Now, since every edge weight is positive, deleting an edge from a Hamiltonian cycle would result into a spanning tree of lesser weight. But, the weight of any spanning tree is greater than that of the minimum weight spanning tree. Hence, the minimum weight spanning tree gives a lower bound on the weight of the minimum weight Hamiltonian cycle. Therefore, letting $T$ be the minimum weight spanning tree of $G$, this inequaltiy holds :
+\begin{equation}
+    \label{eq:1}
+    w(T) \leq w(T^\star) \leq w(H^\star)
+  \end{equation}
+Now, let $W$ be a full walk of $T$. It was argued in this section that, a full walk uses an edge of $T$ exactly twice. Hence,
+\begin{equation}
+    \label{eq:2}
+    w(W) = 2w(T) \leq 2w(H^\star) ({\normalfont{By Equation \ref{eq:1}}})\\
+    \implies w(W) \leq 2w(H^\star)
+  \end{equation}
+However, $W$ is not a Hamiltonian cycle because it contains repetition of vertices. But, it can be noted that since $G$ satisfies the triangle inequality, travelling from vertex $u$ directly to a vertex $v$ has less weight then travelling from a vertex $u$ to a vertex $c$ and then travelling again to vertex $v$. Hence, the repetitions of vertices can be removed to obtain a Hamiltonian cycle $H$. Note that, $H$ uses a subset of the edges from $W$, hence,
+\begin{equation}
+    \label{eq:3}
+    w(H) \leq w(W)
+  \end{equation}
+In addition to this, H is the preorder tree walk of the minimum weight spanning tree $T$. Hence, $H$ is the Hamiltonian cycle outputted by the TAMSA. Therefore, from Equation \ref{eq:3} and Equation \ref{eq:2} it can be concluded that,
+\begin{equation}
+    \label{eq:3}
+    w(H) \leq 2w(H^\star)
+  \end{equation}
+Hence, the value of the approximate solution returned by the TAMSA is within a constant factor of 2 of the optimal value. Hence, the TAMSA is a 2-approximation algorithm for the Metric-TSP.
 \end{proof}
-Tell implications of theorem above (hence unlike NNA we have a constant bound), refer to not practice, give an example to why, and move to ACO by saying that we need mechanisms that even though we may not know the approximation ratio, we are guaranteed to reach the optimal solution if given enough time.
-\subsection{The Ant Colony Algorithm}
+Therefore, it is guaranteed by Theorem \ref{2_approx} that, the value of the approximation returned by the TAMSA for the Metric-TSP is never more than twice the optimal value, even for very large instance sizes. Recall that, this was not the case for the NNA. In fact, in Section 2.1 it was argued that, for large instance sizes, since the approximation ratio increases logarithmically, the approximation ratio becomes large enough that it may allow approximate solutions with a value that is far off from the optimal value. That being said, it is stated in \cite{cormen_leiserson_rivest_stein} that although the TAMSA has a constant approximation ratio, it is not the best practical choice for the Metric-TSP. In fact, Christofides gave a 3/2-approximation algorithm for the Metric-TSP. However, this will not be discussed in this project because, it requires presenting mathematical concepts such as minimum weight perfect matchings which are out of the scope of this project.\\\\
+In Section 2.1.1 and Section 2.1.2, the aim was to present algorithms that approximate the TSP, and presenting their approximation ratios for special cases of the TSP. Although knowing the approximation ratio of an algorithm is important, it is more convenient in practice to design an algorithm that is guaranteed to find an optimal solution if given enough time, even if it's approximation ratio is not known. An example of an algorithm that is guaranteed to find an optimal solution if given enough time is the Ant Colony Optimization algorithm. This algorithm will be presented in the next subsection, and the main result in this section guarantees that the Ant Colony Optimization algorithm will always find an optimal solution if given enough time. 
+\subsubsection{The Ant Colony Algorithm}
 \newpage
 \section{Experimental Data}
 \newpage
