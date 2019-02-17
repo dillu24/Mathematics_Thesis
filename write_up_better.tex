@@ -981,9 +981,9 @@ Again, since not all vertices in $V$ have been added to $V^\prime$, the same pro
 \end{tikzpicture}\\\\
 Since all vertices in $V$ have been added to $V^\prime$, the algorithm now terminates by returning $T$.
 \end{example}
-The second algorithm used by the TAMSA is the preorder tree walk algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, the preorder tree walk algorithm returns a walk $S$ of $T$ containing all vertices in $V$, where the vertices are ordered according to how they were visited while performing the walk. The preorder tree walk algorithm computes a walk $S$ in the following way. At the start of the algorithm, $S$ is empty. Then, starting from $r$, the algorithm adds $r$ to $S$, and recursively calls itself on all neighbors of $r$. The entire procedure is repeated until all vertices in $V$ are added to $S$. Note that in this section, the execution of the preorder tree walk algorithm on an arbitrary tree will be termed as a preorder walk. For example, a preorder walk of the tree in Example \ref{tree_example} below, results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}
-\begin{example}
-\label{tree_example}
+The second algorithm used by the TAMSA is the preorder tree walk algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, the preorder tree walk algorithm returns a walk $S$ of $T$ containing all vertices in $V$, where the vertices are ordered according to how they were visited while performing the walk. The preorder tree walk algorithm computes a walk $S$ in the following way. At the start of the algorithm, $S$ is empty. Then, starting from $r$, the algorithm adds $r$ to $S$, and recursively calls itself on all neighbors of $r$. The entire procedure is repeated until all vertices in $V$ are added to $S$. Note that in this section, the execution of the preorder tree walk algorithm on an arbitrary tree will be termed as a preorder walk. For example, a preorder walk of the tree in Figure \ref{tree_example} below, results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}
+\begin{figure}[h]
+\centering
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -1016,8 +1016,10 @@ The second algorithm used by the TAMSA is the preorder tree walk algorithm. Give
     \path[->] (v9) edge  node[]{}(v6);
     \path[->] (v9) edge  node[]{}(v7);
     \path[->] (v9) edge  node[]{}(v8);
-\end{tikzpicture}\\\\
-\end{example}
+\end{tikzpicture}
+\caption{Tree example}
+\label{tree_example}
+\end{figure}
 %Check preorder walk algorithm is correct, by induction maybe?, and arrange example 
 Having briefly described important algorithms that will be used by the TAMSA algorithm, now it is time to describe the actual TAMSA. The TAMSA takes as input an instance of the TSP, and returns a sequence of vertices representing a Hamiltonian cycle \cite{cormen_leiserson_rivest_stein}. The TAMSA algorithm can be described using the pseudocode adapted from \cite{cormen_leiserson_rivest_stein} below.\\\\
 \textbf{TAMSA($G(V,E,f)$):}
