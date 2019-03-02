@@ -1,6 +1,7 @@
 \documentclass{article}
 \title{The Ant Colony Optimisation for the Travelling Salesman Problem}
 \author{Dylan Galea}
+%Note since you added a sub section you will need to update some parts referring to a seciton.  IDEALLY LABEL SECTIONS
 
 \usepackage{cite}
 \usepackage[tbtags]{amsmath}
@@ -539,6 +540,7 @@ The classes P, NP and NPC have very important implications in computational theo
 After defining the important computational theory, it is now time to define the Travelling Salesman Problem, and present important properties about it. This will all lead to showing that the Travelling Salesman Problem is NP-Complete, hence, showing that no polynomial time algorithm has yet been discovered to solve the Travelling Salesman Problem. All of this will be done in the next section.
 \newpage
 \section{The Travelling Salesman Problem}
+\subsection{Problem Definition, Properties and Complexity Class}
 After defining all the graph theoretic concepts and computational theory required, it is now time to define the Travelling Salesman Problem. The Travelling Salesman Problem is defined mathematically in Definition \ref{TSP} below.
 \begin{definition}
 \label{TSP}
@@ -981,7 +983,7 @@ Again, since not all vertices in $V$ have been added to $V^\prime$, the same pro
 \end{tikzpicture}\\\\
 Since all vertices in $V$ have been added to $V^\prime$, the algorithm now terminates by returning $T$.
 \end{example}
-The second algorithm used by the TAMSA is the preorder tree walk algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, the preorder tree walk algorithm returns a walk $S$ of $T$ containing all vertices in $V$, where the vertices are ordered according to how they were visited while performing the walk. The preorder tree walk algorithm computes a walk $S$ in the following way. At the start of the algorithm, $S$ is empty. Then, starting from $r$, the algorithm marks $r$ as visited and adds $r$ to $S$. Following this, the algorithm recursively calls itself on all unvisited neighbors of $r$. The entire procedure is repeated until all vertices in $V$ are added to $S$. Note that in this section, the execution of the preorder tree walk algorithm on an arbitrary tree will be termed as a preorder walk. For example, a preorder walk of the tree in Figure \ref{tree_example} below, results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}\\\\
+The second algorithm used by the TAMSA is the preorder tree walk algorithm, more commonly known as the depth first traversal tree algorithm. Given a tree $T(V,E,f)$ and an arbitrary starting vertex $r$ $\in$ $V$ as inputs, the preorder tree walk algorithm returns a walk $S$ of $T$ containing all vertices in $V$, where the vertices are ordered according to how they were visited while performing the walk. The preorder tree walk algorithm computes a walk $S$ in the following way. At the start of the algorithm, $S$ is empty. Then, starting from $r$, the algorithm marks $r$ as visited and adds $r$ to $S$. Following this, the algorithm recursively calls itself on all unvisited neighbors of $r$. The entire procedure is repeated until all vertices in $V$ are added to $S$. Note that in this section, the execution of the preorder tree walk algorithm on an arbitrary tree will be termed as a preorder walk. For example, a preorder walk of the tree in Figure \ref{tree_example} below, results in the vertex sequence $v_1, v_2, v_3, v_4, v_5, v_9, v_6, v_7, v_8$. \cite{cormen_leiserson_rivest_stein}\\\\
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[
@@ -1030,7 +1032,7 @@ Having briefly described important algorithms that will be used by the TAMSA alg
 \item Add $r$ to $S$ as a final vertex and return S.
 \end{itemize}
 For the TAMSA to be a useful approximation algorithm that approximates the TSP, it must guarantee that it will return a Hamiltonian cycle, and that the Hamiltonian cycle is computed in polynomial time. Let $G$ be an instance of the TSP, and let $T$ be the minimum weight spanning tree of $G$ returned by Prim's algorithm. By Theorem \ref{correctness2} and Theorem \ref{correctness1} it is guaranteed that $T$ is a minimum weight spanning tree. Now, let $S$ be the sequence of vertices returned by a preorder walk on $T$. Since $T$ has no cycles and, visited vertices can never be visited again, a preorder tree walk of $T$ can never result into a walk with repetition of vertices. Hence, $S$ has no repetition of vertices. In addition to this, since $T$ is connected, the preorder tree walk algorithm terminates when all vertices of $G$ have been added to $S$. Therefore, $S$ must contain all vertices of $G$. Hence, $S$ must be a path containing all vertices of $G$. As a result, for $S$ to be a Hamiltonian cycle, the first vertex in $S$ must be repeated as a final vertex. This is done by bullet point number four in the TAMSA pseudo code. Therefore, it can be concluded that $S$ must be a Hamiltonian cycle. The next step is to check that the TAMSA computes a Hamiltonian cycle in polynomial time.\\\\
-Given a TSP instance $G(V,E,f)$, the time complexity of the TAMSA is $O(|V|^2)$ \cite{cormen_leiserson_rivest_stein}. This is true because of the following. Consider the TAMSA pseudo code above. Clearly, the largest amount of work to be performed by the TAMSA is to compute a minimum weight spanning tree $T$ of $G$, and to compute a preorder tree walk of $T$. The preorder tree walk of $T$ takes $O(|V|)$ steps because, the preorder tree walk algorithm terminates when all the vertices in $G$ have been visited (this is true due to reasons mentioned in the previous paragraph). Hence, bullet point number three takes $O(|V|)$ time. Now, according to Exercise 23.2-2 in \cite{cormen_leiserson_rivest_stein}, there is an implementation of Prim's algorithm that takes $O(|V^2|)$ time in order to compute a minimum weight spanning tree. Thus, the total time complexity of the TAMSA is $O(|V^2|)+ O(|V|) = O(|V^2|)$. However, in \cite{cormen_leiserson_rivest_stein} it is shown that the asymptotic time complexity of Prim's algorithm can be improved to $O(|E| log(|V|))$ by using a Binary min-heap. This would mean that the time complexity of the TAMSA is no longer $O(|V^2|)$, but is $O(|E| log(|V|))$. As a result, the TAMSA has a log-linear time complexity. Therefore, using Table \ref{tab:table1} in Section 1.2, and and the fact that the NNA has a quadratic time complexity (discussed in Section 2.1.1), the TAMSA is more efficient asymptotically because, it has a smaller order of growth. Note that, the analysis of the time complexity of Prim's algorithm is not given because, it requires theory about data structures such as Heaps to be established, and this is out of the scope of this project. What follows is an example which demonstrates how the TAMSA computes a Hamiltonian cycle.
+Given a TSP instance $G(V,E,f)$, the time complexity of the TAMSA is $O(|V|^2)$ \cite{cormen_leiserson_rivest_stein}. This is true because of the following. Consider the TAMSA pseudo code above. Clearly, the largest amount of work to be performed by the TAMSA is to compute a minimum weight spanning tree $T$ of $G$, and to compute a preorder tree walk of $T$. The preorder tree walk of $T$ takes $O(|V|)$ steps because, the preorder tree walk algorithm terminates when all the vertices in $G$ have been visited (this is true due to reasons mentioned in the previous paragraph). Hence, bullet point number three takes $O(|V|)$ time. Now, according to Exercise 23.2-2 in \cite{cormen_leiserson_rivest_stein}, there is an implementation of Prim's algorithm that takes $O(|V^2|)$ time in order to compute a minimum weight spanning tree. Thus, the total time complexity of the TAMSA is $O(|V^2|)+ O(|V|) = O(|V^2|)$. However, in \cite{cormen_leiserson_rivest_stein} it is shown that the asymptotic time complexity of Prim's algorithm can be improved to $O(|E| log(|V|))$ by using a binary min-heap. This would mean that the time complexity of the TAMSA is no longer $O(|V^2|)$, but is $O(|E| log(|V|))$. As a result, the TAMSA has a log-linear time complexity. Therefore, using Table \ref{tab:table1} in Section 1.2, and and the fact that the NNA has a quadratic time complexity (discussed in Section 2.1.1), the TAMSA is more efficient asymptotically because, it has a smaller order of growth. Note that, the analysis of the time complexity of Prim's algorithm is not given because, it requires theory about data structures such as Heaps to be established, and this is out of the scope of this project. What follows is an example which demonstrates how the TAMSA computes a Hamiltonian cycle.
 \begin{example}
 \label{tamsa_demonstration}
 \normalfont{Consider} the graph $G$ in Example \ref{example4}, and the TAMSA pseudo code presented in this section. Assume that randomly, the TAMSA chooses vertex $v_1$ as starting vertex. From Example \ref{example_prim}, the minimum spanning tree $T$ returned by Prim's algorithm starting from vertex $v_1$ is the graph below.\\\\
@@ -1202,8 +1204,112 @@ As described in this section, the difference between a full walk and a preorder 
 Hence, from Equation \ref{eq:4} it can be concluded that, the value of the approximate solution returned by the TAMSA is within a constant factor of 2 of the optimal value. Hence, the TAMSA is a 2-approximation algorithm for the Metric-TSP.
 \end{proof}
 Therefore, Theorem \ref{2_approx} guarantees that, the value of the approximation returned by the TAMSA when applied to the Metric-TSP, is never more than twice the optimal value, even for very large instance sizes. Recall that, this was not the case for the NNA. In fact, in Section 2.1 it was shown that, the approximation ratio for the NNA when applied to the Metric-TSP increases logarithmically with respect to the input size. That being said, it is stated in \cite{cormen_leiserson_rivest_stein} that although the TAMSA has a constant approximation ratio, it is not the best practical choice for the Metric-TSP. In fact, Christofides gave a 3/2-approximation algorithm for the Metric-TSP. However, this will not be discussed in this project because, Christofides' algorithm requires presenting mathematical concepts which are out of the scope of this project. Such mathematical concepts are those of a minimum weight perfect matching.\\\\
-In Section 2.1.1 and Section 2.1.2, the aim was to present algorithms that approximate the TSP, and rigorously prove their approximation ratios when applied to a special case of the TSP (Metric-TSP). Although knowing the approximation ratio of an algorithm is important, it is more convenient in practice to design an algorithm that is guaranteed to find an optimal solution if given enough time, even if it's approximation ratio is not known. This statement will become clearer when comparing the algorithm's performance in Chapter 3. An example of an algorithm that is guaranteed to find an optimal solution if given enough time is the Ant Colony Optimization Algorithm. This algorithm will be presented in the next subsection, and the main result in this section guarantees that the Ant Colony Optimization Algorithm will always find an optimal solution if given enough time (although the time may be infinite). 
+In Section 2.1.1 and Section 2.1.2, the aim was to present algorithms that approximate the TSP, and rigorously prove their approximation ratios when applied to a special case of the TSP (Metric-TSP). Although knowing the approximation ratio of an algorithm is important, it is more convenient in practice to design an algorithm that is guaranteed to find an optimal solution if given enough time, even if it's approximation ratio is not known. This statement will become clearer when comparing the algorithm's performance in Chapter 3. An example of an algorithm that is guaranteed to find an optimal solution if given enough time is the Ant Colony Optimization Algorithm. This algorithm will be presented in the next subsection, and the main result in this section guarantees that the Ant Colony Optimization Algorithm will always find an optimal solution if given enough time (although the time may be infinite).
 \subsubsection{The Ant Colony Optimization Algorithm}
+The Ant Colony Optimization Algorithm (ACO) forms part of the metaheuristic class of algorithms \cite{dorigo_stutzle_thomas_2004}. A metaheuristic is a set of ideas that can be used to define algorithms that solve a wide set of problems \cite{dorigo_stutzle_thomas_2004}. In other words this means that, the ACO is a framework that can be applied to a number of problems. Note that, this is different than what have been presented in Section 2.2.2 and Section 2.2.1 because, the TAMSA and the NNA are algorithms that are specifically written for a particular problem (in this case the TSP). Each metaheuristic has it's own general idea which can then be implemented specifically as an algorithm for a particular problem.\\\\
+The ACO's general idea was inspired from the behavior of ants. Ants are capable of finding the shortest path from a food source to their nest and vice-versa without using any visual indications. The ants manage to find shortest paths due to the following. Each ant deposits a chemical known as pheromone on the path from a food source to it's nest. In addition to this, when an ant has a choice in which direction it should move, it probabilistically chooses a direction which has rich pheromone levels. Obviously, ants that choose shorter paths will arrive to their nest much quicker than the ants that choose longer paths. This means that, on the way back to the food source, the shortest path has more pheromone than any other path because, the other paths would have not yet been constructed. Therefore, on their way back to the food source, the ants would probabilistically choose the shortest path. After a number of repetitions, the above procedure would eventually result in a situation were all ants choose the shortest path from their nest to a food source and vice-versa. \cite{dorigo_gambardella_1997}\\\\
+To understand the ACO framework better, Example \ref{explain_ACO} will demonstrate how the ACO framework can be applied to the Shortest Path Problem, without going into specific details on how the algorithm can be implemented.
+\begin{example}
+\label{explain_ACO}
+\normalfont{Suppose} that the shortest path of the graph $G(V,E,f)$ below from vertex $v_1$ to vertex $v_4$ must be found.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[]  node[]{4}(v2);
+    \path[->] (v1) edge  node[]{5}(v3);
+    \path[->] (v3) edge  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}
+\\\\
+Clearly, the ACO framework can be applied to the Shortest Path Problem on $G$ by letting the ant's environment be $G$, and the food source and the nest be $v_1$ and $v_2$ respectively. The ants would then find the shortest path due to the following. Since no ant has yet started to walk in it's environment, no pheromone has yet been deposited. Hence at vertex $v_1$, $v_2$ and $v_3$ have the same probability of being chosen by ants. Hence, probabilistically, half of the ants move to $v_2$ and half of the ants move to $v_3$.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[red]  node[]{4}(v2);
+    \path[->] (v1) edge[blue]  node[]{5}(v3);
+    \path[->] (v3) edge  node[]{10}(v4);
+    \path[->] (v2) edge  node[]{4}(v4);
+\end{tikzpicture}
+\\\\
+Ants at $v_3$ and $v_2$ have only one vertex to visit because $v_1$ has already been visited. Therefore, all ants move to vertex $v_4$.\\\\
+\begin{tikzpicture}[
+    > = , % arrow head style
+    shorten > = 1pt, % don't touch arrow head to node
+    auto,
+    node distance = 3cm, % distance between nodes
+    semithick % line style
+    ]
+
+    \tikzset{every state}=[
+    draw = black,
+    thick,
+    fill = white,
+    minimum size = 1mm
+    ]
+    \node[state] (v1) {$v_1$};
+    \node[state] (v2) [right=of v1] {$v_2$};
+    \node[state] (v3) [below =of v1] {$v_3$};
+    \node[state] (v4) [below =of v2] {$v_4$};
+  
+    \path[->] (v1) edge[red]  node[]{4}(v2);
+    \path[->] (v1) edge[blue]  node[]{5}(v3);
+    \path[->] (v3) edge[blue]  node[]{10}(v4);
+    \path[->] (v2) edge[red]  node[]{4}(v4);
+\end{tikzpicture}
+\\\\
+Now, since the red path is shorter than the blue path, the ants following the red path arrive at vertex $v_4$ before the ants following the blue path. Hence, on the way back to vertex $v_1$, the red path has more pheromone than the blue path because, the ants following the blue path have still not yet arrived at vertex $v_4$. Therefore, the ants that arrived at $v_4$ using the red path path would probabilistically choose to travel to $v_1$ using the red path again. As a result, the red path keeps on accumulating more pheromone than the blue path, and eventually this would lead to a situation were all ants choose the red path when traveling from $v_1$ to $v_4$ and vice-versa. Note that the red path is the shortest path of $G$.
+\end{example}
+After describing the ACO framework, it is now time to describe how an algorithm obeying the ACO framework can be written for the TSP. An ACO algorithm for the TSP can be represented by the following pseudocode. Note that the pseudocode below was adapted using ideas from \cite{dorigo_gambardella_1997}.\\\\
+\textbf{ACO algorithm for the TSP pseudocode}\\\\
+Suppose that $G(V,E,f)$ is an instance of the TSP, and $g$ is a probabilistic function.\\
+\textbf{ACO($G(V,E,f)$):}\\
+Place $m$ ants on $m$ randomly selected vertices.\\
+while(!finished)\{\\
+	for every ant $a$:
+		move $a$ to vertex $v$ using the probabilistic function $g$.\\
+		update the pheromone level of the edge $\{a.current\_vertex, v\}$\\
+	$A$ = ant which produces the minimum weight Hamiltonian cycle of this iteration.\\
+	Add more pheromone on the edges of the Hamiltonian cycle computed by $A$.\\
+\}\\\\
+%use above to state paragraph below, and explain.. sayclearer when representing equations .. or give immediately
+ Let $G(V,E,f)$ be an instance of the TSP. As described in Example \ref{explain_ACO}, the ant's environment can be represented by $G$. In addition to this, since in the TSP a Hamiltonian cycle is to be found, it doesn't matter which is the food source vertex and which is the nest vertex because, all vertices have to be visited. Therefore initially, each ant can be placed on a random vertex of $G$. Moreover, suppose that an ant $a$ is at some vertex $u$. Ant $a$ chooses an unvisited vertex $v$ using a probabilistic function of both the pheromones accumulated on the edge $\{u,v\}$, and $f(\{u,v\})$. Hence, ants probabilistically prefer to move to vertices which are connected by an edge of high pheromone and which are close-by. It is important to avoid having a strong vertex chosen by all ants, otherwise, a very small number of Hamiltonian cycles will be explored. This can be done by decreasing the pheromone on a chosen edge, so that an ant has a higher probability of choosing another vertex. This is termed as local trail updating. When 
+
+%describe pseudocode, move to artificial describe, formulas etc, indent .. say different ACO algorithms
+%say why it obeys the ACO framework
+%go to theoratic, why no time complexity and no proofs,
+%move to proof
 \newpage
 \section{Experimental Data}
 \newpage
