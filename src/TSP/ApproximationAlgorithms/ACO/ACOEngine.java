@@ -268,6 +268,7 @@ public class ACOEngine {
                     bestAntIndex = j;
                 }
             }
+            //ToDo change it to global due to convergence
             Ant ant = listOfAnts.get(bestAntIndex); //get ant that produced the best tour in the current iteration
             ArrayList<Integer> bestRoute = ant.getVisitedCitiesOrdered(); //get route of the best ant
             for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
