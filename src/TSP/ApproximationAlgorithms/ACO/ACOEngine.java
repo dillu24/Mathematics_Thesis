@@ -38,7 +38,7 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/ch130");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp()); // as suggested in Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
@@ -246,6 +246,7 @@ public class ACOEngine {
      */
     public double approximateTsp(){
         double routeLength = Double.MAX_VALUE; //stores the result
+        Ant globalBestAnt = new Ant();
         int numberOfCities = graph.getVertices().size(); // stores the number of cities in the graph
         double [][] distanceMatrix = graph.getDistanceMatrix(); //stores the distance matrix of the graph in question
         for(int i=0;i<100000;i++){ // for a number of iterations
@@ -270,14 +271,15 @@ public class ACOEngine {
             }
             //ToDo change it to global due to convergence
             Ant ant = listOfAnts.get(bestAntIndex); //get ant that produced the best tour in the current iteration
-            ArrayList<Integer> bestRoute = ant.getVisitedCitiesOrdered(); //get route of the best ant
-            for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
-                globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),ant.getRouteLength());
-            }
-            globalTrailUpdating(bestRoute.get(bestRoute.size()-1),bestRoute.get(0),ant.getRouteLength()); //globally update pheromone from last ant to first
             if(ant.getRouteLength() < routeLength){ // if length of route produced by the best ant in the iteration is better than previous best store it
                 routeLength = ant.getRouteLength();
+                globalBestAnt = ant;
             }
+            ArrayList<Integer> bestRoute = globalBestAnt.getVisitedCitiesOrdered(); //get route of the best ant
+            for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
+                globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),globalBestAnt.getRouteLength());
+            }
+            globalTrailUpdating(bestRoute.get(bestRoute.size()-1),bestRoute.get(0),globalBestAnt.getRouteLength()); //globally update pheromone from last ant to first
             System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
             listOfAnts = new ArrayList<>(); // create new list to avoid clearing it thus taking o(n) time
         }

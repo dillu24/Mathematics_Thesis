@@ -11,7 +11,7 @@ import TSP.Graphs.CompleteWeightedPlanarGraph;
 public class AlgorithmLauncher {
     public static void main (String args[]){
         ACOEngine aco = new ACOEngine(); //Creates the ACO algorithm object
-        System.out.println("This is the Ant System's result: "+aco.approximateTsp()); //Starts the algorithm and
+        System.out.println("This is the Ant Colony System's result: "+aco.approximateTsp()); //Starts the algorithm and
                                                                                       // displays result
         /* This was done for testing purposes only, to check that the MST output is correct
         CompleteWeightedPlanarGraph testGraph = new CompleteWeightedPlanarGraph();
