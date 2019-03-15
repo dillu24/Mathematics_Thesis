@@ -10,8 +10,8 @@ import TSP.Graphs.CompleteWeightedPlanarGraph;
 
 public class AlgorithmLauncher {
     public static void main (String args[]){
-        ACOEngine aco = new ACOEngine(); //Creates the ACO algorithm object
-        System.out.println("This is the Ant Colony System's result: "+aco.approximateTsp()); //Starts the algorithm and
+        //ACOEngine aco = new ACOEngine(); //Creates the ACO algorithm object
+        //System.out.println("This is the Ant Colony System's result: "+aco.approximateTsp()); //Starts the algorithm and
                                                                                       // displays result
         /* This was done for testing purposes only, to check that the MST output is correct
         CompleteWeightedPlanarGraph testGraph = new CompleteWeightedPlanarGraph();
@@ -41,14 +41,14 @@ public class AlgorithmLauncher {
         }*/
 
         //This creates the TwiceAroundMstHeuristic object that is used to start the algorithm and displays result
-        TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
-                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"));
-        System.out.println("Twice around MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
+        //TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
+                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"));
+        //System.out.println("Twice around MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
 
         // This creates the NearestNeighbourHeuristic object which is also used to approximate tsp and then the result
         // is displayed
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
-                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"));
+                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/burma14"));
         System.out.println("Nearest Neighbour heuristic result: "+nnh.ApproximateTsp());
 
 

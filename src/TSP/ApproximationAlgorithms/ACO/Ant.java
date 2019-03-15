@@ -109,21 +109,17 @@ public class Ant {
     /**
      * This method is used by the algorithm to move the ant to a new city. Note that the validation of whether the move
      * is valid was done in the class ACOEngine. In this method the values in this.currentCityId,this.startingCityId,
-     * this.visitedCities,this.visitedCitiesOrdered,this.routeLength are updated accordingly . Note that since a
-     * Hamiltonian path is to be found , when moving the distance between the previous last city and the starting city
-     * must be subtracted since it no longer contributes to the route length .
+     * this.visitedCities,this.visitedCitiesOrdered,this.routeLength are updated accordingly .
      * @param nextCityId
      *  Stores the id of the city to be visited
      * @param distanceMatrix
      *  Stores the distance matrix of the graph so that the route length can be modifed.
      */
     public void moveToCity(int nextCityId,double[][] distanceMatrix){
-        routeLength -= distanceMatrix[currentCityId][startingCityId]; // since tour is not complete remove returning distance
         visitedCities.add(nextCityId); // add the new city to be visited to the set of cities visited
         visitedCitiesOrdered.add(nextCityId); // add the new city to be visited to the permutation of cities visited
         routeLength += distanceMatrix[currentCityId][nextCityId]; //modify the distance
         currentCityId = nextCityId; // update current city to the last city that was visited
-        routeLength += distanceMatrix[currentCityId][startingCityId]; // return back for now to complete tour
     }
 
     /**

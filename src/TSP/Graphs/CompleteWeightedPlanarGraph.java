@@ -57,7 +57,7 @@ public class CompleteWeightedPlanarGraph extends Graph {
             distanceMatrix = new double[vertices.size()][vertices.size()]; //give memory to the distance matrix
             for(int i =0;i<vertices.size();i++){ //initialize all entries according to euclidean distance between cities
                 for(int j=0;j<vertices.size();j++){
-                    distanceMatrix[i][j] = getEuclideanDistance(vertices.get(i),vertices.get(j));
+                    distanceMatrix[i][j] = geometricDistanceBetween2Cities(vertices.get(i),vertices.get(j));
                 }
             }
         }catch (IOException e) { //if file is not found handle the error exception by displaying that file is not found
@@ -75,8 +75,34 @@ public class CompleteWeightedPlanarGraph extends Graph {
      * @return
      *  The euclidean distance between the 2 cities passed as parameters
      */
-    public double getEuclideanDistance(City city1,City city2){
+    private double getEuclideanDistance(City city1, City city2){
         return Math.sqrt(Math.pow(city1.getX()-city2.getX(),2)+Math.pow(city1.getY()-city2.getY(),2));
+    }
+
+    private double geometricDistanceBetween2Cities(City city1, City city2){
+        //First convert each x and y co ordinate of the 2 cities to radian and put them in separate arrays
+        double cityX[] = {computeCoordinateToRadian(city1.getX()),computeCoordinateToRadian(city2.getX())};
+        double cityY[] = {computeCoordinateToRadian(city1.getY()),computeCoordinateToRadian(city2.getY())};
+        double RRR = 6378.388; // constant used to compute
+
+        double q1 = Math.cos(cityY[0]-cityY[1]); //compute the distance as specified by TSPLIB FAQ
+        double q2 = Math.cos(cityX[0]-cityX[1]);
+        double q3 = Math.cos(cityX[0]+cityX[1]);
+        return (int)( RRR * Math.acos( 0.5*((1.0+q1)*q2 - (1.0-q1)*q3) ) + 1.0); //return the distance
+    }
+
+    /**
+     * This method is used to convert the x-co ordinates to radians
+     * @param input
+     * stores the input to be converted
+     * @return
+     * The corresponding radian value.
+     */
+
+    private double computeCoordinateToRadian(double input){
+        int degree = (int) input; //Convert as specified in TSPLIB FAQ
+        double min = input-degree;
+        return Math.PI * (degree + 5.0*(min/3.0)) / 180.0;
     }
 
 }

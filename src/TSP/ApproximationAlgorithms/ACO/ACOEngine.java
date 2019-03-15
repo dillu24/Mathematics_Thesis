@@ -38,13 +38,13 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/ch130");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/ali535");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp()); // as suggested in Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
         for(int i=0;i<graph.getVertices().size();i++){ //initialize pheromone matrix
             for(int j=0;j<graph.getVertices().size();j++){
-                pheromoneMatrix[i][j] = 0.00005;
+                pheromoneMatrix[i][j] = t0;
             }
         }
     }
@@ -67,7 +67,7 @@ public class ACOEngine {
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocation memory
         for(int i=0;i<graph.getVertices().size();i++){ //initialize pheromone matrix with starting default value
             for(int j=0;j<graph.getVertices().size();j++){
-                pheromoneMatrix[i][j] = 0.00005;
+                pheromoneMatrix[i][j] = t0;
             }
         }
     }
@@ -249,7 +249,7 @@ public class ACOEngine {
         Ant globalBestAnt = new Ant();
         int numberOfCities = graph.getVertices().size(); // stores the number of cities in the graph
         double [][] distanceMatrix = graph.getDistanceMatrix(); //stores the distance matrix of the graph in question
-        for(int i=0;i<100000;i++){ // for a number of iterations
+        for(int i=0;i<10000000;i++){ // for a number of iterations
             createAnts(); //create new ants at each iteration for more efficiency (thus not need to clear list taking o(n)time)
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){ //until last ant completed tour(i.e all of them complete)
                 for(int j=0;j<numberOfAnts;j++){ //for each ant in the list
@@ -264,6 +264,7 @@ public class ACOEngine {
             for(int j=0;j<numberOfAnts;j++){ //for each ant
                 Ant ant = listOfAnts.get(j); //get ant
                 localTrailUpdating(ant.getCurrentCityId(),ant.getStartingCityId()); //locally update pheromone from last city to first city
+                ant.moveToCity(ant.getStartingCityId(), distanceMatrix); // each ant must return to the starting vertex
                 if(ant.getRouteLength()<shortestTour){ // if route length is shorter than current shortest store ant details
                     shortestTour = ant.getRouteLength();
                     bestAntIndex = j;
@@ -279,7 +280,6 @@ public class ACOEngine {
             for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
                 globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),globalBestAnt.getRouteLength());
             }
-            globalTrailUpdating(bestRoute.get(bestRoute.size()-1),bestRoute.get(0),globalBestAnt.getRouteLength()); //globally update pheromone from last ant to first
             System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
             listOfAnts = new ArrayList<>(); // create new list to avoid clearing it thus taking o(n) time
         }
