@@ -4,6 +4,8 @@
 %Note since you added a sub section you will need to update some parts referring to a seciton.  IDEALLY LABEL SECTIONS
 
 \usepackage{cite}
+\usepackage{graphicx}
+\usepackage{listings}
 \usepackage[tbtags]{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -634,6 +636,7 @@ The Metric-TSP is the TSP defined on a complete weighted graph $G(V,E,f)$ on at 
  What follows is a subsection on two approximation algorithms that are suitable for the TSP. These approximation algorithms are the Nearest Neighbour Approximation Algorithm and the Twice Around The Minimum Spanning Tree Approximation Algorithm. Both of these algorithms can be applied to the TSP defined in Definition \ref{TSP}, however, we do not know their approximation ratios when applied to the TSP defined in Definition \ref{TSP}. 
 \subsection{Approximation Algorithms}
 \subsubsection{Nearest Neighbour Approximation Algorithm}
+\label{nna_section}
 The Nearest Neighbour Algorithm (NNA) is a simple algorithm that can find near-optimal solutions for the TSP \cite{arora_agarwal_tanwar_2016}. The NNA takes as input, an instance of the TSP, and outputs a sequence of all visited vertices in the order of how they were visited \cite{arora_agarwal_tanwar_2016}. According to \cite{arora_agarwal_tanwar_2016}, the NNA can be described by the following steps:\\\\
 \underline{\textbf{NNA Procedure:}}
 \begin{itemize}
@@ -1414,17 +1417,79 @@ As discussed previously, Theorem \ref{main_thrm} guarantees that the $ACO_{bs, \
 The ACS differs in three ways from the $ACO_{bs, \tau_{min}}$ algorithm. The first difference is in the probabilistic function that the ACS uses to construct solutions (Equation \ref{eq:aco1} and Equation \ref{eq:aco2}). The second difference is that in the ACS, pheromone evaporation is not performed to all of the edges, but to those of the global best solution, and to the chosen edges while the ants construct solutions. The third difference is that in the ACS, while an ant constructs a solution, the ant performs local pheromone update on the edges that it chooses. One can notice that in the ACS, the local pheromone update and the global pheromone update are of the form $\tau_{ij}(\theta +1)$ = $(1-\mu)\tau_{ij}(\theta)$ + $\mu$b where b = $q_f(s^{bs})$ or $\tau_0$ and $\mu$ = $p$ or $\zeta$. Therefore, $\tau_{ij}(\theta)$ = $(1-\mu)^\theta\tau_{ij}(0)$ + $b(1-(1-\mu)^\theta)$. Hence, as $\theta\to\infty$,  $\tau_{ij}(\theta)\to b$ (*). Hence, the sequence of pheromones $\tau_{ij}(\theta)$ can either decrease to $b$ if $\tau_{ij}(0)$ $>$ $b$ as $\theta$ increases, or it can increase to $b$ if $\tau_{ij}(0)$ $<$ $b$ as $\theta$ increases (**). Now, since local pheromone update decreases the pheromone value of an edge, one can consider the global pheromone update only and obtain an upper bound on $\tau_{ij}(\theta)$. By the result obtained in (*), and the fact that local pheromone update is ignored, one can conclude that the maximum value that $\tau_{ij}(\theta)$ can take is $q_f(s^\star)$. In addition to this, since $\tau_{ij}(0)$=$\tau_0$ $<$ $q_f(s^{bs})$ = $b$, then by (**), $\tau_{ij}(\theta)$ increases, hence, $\tau_{ij}(\theta)$ cannot fall below the value of $\tau_0$. As a result, $\tau_{min} = \tau_0$ and $\tau_{max} = q_f(s^\star)$ exist for the ACS. \cite{dorigo_stutzle_thomas_2004}\\\\
 Therefore, given the results obtained in the previous paragraph, what remains to be shown is that, any feasible solution in $\widetilde{S}$ can be constructed with non-zero probability. Suppose that an ant $k$ is on component/vertex $c_i$. Suppose also that, the edge $e$ = $\{c_i, c_j\}$ with the property $c_j$ $\notin$ $M_k$ is not the most feasible edge to choose (i.e if $q$ $\leq$ $q_0$ $e$ will not be chosen). Hence, according to Equation \ref{eq:aco1}, the edge $\{c_i, c_j\}$ is only chosen when a biased randomized choice is made. Therefore, the probability of choosing edge $\{c_i, c_j\}$ is that of $(1-q_0)$.$p^\prime$, where $p^\prime$ is the probability of choosing the edge $\{c_i, c_j\}$ defined by the probabilistic function in Equation \ref{eq:aco2}. Now, if 0 $<$ $\eta_{ij}$ $<$ $\infty$ for all $i,j$ $\in$ $N$ (which in the case of the TSP it is), and $\beta$ $<$ $\infty$, then for all $i$, $j$ $\in$ [$N$], $\eta_{ij}$ belongs to the interval $[\eta_{min}, \eta_{max}]$, where $\eta_{min}$ and $\eta_{max}$ are the minimum and maximum elements that all $\eta_{ij}$'s may take, respectively. As a result, a lower bound on $p^\prime$ would be $\widetilde{p}^\prime$ = $\displaystyle{\frac{\tau_{min} \eta_{min}^\beta}{(N-1)\tau_{max}\eta_{max}^\beta + \tau_{min}\eta_{min}^\beta}}$. Hence, the probability of choosing the edge $\{c_i, c_j\}$ is bounded from below by $(1-q_0)\widetilde{p}^\prime$. As a result, since $i$ and $j$ are arbitrary, the value $0 < (1-q_0)\widetilde{p}_{min}$ is a lower bound to the probability of any choice while constructing the solution. Therefore, the probability of any feasible solution to be generated is greater than zero. As a result, due to what has been discussed before, Theorem \ref{main_thrm} applies to the ACS. \cite{dorigo_stutzle_thomas_2004}\\\\
 From the above two paragraphs it can now be deduced that the ACS converges in value to the optimal solution of any static problem it is applied to if given enough time to execute. Hence, when applied to the TSP, the ACS converges in solution to a minimum weight Hamiltonian cycle if given enough time to execute. This means that when applied to the TSP, the ACS is guaranteed to find a minimum weight Hamiltonian cycle at least once, if it is executed long enough. It is important to note that, although it is guaranteed that the ACS will find a minimum weight Hamiltonian cycle when applied to the TSP if it is executed long enough, it is not guaranteed to do so in polynomial time. In fact according to \cite{dorigo_stutzle_thomas_2004}, there are no theoretical results about the speed of convergence of any ACO algorithm. Therefore, the algorithmic performance in terms of speed of convergence of any ACO algorithm can only be measured empirically \cite{dorigo_stutzle_thomas_2004}. Another important deduction that could be made from Theorem \ref{main_thrm} is that, the ACS is not susceptible to the problem presented in Example \ref{nna_fail}. This is true because, Theorem \ref{main_thrm} guarantees that a minimum weight Hamiltonian cycle will be found if given enough time, regardless of the starting positions of every ant. Hence, the question that remains to be asked is whether in practice, the ACS gives better results \\\\
-Having presented the theory behind the NNA, the TAMSA, and the ACS algorithm, it is now time to check whether the results obtained in practice by these algorithms satisfy the theory. Therefore, an entire section will be dedicated to the computational results of the NNA, the TAMSA, and the ACS algorithm, where, this section has the following layout. Firstly, a brief description on the implementation of the NNA, the TAMSA, and the ACS will be given. This will also include a description of the values of any parameters that are needed to implement the algorithms. Secondly, the approximation ratios of the TAMSA, and the NNA stated by Theorem \ref{2_approx} and by Theorem \ref{log_bound_thrm} respectively, will be tested on Metric-TSP instances of different sizes. Thirdly, a comparison in terms of quality of approximations will be given between the results obtained by the TAMSA, the NNA, and the ACS. Finally, an experimental test will also be carried out on the ACS applied to the TSP with different distance types (ex euclidean distance, geographic distance etc). This experimental test will check how long in seconds does the ACS take, in order to find a solution of weight within a specified factor from the optimal value.
-%tan NNA amel how it varies tas time passes habba log
-%Experimental test on tsp acs different metrics
-%note computational ghat tamsa ma tistax tamel geog habba li metric.
-%note fesible irranga fil proof gifiri%)  
+Having presented the theory behind the NNA, the TAMSA, and the ACS algorithm, it is now time to evaluate this theory empirically. Therefore, an entire section will be dedicated to the computational results of the NNA, the TAMSA, and the ACS algorithm, where, this section has the following layout. Firstly, a brief description on the implementation of the NNA, the TAMSA, and the ACS will be given. This will also include a description of the values of any parameters that are needed to implement the algorithms. Secondly, the approximation ratios of the TAMSA, and the NNA stated by Theorem \ref{2_approx} and by Theorem \ref{log_bound_thrm} respectively, will be tested on Metric-TSP instances of different sizes, where the aim of the test is to check how much sharp the bounds stated in Theorem \ref{2_approx} and Theorem \ref{log_bound_thrm} are. Thirdly, the quality of approximations of the ACS will be compared to those of the NNA and the TAMSA. Finally, another experimental test will also be carried out on the ACS, where the aim of this test is to check how long does the ACS take in seconds to find a solution of weight which is within a specified factor from the optimal value.
 %give parameters of beta et cin computational work, also for other parameters number of ants uek
 %how solutions improve asiterations increased for ACO maybe?
 %the comparison is important li ghadt qabel ghal chapter tal aco compare guarantee opt in inf or guarantee optimailty
-%Check that every algorithm is correct
 \newpage
-\section{Experimental Data}
+\section{Computational Work}
+Having presented the TAMSA, the NNA, and the ACS algorithm theoretically, it is now time to evaluate their performance in practice when applied to different TSP instances. Therefore the following will be done. Firstly, a brief description on the implementation of each algorithm will be given. Secondly, the approximation results returned by each algorithm, when applied to TSP instances of different sizes will be given. Thirdly, these approximation results will then be used to analyze different theoretical properties which where described in previous sections. Finally, these approximation results will also be used to compare the quality of the approximations returned by ACS metaheuristic, to that of the NNA and the TAMSA. Note that all algorithms where implemented using Java. The following subsection is about the empirical analysis of the NNA. 
+\subsection{The NNA Empirically}
+As already described, the main aim of this subsection is to present the approximation results returned by the NNA implementation given TSP instances of different sizes, and to analyze how much sharp the bound in Theorem \ref{log_bound_thrm} is. In addition to this, the factor by which the approximation results vary from the optimal value with respect to instance size will be analyzed. However, before doing all this, the implementation of the NNA will be briefly described. Note that for a detailed description of the NNA implementation, the reader is encouraged to either read the inline documentation supplied with the code located in the folder MathematicsThesis/src/TSP/ApproximationAlgorithms/NearestNeighbour/Approximation, or the java docs located in the same folder.
+\subsubsection{Implementation Description}
+The implementation of the NNA was based on the procedure presented in Section \ref{nna_section}. The only difference is that, the NNA implementation which is given does not choose a random vertex as a starting vertex, but it gives each vertex the opportunity to act as a starting vertex. As a result, if $G(V,E,f)$ is the inputted TSP instance, $|V|$ Hamiltonian cycles are computed, where each Hamiltonian cycle has a different starting vertex from V. That being said, the NNA then returns the Hamiltonian cycle of least weight among the $|V|$ Hamiltonian cycles that it computes. Due to this change, the NNA will return the best possible Hamiltonian cycle of $G$ that it can return. As a result, the problem presented in Example \ref{nna_fail} is avoided.\\\\
+The NNA's logic was implemented using two methods which where called, $approximateTsp$, and $closestCity$. Given a vertex $u$, and information related to the input graph instance $G$, the $closestCity$ method iterates over all the vertices of $G$, and returns the unvisited vertex which is connected to $u$ via the edge of least weight among all edges incident to $u$. This was carried out by iterating over all possible edges $\{u,x\}$, and choosing the vertex $t$ such that, $f(\{u,t\})$ $\leq$ $f(\{u,x\})$ for all $x$ $\in$ $V$. On the other hand, the $approximateTsp$ method iterates over all the vertices in $V$. At every iteration $i$, a Hamiltonian cycle $H$ is computed by starting from vertex $i$, and always visiting the vertex returned by the $closestCity$ method. After $H$ is computed, the $approximateTsp$ method stores the weight of $H$ in the variable $bestTourLength$, if $H$ the Hamiltonian cycle of least weight that the $approximateTsp$ method has encountered since the first iteration. After the $approximateTsp$ method completes all the iterations, the value of $bestTourLength$ is returned, and the NNA stops executing.\\\\
+After briefly describing the NNA implementation, it is now time to present the approximation results obtained when the NNA algorithm was applied to TSP instances of different sizes. In addition to this, the results are then used to verify whether the bound stated in Theorem \ref{log_bound_thrm} is sharp. Afterwards, the approximation results analyzed by checking by how much they vary from the optimal value, as the instance size increases.
+\subsubsection{Results and Analysis of Results}
+%check how much sharp the bound is, and how much approximation ratio increases
+%note euclidean only tat TSPLIB GHAL DIN AX METRIC L BOUNDS
+%will it limit? ... maybe but have to consider one hux nkella ma nispicaw qatt
+The NNA implementation described in the previous paragraph was applied to TSP instances of different sizes, which where obtained from the TSPLIB library \cite{reinelt}. The TSPLIB library is a database consisting of different TSP instances whose optimal value is known. Each TSPLIB instance is stored in a text file containing information relevant to the input graph. The instances from the TSPLIB library which are used in this project contain a number of coordinates, that represent the position of the vertices in the considered space. In addition to this, the TSP instances also contain information on how the distance between these vertices should be defined. For this section, the space and metric that will be considered are $\real^2$, and the Euclidean distance $d$. The Euclidean distance between two points $x=(x_1, x_2)$ and $y=(y_1, y_2)$ in $\real^2$ is defined by the following formula: \\
+\begin{equation}
+  \label{metric_space}
+  d(x,y) = \sqrt{(x_1-y_1)^2+(x_2-y_2)^2}
+\end{equation}\\
+The metric space ($\real^2$, $d$) was chosen because, the bound presented in Theorem \ref{log_bound_thrm} requires the input graph instance to have edge weights defined by a metric. In addition to this, the majority of the TSPLIB instances are defined in the space ($\real^2$, $d$). Having briefly described the TSP instances which where used, it is now time to present the approximation results of the NNA, when applied to TSP instances defined in ($\real^2$, $d$). These approximation results are summarized in Table \ref{tab:NNA_results} below.
+\begin{table}[H]
+    \caption{NNA Appoximation Results.}
+    \label{tab:NNA_results}
+    \begin{tabular}{l|c|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{TSPLIB instance} & \textbf{Instance size} & \textbf{optimal value} & \textbf{approximation value}\\
+      \hline
+    eil51 & 51 & 426 & 513.61\\
+    rat99 & 99 & 1211 &  1369.53\\
+    ch130 & 130 & 6110 & 7198.74 \\
+    gil262 & 262 & 2378 & 2768.34\\
+    lin318 & 318 & 41029 & 49215.61\\
+    pcb442 & 442 & 50778 & 59064.27\\
+    u574 & 574  & 36905 & 44605.14 \\ 
+    p654 & 654 & 34643 & 40910.31\\
+    u724 & 724 & 41910 & 51795.59\\
+    u1060 & 1060 & 224094 & 276638.82\\
+    d1291 & 1219 & 50801 & 59070.41\\
+    u2319 & 2319 & 234256 & 270096.29
+    \end{tabular}
+\end{table}
+Knowing the results in Table \ref{tab:NNA_results} above, one can compute the approximation factor of every TSP instance, and compare it with the bound stated by Theorem \ref{log_bound_thrm}. Note that the approximation factor is the value obtained from calculating $\frac{\text{approximation value}}{\text{optimal value}}$. These calculations are all summarized in Table \ref{tab:NNA_further_results} below. 
+\begin{table}[H]
+    \caption{NNA Further Results.}
+    \label{tab:NNA_further_results}
+    \begin{tabular}{l|c|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{TSPLIB instance} & \textbf{Approximation Factor} & \textbf{Bound from Theorem \ref{log_bound_thrm}}\\
+      \hline
+    eil51 & 1.21 & 3.5\\
+    rat99 & 1.13 & 4 \\
+    ch130 & 1.18  & 4.5  \\
+    gil262 &1.16 &  5  \\
+    lin318 & 1.2 &  5  \\
+    pcb442 & 1.16  & 5  \\
+    u574 & 1.21   & 5.5  \\ 
+    p654 & 1.18  & 5.5 \\
+    u724 & 1.24 & 5.5 \\
+    u1060 & 1.23  & 6  \\
+    d1291 & 1.16  & 6\\
+    u2319& 1.15 & 6.5
+    \end{tabular}
+\end{table}
+From Table \ref{tab:NNA_further_results} one can observe that, for the instances of the TSP which where taken, the approximation factor is not close to the bound stated in Theorem \ref{log_bound_thrm}. This means that in general, the bound stated in Theorem \ref{log_bound_thrm} does not give a good indication of what approximation ratios should be expected in practice. In addition to this, it can be observed from Table \ref{tab:NNA_further_results} that, although the instance size is increased, the approximation factor is approximately 1.2. This means that although in general for any Metric-TSP, it is theoretically known that the approximation ratio increases logarithmically with respect to the number of vertices, the empirical results suggest that for TSP instances in ($\real^2$, $d$), the NNA may have a constant approximation ratio of approximately 1.25. Having empirically analyzed the NNA, it is now time to analyze the TAMSA empirically.
+\subsection{The TAMSA Empirically}
+\subsubsection{Implementation Description}
+\subsubsection{Results and Analysis of Results}
+\subsection{The ACS Empirically}
+\subsubsection{Implementation Description}
+\subsubsection{Results and Analysis of Results}
+%check how much sharp the bound is, and how much approximation ratio increases
+\subsection{Comparison of Approximations Between the ACS, the TAMSA, and the NNA}
 \newpage
 \section{Conclusion}
 \newpage

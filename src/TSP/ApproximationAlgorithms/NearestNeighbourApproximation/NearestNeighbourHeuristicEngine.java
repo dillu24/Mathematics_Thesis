@@ -3,7 +3,6 @@ package TSP.ApproximationAlgorithms.NearestNeighbourApproximation;
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
 import java.util.HashSet;
-import java.util.Random;
 
 public class NearestNeighbourHeuristicEngine {
     /**
@@ -12,7 +11,8 @@ public class NearestNeighbourHeuristicEngine {
      * If graph to be inputted is not complete it can be converted to complete by creating the missing edges in the graph
      * with infinite weight.If such a construction is made the infinite edges will be avoided implicitly in the algorithm
      * since the shortest edges will be taken . If a hamiltonian path does not exist in the original graph , then it must
-     * be that the original graph does not contain a hamiltonian path.
+     * be that the original graph does not contain a hamiltonian path. Note that for better approximations, the algorithm
+     * gives opportunity that each vertex acts as a starting vertex, where then the best route is chosen.
      */
     private Graph g; // stores the graph to be considered
 
@@ -55,23 +55,27 @@ public class NearestNeighbourHeuristicEngine {
      * @return
      *  The approximation to TSP
      */
-    public double ApproximateTsp(){
-        Random randomNumberGenerator = new Random(System.currentTimeMillis()); //random number generator instance
+    public double approximateTsp(){
         int numberOfCities = g.getVertices().size(); //stores the number of cities in the graph
-        int startingCityId = randomNumberGenerator.nextInt(numberOfCities); // start from a random city in the graph
-        double tourLength = 0.0; //stores the result
-        HashSet<Integer> visitedCities = new HashSet<>(); //store the list of visited cities in a set to not visit again
+        double bestTourLength = Double.MAX_VALUE; //stores the result
         double[][] distanceMatrix = g.getDistanceMatrix(); // stores the distance matrix of the graph
-        visitedCities.add(startingCityId); // add starting city to the list of visited cities
-        int currentCityId = startingCityId; // set currentCityId to the starting city
-        while(numberOfCities != visitedCities.size()){ //until computing a tour
-            int chosenCityId = closestCity(currentCityId,distanceMatrix,numberOfCities,visitedCities); //determine closest city
-            visitedCities.add(chosenCityId); //add next city to be visited to the list of visited cities
-            tourLength += distanceMatrix[currentCityId][chosenCityId]; //update tour
-            currentCityId = chosenCityId; //move to next city
+        for(int i=0;i<numberOfCities;i++) { //execute the algorithm by starting from a different vertex each time
+            double tourLength = 0.0; //stores the result
+            HashSet<Integer> visitedCities = new HashSet<>(); //store the list of visited cities in a set to not visit again
+            visitedCities.add(i); // add starting city to the list of visited cities
+            int currentCityId = i; // set currentCityId to the starting city
+            while (numberOfCities != visitedCities.size()) { //until computing a tour
+                int chosenCityId = closestCity(currentCityId, distanceMatrix, numberOfCities, visitedCities); //determine closest city
+                visitedCities.add(chosenCityId); //add next city to be visited to the list of visited cities
+                tourLength += distanceMatrix[currentCityId][chosenCityId]; //update tour
+                currentCityId = chosenCityId; //move to next city
+            }
+            tourLength += distanceMatrix[currentCityId][i]; //complete tour length by visiting from last city to starting city
+            if(bestTourLength > tourLength){
+                bestTourLength = tourLength;
+            }
         }
-        tourLength += distanceMatrix[currentCityId][startingCityId]; //complete tour length by visiting from last city to starting city
-        return tourLength; //return answer
+        return bestTourLength; //return answer
     }
 
     /**

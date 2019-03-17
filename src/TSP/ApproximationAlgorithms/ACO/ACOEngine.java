@@ -34,13 +34,13 @@ public class ACOEngine {
      */
     public ACOEngine(){
         listOfAnts = new ArrayList<>(); //allocate memory
-        beta = 2;
+        beta = 5;
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/ali535");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u724");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
-        t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp()); // as suggested in Dorigo paper
+        t0 = 1/(graph.getVertices().size()* nnh.approximateTsp()); // as suggested in Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
         for(int i=0;i<graph.getVertices().size();i++){ //initialize pheromone matrix
             for(int j=0;j<graph.getVertices().size();j++){
@@ -63,7 +63,7 @@ public class ACOEngine {
         numberOfAnts = 10;
         graph = g;
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
-        t0 = 1/(graph.getVertices().size()* nnh.ApproximateTsp()); //as suggested by Dorigo paper
+        t0 = 1/(graph.getVertices().size()* nnh.approximateTsp()); //as suggested by Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocation memory
         for(int i=0;i<graph.getVertices().size();i++){ //initialize pheromone matrix with starting default value
             for(int j=0;j<graph.getVertices().size();j++){

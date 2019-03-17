@@ -3,7 +3,6 @@
   TSP instances found in TSPLIB.
  */
 
-import TSP.ApproximationAlgorithms.ACO.ACOEngine;
 import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbourHeuristicEngine;
 import TSP.ApproximationAlgorithms.TwiceAroundMST.TwiceAroundMSTHeuristic;
 import TSP.Graphs.CompleteWeightedPlanarGraph;
@@ -41,15 +40,15 @@ public class AlgorithmLauncher {
         }*/
 
         //This creates the TwiceAroundMstHeuristic object that is used to start the algorithm and displays result
-        //TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
-                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"));
-        //System.out.println("Twice around MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
+        TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
+                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/eil51"));
+        System.out.println("Twice around the MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
 
         // This creates the NearestNeighbourHeuristic object which is also used to approximate tsp and then the result
         // is displayed
-        NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
-                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/burma14"));
-        System.out.println("Nearest Neighbour heuristic result: "+nnh.ApproximateTsp());
+        //NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
+                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u2319"));
+        //System.out.println("Nearest Neighbour heuristic result: "+nnh.approximateTsp());
 
 
     }

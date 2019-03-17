@@ -57,7 +57,7 @@ public class CompleteWeightedPlanarGraph extends Graph {
             distanceMatrix = new double[vertices.size()][vertices.size()]; //give memory to the distance matrix
             for(int i =0;i<vertices.size();i++){ //initialize all entries according to euclidean distance between cities
                 for(int j=0;j<vertices.size();j++){
-                    distanceMatrix[i][j] = geometricDistanceBetween2Cities(vertices.get(i),vertices.get(j));
+                    distanceMatrix[i][j] = getEuclideanDistance(vertices.get(i),vertices.get(j));
                 }
             }
         }catch (IOException e) { //if file is not found handle the error exception by displaying that file is not found
