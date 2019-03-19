@@ -3,7 +3,6 @@ package TSP.ApproximationAlgorithms.TwiceAroundMST;
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class TwiceAroundMSTHeuristic {
     /**
@@ -26,8 +25,6 @@ public class TwiceAroundMSTHeuristic {
      */
     public TwiceAroundMSTHeuristic(){
         g = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/burma14"); //default graph
-        PrimMST mst = new PrimMST(g);//create prim's algorithm instance
-        MSTAdjacencyMatrix = mst.calculateMinimumWeightSpanningTree(); //calculate mst's adjacency matrix
         visitedVertices = new boolean[g.getVertices().size()]; //allocate memory
         approximateTour = new ArrayList<>(); // allcoate memory
     }
@@ -39,8 +36,6 @@ public class TwiceAroundMSTHeuristic {
      */
     public TwiceAroundMSTHeuristic(Graph g){
         this.g = g;
-        PrimMST mst = new PrimMST(g);//create prim's algorithm instance
-        MSTAdjacencyMatrix = mst.calculateMinimumWeightSpanningTree();// calculate mst's adjacency matrix
         visitedVertices = new boolean[g.getVertices().size()]; // allocate memory
         approximateTour = new ArrayList<>(); // allocate memory
     }
@@ -53,6 +48,8 @@ public class TwiceAroundMSTHeuristic {
     public double approximateTSP(){
         double result = Double.MAX_VALUE; //stores the result
         for(int j=0;j<g.getVertices().size();j++) { //do procedure form every vertex for better approximation result
+            PrimMST mst = new PrimMST(g);//create prim's algorithm instance
+            MSTAdjacencyMatrix = mst.calculateMinimumWeightSpanningTree(j); //calculate mst's adjacency matrix starting from current vertex
             double partialResult = 0.0;
             DFS(j);//Do a DFS of the MST by starting from current vertex of mst
             for (int i = 0; i < approximateTour.size() - 1; i++) {//Calculate the result tour length
@@ -62,6 +59,8 @@ public class TwiceAroundMSTHeuristic {
             if (partialResult < result) {
                 result = partialResult;
             }
+            visitedVertices = new boolean[g.getVertices().size()]; //empty array to restart algorithm
+            approximateTour = new ArrayList<>(); //empty list to restart algorithm
         }
         return result; //return result
     }

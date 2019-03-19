@@ -48,11 +48,10 @@ public class PrimMST {
      * @return
      *  The adjacency matrix of the resultant tree
      */
-   public int[][] calculateMinimumWeightSpanningTree(){
+   public int[][] calculateMinimumWeightSpanningTree(int startingVertex){
        int [][] MSTAdjacencyMatrix = new int[g.getVertices().size()][g.getVertices().size()]; //stores the resultant adjacency matrix of the tree
-       Random randomNumberGenerator = new Random(System.currentTimeMillis()); //random number generator instance
        double [][] distanceMatrix = g.getDistanceMatrix(); //stores the distance matrix of the graph
-       PrimsPriorityQueueEntry firstEntry = new PrimsPriorityQueueEntry(randomNumberGenerator.nextInt(g.getVertices().size())); // choose a random vertex for the graph and create an entry for it
+       PrimsPriorityQueueEntry firstEntry = new PrimsPriorityQueueEntry(startingVertex); // choose a random vertex for the graph and create an entry for it
        firstEntry.updateEntry(0.0,-1);//need to update first entry because it's edge value must be 0
        allEntries[firstEntry.getCityId()] = firstEntry; //modify first entry's entry in the list of entries
        priorityQueue.add(firstEntry); // add the first entry to the priority queue
