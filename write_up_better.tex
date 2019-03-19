@@ -1541,10 +1541,30 @@ Comparing Table \ref{tab:NNA_further_results} with Table \ref{tab:Tamsa_further}
 As already described, the main aim of this section is to empirically analyze the ACS algorithm when applied to the TSP. Unlike the TAMSA and the NNA, no theoretical bound is known for the ACS algorithm when applied to the TSP. On the other hand, as discussed in Section \ref{section_ACO}, what is known is that if the ACS is given enough time, it will converge in value to the optimal solution. In addition to this, it was also argued in Section \ref{section_ACO} that, there are no theoretical results about the speed of convergence of any ACO algorithm. Hence, apart from presenting the approximation results of the ACS when applied to TSPLIB instances, the empirical analysis will also evaluate the time it takes for the ACS algorithm to reach an approximation factor below 1.1. Note that the value 1.05 was chosen because, the algorithm may take infinite time to converge in value to the optimal solution. In addition to this, if the approximation value is close to 1.05, then the approximation value is very close to the optimal value.\\\\
 But, before conducting the empirical analysis, the ACS java implementation which was carried out will be briefly described. The ACS implementation is written in the file ACOEngine.java located in the folder MathematicsThesis/src/TSP/ApproximationAlgorithms/ACO. Note that in the following subsection, only a brief description will be given on the implementation. The reason is that java docs and inline comments where written to describe the specific details of the implementation (located in the same path as the ACOEngine.java file).
 \subsubsection{Implementation Description}
+\label{acs_impl}
+The ACS algorithm which was implemented is based on the ideas presented in Algorithm \ref{ACO_ALG}. The ACS algorithm logic is implemented using a number of functions located in the ACOEngine.java file. However, the main function is called the $approximateTSP$ TSP function. The $approximateTSP$ function starts by placing $m$ ants on randomly selected vertices of the input graph instance. Then, all ants are moved to a new vertex according to the probabilistic function $determineNextCity$ which implements Formula \ref{eq:aco1} and \ref{eq:aco2}. When an ant is moved to a new city, the chosen edge's pheromone is locally updated using the$localTrailUpdating$ function, which implements Formula \ref{eq:aco4}. When each ant computes a Hamiltonian cycle, the weight of the iteration best Hamiltonian cycle is compared to the weight of the global best Hamiltonian cycle, and if it's weight is smaller than the global best, the global best Hamiltonian cycle is set to be equal to the iteration best Hamiltonian cycle. Afterwards, the global best ant deposits pheromone on the global best Hamiltonian cycle using the $globalTrailUpdating$ function, which implements Formula \ref{eq:aco3}. The whole procedure is then repeated until a termination condition is met. When the termination condition is met, the weight of the global best Hamiltonian cycle is returned as an approximation.\\\\
+As could be observed in Algorithm \ref{ACO_ALG}, and the discussion in Section \ref{section_ACO}, there are a number of parameters who's value is still not given. Such parameters are, the number of ants in the algorithm, $\beta$ defined in Formula \ref{eq:aco1}, and more. In general, different TSP instances require different parameters for optimal execution, however, according to \cite{dorigo_stutzle_thomas_2004}, the following values summarized in Table \ref{tab:param} where empirically found to be robust across many problems and instances. Therefore in the implementation of the ACS, the parametric values represented in Table \ref{tab:param} below where taken. Note that in Table \ref{tab:param} below, $C^{nn}$ denotes the approximation value returned by the NNA, and $n$ is the number of vertices in the input graph TSP instance.
+\begin{table}[H]
+    \caption{ACS algorithm parameter values.}
+    \centering
+    \label{tab:param}
+    \begin{tabular}{l|c|} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{Parameter} & \textbf{Value}\\
+      \hline
+    $\beta$ & 2-5\\
+    $p$ & 0.1\\
+    $m$ & 10\\
+    $\tau_0$ & $\frac{1}{nC^{nn}}$\\
+    $\zeta$ & 0.1\\
+    $q_0$  & 0.9
+    \end{tabular}
+\end{table}
+Another important factor in the ACS is the termination condition. The termination condition determines when the ACS stops execution. In this implementation, the ACS algorithm stops executing after executing for 1000000 iterations. This was done in this way to ensure that the ACS is executed long enough before returning an approximation value. Having briefly described the ACS implementation, it is now time to empirically analyze the ACS.
 \subsubsection{Results and Analysis of Results}
+\label{acs_analysis}
 %check how much sharp the bound is, and how much approximation ratio increases
 %approximate timing
-%do it for geo also maybe?
+%do timing for (r^2 d) only
 %say about terminating condition
 \subsection{Comparison of Approximations Between the ACS, the TAMSA, and the NNA}
 \newpage
