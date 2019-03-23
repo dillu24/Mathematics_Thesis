@@ -4,6 +4,7 @@ import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbou
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -30,7 +31,8 @@ public class ACOEngine {
 
     /**
      * This is the default constructor and is used to created an instance of the algorithm based on values specified
-     * in the Dorigo paper.
+     * in the Dorigo book. Note that in dorigo book it was argued that p = zeta = 0.1, therefore in this implementation,
+     * alpha denotes both zeta and p.
      */
     public ACOEngine(){
         listOfAnts = new ArrayList<>(); //allocate memory
@@ -38,7 +40,7 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u724");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/eil51");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.approximateTsp()); // as suggested in Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
@@ -249,7 +251,7 @@ public class ACOEngine {
         Ant globalBestAnt = new Ant();
         int numberOfCities = graph.getVertices().size(); // stores the number of cities in the graph
         double [][] distanceMatrix = graph.getDistanceMatrix(); //stores the distance matrix of the graph in question
-        for(int i=0;i<10000000;i++){ // for a number of iterations
+        for(int i=0;i<10000;i++){ // for a number of iterations
             createAnts(); //create new ants at each iteration for more efficiency (thus not need to clear list taking o(n)time)
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){ //until last ant completed tour(i.e all of them complete)
                 for(int j=0;j<numberOfAnts;j++){ //for each ant in the list
@@ -270,7 +272,6 @@ public class ACOEngine {
                     bestAntIndex = j;
                 }
             }
-            //ToDo change it to global due to convergence
             Ant ant = listOfAnts.get(bestAntIndex); //get ant that produced the best tour in the current iteration
             if(ant.getRouteLength() < routeLength){ // if length of route produced by the best ant in the iteration is better than previous best store it
                 routeLength = ant.getRouteLength();
@@ -281,6 +282,7 @@ public class ACOEngine {
                 globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),globalBestAnt.getRouteLength());
             }
             System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
+            //System.out.print("("+i+","+routeLength+")"); for experiment
             listOfAnts = new ArrayList<>(); // create new list to avoid clearing it thus taking o(n) time
         }
         return routeLength; //return result.
