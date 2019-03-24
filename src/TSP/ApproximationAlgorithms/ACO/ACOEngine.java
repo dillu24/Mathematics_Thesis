@@ -40,7 +40,7 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/eil51");
+        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/p654");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.approximateTsp()); // as suggested in Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
@@ -251,7 +251,8 @@ public class ACOEngine {
         Ant globalBestAnt = new Ant();
         int numberOfCities = graph.getVertices().size(); // stores the number of cities in the graph
         double [][] distanceMatrix = graph.getDistanceMatrix(); //stores the distance matrix of the graph in question
-        for(int i=0;i<10000;i++){ // for a number of iterations
+        System.out.print("["); //for python experiment
+        for(int i=0;i<2000;i++){ // for a number of iterations
             createAnts(); //create new ants at each iteration for more efficiency (thus not need to clear list taking o(n)time)
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){ //until last ant completed tour(i.e all of them complete)
                 for(int j=0;j<numberOfAnts;j++){ //for each ant in the list
@@ -281,10 +282,11 @@ public class ACOEngine {
             for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
                 globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),globalBestAnt.getRouteLength());
             }
-            System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
-            //System.out.print("("+i+","+routeLength+")"); for experiment
+            //System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
+            System.out.print(routeLength+", "); //for python experiment
             listOfAnts = new ArrayList<>(); // create new list to avoid clearing it thus taking o(n) time
         }
+        System.out.print("]"); //for python experiment
         return routeLength; //return result.
     }
 
