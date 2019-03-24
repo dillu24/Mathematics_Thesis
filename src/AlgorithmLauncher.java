@@ -16,7 +16,7 @@ public class AlgorithmLauncher {
     public static void main (String args[]){
         ACOEngine aco = new ACOEngine(); //Creates the ACO algorithm object
         System.out.println("This is the Ant Colony System's result: "+aco.approximateTsp()); //Starts the algorithm and
-                                                                                      // displays result
+                                                                                             // displays result
         /*This was done for testing purposes only, to check that the MST output is correct
         CompleteWeightedPlanarGraph testGraph = new CompleteWeightedPlanarGraph();
         ArrayList<City> vertices = new ArrayList<>();
@@ -45,15 +45,16 @@ public class AlgorithmLauncher {
         }*/
 
         //This creates the TwiceAroundMstHeuristic object that is used to start the algorithm and displays result
-        //TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
-                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u1060"));
-        //System.out.println("Twice around the MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
+        TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
+                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u1060"));
+
+        System.out.println("Twice around the MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
 
          //This creates the NearestNeighbourHeuristic object which is also used to approximate tsp and then the result
         // is displayed
-        //NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
-                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u2319"));
-        //System.out.println("Nearest Neighbour heuristic result: "+nnh.approximateTsp());
+        NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
+                new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u2319"));
+        System.out.println("Nearest Neighbour heuristic result: "+nnh.approximateTsp());
 
 
     }
