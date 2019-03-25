@@ -1,10 +1,13 @@
 \documentclass[12pt]{article}
-\title{The Ant Colony Optimization Algorithm for the Travelling Salesman Problem}
-\author{By\\\\Dylan Galea}
 %Note since you added a sub section you will need to update some parts referring to a seciton.  IDEALLY LABEL SECTIONS
 
 \usepackage{cite}
 \usepackage{graphicx}
+\title{\includegraphics[scale=0.6]{screenshots/crest.png}\\[1cm]
+The Ant Colony Optimization Algorithm for the Travelling Salesman Problem\vspace{-2ex}
+}
+\date{}
+\author{By\\Dylan Galea\\[1cm]}
 \usepackage{listings}
 \usepackage[tbtags]{amsmath}
 \usepackage{amsthm}
@@ -37,11 +40,17 @@ bottom = 20mm,
  left = 25mm,
  top = 20mm,
  }
-
 \begin{document}
-\maketitle
+\clearpage\maketitle
+\thispagestyle{empty}
+{\centering A Dissertation submitted in partial fulfillment of the requirements\\
+for the Degree of Bachelor of Science(Honours)\\ in Mathematics as main area\\[2cm]}
+{\centering DEPARTMENT OF MATHEMATICS\\
+FACULTY OF SCIENCE\\ UNIVERSITY OF MALTA\\[2cm]}
+{\centering May 2, 2019\\}
 \newpage
 \tableofcontents
+\pagenumbering{arabic}
 \newpage
 \section{Introduction}
 Before defining the Travelling Salesman Problem and proving properties about it, a number of graph theoretic concepts that will be used throughout, must first be defined. Therefore, what follows is a sub-section that introduces a number of graph theoretic concepts which are required for the Travelling Salesman Problem.
