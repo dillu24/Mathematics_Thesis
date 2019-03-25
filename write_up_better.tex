@@ -1,6 +1,6 @@
-\documentclass{article}
-\title{The Ant Colony Optimization for the Traveling Salesman Problem}
-\author{Dylan Galea}
+\documentclass[12pt]{article}
+\title{The Ant Colony Optimization Algorithm for the Travelling Salesman Problem}
+\author{By\\\\Dylan Galea}
 %Note since you added a sub section you will need to update some parts referring to a seciton.  IDEALLY LABEL SECTIONS
 
 \usepackage{cite}
@@ -13,7 +13,9 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{slashbox}
+\usepackage{titling}
 \usepackage{algpseudocode,algorithm,algorithmicx}
+\usepackage{titlepic}
 \usetikzlibrary{arrows.meta,automata,positioning}
 
 \newtheorem{definition}{Definition}[subsection]
@@ -24,7 +26,17 @@
 \newtheorem{example}[definition]{Example}
 \newtheorem{case}{Case}
 \newtheorem{claim}{Claim}
+\numberwithin{equation}{subsection}
+\numberwithin{table}{subsection}
 \DeclareMathOperator*{\argmax}{argmax}
+\renewcommand{\baselinestretch}{1.5} 
+\usepackage { geometry } 
+ \geometry {
+ right = 20mm,
+bottom = 20mm,
+ left = 25mm,
+ top = 20mm,
+ }
 
 \begin{document}
 \maketitle
@@ -1629,6 +1641,5 @@ Apart from the fact that the ACS algorithm outperformed both the TAMSA and the N
 \section{Conclusion}
 \newpage
 \bibliography{bibliography}
-\nocite{*}
-\bibliographystyle{IEEEtran}
+\bibliographystyle{IEEEtran} %have to be changed to APA
 \end{document}
