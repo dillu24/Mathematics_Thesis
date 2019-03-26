@@ -20,6 +20,7 @@ The Ant Colony Optimization Algorithm for the Travelling Salesman Problem\vspace
 \usepackage{algpseudocode,algorithm,algorithmicx}
 \usepackage{titlepic}
 \usetikzlibrary{arrows.meta,automata,positioning}
+\renewcommand{\contentsname}{\centering Contents}
 
 \newtheorem{definition}{Definition}[subsection]
 \newtheorem{theorem}[definition]{Theorem}
@@ -37,7 +38,7 @@ The Ant Colony Optimization Algorithm for the Travelling Salesman Problem\vspace
  \geometry {
  right = 20mm,
 bottom = 20mm,
- left = 25mm,
+ left = 30mm,
  top = 20mm,
  }
 \begin{document}
@@ -47,11 +48,18 @@ bottom = 20mm,
 for the Degree of Bachelor of Science(Honours)\\ in Mathematics as main area\\[2cm]}
 {\centering DEPARTMENT OF MATHEMATICS\\
 FACULTY OF SCIENCE\\ UNIVERSITY OF MALTA\\[2cm]}
-{\centering May 2, 2019\\}
+{\centering May 2019\\}
+\newpage
+{\center\section*{Acknowledgements}}
+\addcontentsline{toc}{section}{Acknowledgements}
+\noindent
+I would like to thank everyone who helped me either academically or on a personal level throughout the writing of this dissertation. Firstly, I would like to express my deepest appreciation to my supervisor Professor Lauri, whose guidance and assistance was invaluable.\\\\
+Secondly, I would like to thank my mother Michelle, my father Brian, my brother Kirsten, and my girlfriend Tracy for always being supportive. Without your love and support during hard times I wouldn't have even reached university, let alone writing this dissertation.
+\pagenumbering{roman}
 \newpage
 \tableofcontents
-\pagenumbering{arabic}
 \newpage
+\pagenumbering{arabic}
 \section{Introduction}
 Before defining the Travelling Salesman Problem and proving properties about it, a number of graph theoretic concepts that will be used throughout, must first be defined. Therefore, what follows is a sub-section that introduces a number of graph theoretic concepts which are required for the Travelling Salesman Problem.
 \subsection{Some Graph Theory}
