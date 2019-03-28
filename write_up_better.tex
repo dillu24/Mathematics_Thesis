@@ -80,9 +80,8 @@ As already discussed in Chapter \ref{introduction}, the main aim of this chapter
 Graph theory is the study of a mathematical structure called a graph. A graph can be defined formally as shown in definition \ref{Graph} below.
 \begin{definition}
 \label{Graph}
-A graph G is a pair (V,E), where V is any non empty finite set called the set of vertices of G, and E $\subseteq$ \{$\{u,v\}$ $:$ $\forall$ u,v $\in$ V and u $\neq$ v\} is called the set of edges of G {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. A graph G defined by the pair (V,E) will be denoted as G(V,E) or G.
+A graph G is a pair (V,E), where V is any non empty finite set called the set of vertices of G, and E $\subseteq$ \{$\{u,v\}$ $:$ $\forall$ u,v $\in$ V and u $\neq$ v\} is called the set of edges of G {\normalfont{\cite{black_tanenbaum_2017}}}. A graph G defined by the pair (V,E) will be denoted as G(V,E) or G.
 \end{definition}
-\noindent
 A graph defined using Definition \ref{Graph} is called an undirected graph. There is also the concept of a directed graph were $\mathit{E \subseteq \{(u,v) : \forall u,v \in V, u \neq v\}}$ \cite{black_tanenbaum_2017}. However, in this dissertation it can be assumed that any graph that will be considered is undirected, and that for every vertex $u$, there are no edges of the form $\{u, u\}$, unless otherwise stated. It must also be noted that by this definition there cannot be multiple edges joining any 2 vertices. The reason is that sets do not allow repetition of elements. Thus, each element in the edge set is unique. The discussion will now proceed by introducing more graph theoretic terminologies, with examples that illustrate these terminologies.\\
 \\When two vertices are joined by an edge, they are said to be adjacent. This is defined formally in definition \ref{adjacent} below.
 \begin{definition}
@@ -99,11 +98,11 @@ It is sometimes also required to know how many edges are incident to a specific 
 \label{degree}
 The degree of a vertex v in a graph G denoted by deg(v) is, the number of edges incident with v in G. {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}
 \end{definition}
-Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the vertices of $\mathit{G}$ using circles, and by drawing the edges of $\mathit{G}$ using lines between adjacent vertices. As a result, in this thesis a graph is sometimes given formally using sets or as a pictorial representation, assuming that one can be converted into another. Example \ref{Example 1} below depicts how a graph can be represented pictorially.
+Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the vertices of $\mathit{G}$ using circles, and by drawing the edges of $\mathit{G}$ using lines between adjacent vertices. As a result, in this dissertation a graph is sometimes given formally using sets or as a pictorial representation, assuming that one can be converted into another. Example \ref{Example 1} below depicts how a graph can be represented pictorially, and illustrates Definitions  \ref{adjacent}, \ref{incident}, and \ref{degree}.
 \begin{example}
 \label{Example 1}
-{\normalfont{Consider the graph}} G(V,E) {\normalfont{such that}}  V=\{$v_1, v_2, v_3, v_4\}$ {\normalfont{and}} E = \{$\{v_1, v_2\}, \{v_2,v_3\}, \{v_3,v_4\}, \{v_4,v_1\}\}$.\\{\normalfont{Then}} G {\normalfont{can be represented pictorially as :}}\\
-
+{\normalfont{Consider the graph}} G(V,E) {\normalfont{such that}}  V=\{$v_1, v_2, v_3, v_4\}$ {\normalfont{and}} E = \{$\{$ $v_1$, $v_2$\}$, \{v_2,v_3\}, \{v_3,v_4\}, \{v_4,v_1\}\}$.\\{\normalfont{Then,}} G {\normalfont{can be represented pictorially as :}}\\
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -128,11 +127,12 @@ Any graph $\mathit{G(V,E)}$ can also be represented pictorially by drawing the v
     \path[->] (v2) edge  node[]{} (v3);
     \path[->] (v3) edge  node[]{}(v4);
     \path[->] (v4) edge  node[]{}(v1);
-\end{tikzpicture}\\
+\end{tikzpicture}
+\end{center}
 {\normalfont{Using definition \ref{adjacent}, two adjacent vertices in }}G {\normalfont{are}} $v_1$ {\normalfont{and}} $v_2$.{\normalfont{ On the other hand, two non adjacent vertices in }}G {\normalfont{are}} $v_1$ {\normalfont{and}} $v_3.$\\ {\normalfont{By definition \ref{incident}}}, $v_1$ {\normalfont{and}} $v_2$ {\normalfont{are incident to the edge}} \{$v_1, v_2\}$.\\
 {\normalfont{Using definition \ref{degree}, the degree of every vertex in}} G {\normalfont{is 2}}.
 \end{example}
-There are many other examples of graphs, one of them being the complete graph on $\mathit{n}$ vertices.
+There are many important graphs in graph theory, one of them being the complete graph on $\mathit{n}$ vertices.
 \begin{definition}
 \label{Complete Graph}
 A graph G(V,E) is said to be complete if $\forall$ v,w $\in$ V v $\neq$ w, v is adjacent to w. The complete graph on n vertices is denoted by $K_n$. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
@@ -140,7 +140,7 @@ A graph G(V,E) is said to be complete if $\forall$ v,w $\in$ V v $\neq$ w, v is 
 Given any graph $\mathit{G(V,E)}$, one can also define graph theoretic structures that lie within $\mathit{G}$ such as walks and paths.
 \begin{definition}
 \label{walk}
-Given a graph G(V,E), a walk is a sequence of vertices (not necessarily distinct) u= $u_1$, $u_2$, ...,$u_n$ = v such that, $\forall$ i $\in$ [n-1], $\{u_i, u_{i+1}\}$ $\in$ E. Such a walk is usually referred to as a u-v walk, were u and v are the end vertices of the walk. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
+Given a graph G(V,E), a walk is a sequence of vertices (not necessarily distinct) u= $u_1$, $u_2$, ...,$u_n$ = v such that $\forall$ i $\in$ [n-1], $\{u_i, u_{i+1}\}$ $\in$ E. Such a walk is usually referred to as a u-v walk, were u and v are the end vertices of the walk. \normalfont{\cite{harris_hirst_mossinghoff_2008}}
 \end{definition}
 \begin{definition}
 \label{Path}
@@ -153,12 +153,13 @@ A graph G(V,E) is said to be connected if $\forall$ u,v $\in$ V u $\neq$ v, u an
 \end{definition}
 \begin{definition}
 \label{cycle}
-Given a graph G(V,E), a cycle in G is a path on n $\geq$ 4 vertices, such that, the first vertex and the last vertex are equal. \normalfont{\cite{cycle}} 
+Given a graph G(V,E), a cycle in G is a path $u_1$, ..., $u_k$ together with the edge \{$u_1, u_k\}$, where k $\geq$ 3 \normalfont{\cite{harris_hirst_mossinghoff_2008}}. 
 \end{definition}
-By Definitions \ref{walk}, \ref{Path} above, it is clear that a path is a special instance of a walk. Similarly from Definitions \ref{Path} and \ref{cycle}, a cycle is a special instance of a path, with the only difference being that in a cycle, the first vertex and the last vertex are equal. Another thing worth mentioning is that, according to definitions \ref{walk}, \ref{Path} and \ref{cycle}, since cycles and paths are formulated in terms of walks, then they are sequences of vertices and not actual graphs. However, this is not the case because they can be represented easily as graphs. For example, given the path/cycle $\mathit{u_1, u_2, ...,u_n}$ a new graph $\mathit{G(V,E)}$ can be created such that, $\mathit{V= \{ u_1, u_2, ..., u_n\}}$ and $\mathit{E = \{ \{u_i, u_{i+1}\} : \forall i, 0 < i < n\}}$. For example, consider the cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$, then the graph depicted in example \ref{Example 1}, is the graph representing this cycle. Such graphs are known as Cycle/Path graphs and are denoted by $\mathit{C_n/P_n}$ respecitvely, $\mathit{n}$ being the number of vertices in the graph. Since this construction can be done, cycles/paths will be treated as both graphs and sequences throughout this project. This will later be useful when defining Hamiltonian cycles. For better understanding of definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph} and \ref{cycle}, example \ref{example3} is constructed.
+By Definitions \ref{walk} and \ref{Path} above, it is clear that a path is a special instance of a walk. Similarly, from Definitions \ref{Path} and \ref{cycle}, a cycle is a special instance of a path, with the only difference being that in a cycle, the first vertex and the last vertex are equal. Another thing worth mentioning is that, since according to definitions \ref{walk}, \ref{Path} and \ref{cycle}, cycles and paths are formulated in terms of walks, then they could only be perceived as sequences of vertices and not actual graphs. However, this is not the case because cycles and paths can be represented easily as graphs. For example, given the path/cycle $\mathit{u_1, u_2, ...,u_n}$, a new graph $\mathit{G(V,E)}$ can be created such that, $\mathit{V= \{ u_1, u_2, ..., u_n\}}$ and $\mathit{E = \{ \{u_i, u_{i+1}\} : \forall i, 0 < i < n\}}$. For example, consider the cycle $v_1$, $v_2$, $v_3$, $v_4$, $v_1$, then the graph depicted in example \ref{Example 1}, is the graph representing this cycle. Such graphs are known as Cycle/Path graphs and are denoted by $\mathit{C_n/P_n}$ respecitvely, $\mathit{n}$ being the number of vertices in the graph. Since this construction can be done, cycles/paths will be treated as both graphs and sequences throughout this dissertation. The usefulness of this remark will be seen when defining Hamiltonian cycles. Example \ref{example3} is constructed for better understanding of Definitions \ref{Complete Graph}, \ref{Path}, \ref{connectedgraph} and \ref{cycle}.
 \begin{example}
 \label{example3}
 {\normalfont{Consider the graph}} G(V,E) {\normalfont{below:}}\\
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -186,8 +187,8 @@ By Definitions \ref{walk}, \ref{Path} above, it is clear that a path is a specia
     \path[->] (v2) edge  node[]{}(v4);
     \path[->] (v4) edge  node[]{}(v1);
 \end{tikzpicture}
-\\
-{\normalfont{Since every vertex in}} G {\normalfont{is adjacent to every other vertex, }}G {\normalfont{must be complete. Therefore}} G {\normalfont{must be}} $K_4$. {\normalfont{Since}} G {\normalfont{is complete, it must also be connected because, there is a path}} $P_2$ {\normalfont{between any two distinct vertices of}} G.\\
+\end{center}
+{\normalfont{Since every vertex in}} G {\normalfont{is adjacent to every other vertex, then by Definition \ref{Complete Graph}, }}G {\normalfont{must be complete. Hence,}} G {\normalfont{must be}} $K_4$. {\normalfont{Since}} G {\normalfont{is complete, it must also be connected because, there is a path}} $P_2$ {\normalfont{between any two distinct vertices of}} G.\\
 {\normalfont{Some examples of walks in}} G {\normalfont{are:}}\\
 1. $v_1$ $v_2$ $v_3$ $v_4$ $v_1$ $v_2$\\
 2. $v_1$ $v_4$ $v_2$ $v_3$ $v_1$ $v_3$\\
@@ -204,35 +205,35 @@ By Definitions \ref{walk}, \ref{Path} above, it is clear that a path is a specia
  Another important graph theoretic concept is that of subgraphs. 
 \begin{definition}
 \label{subgraph}
-Given a graph G(V,E) and a graph H($V^\prime$,$E^\prime$), H is a subgraph of G if $V^\prime$ $\subseteq$ V and $E^\prime$ $\subseteq$ E.  \normalfont{\cite{harris_hirst_mossinghoff_2008}}
+Given a graph G(V,E) and a graph H($V^\prime$,$E^\prime$), H is a subgraph of G if $V^\prime$ $\subseteq$ V and $E^\prime$ $\subseteq$ E \normalfont{\cite{harris_hirst_mossinghoff_2008}}.
 \end{definition}
-Clearly by definition \ref{subgraph} and the construction of Cycle/Path graphs, if $A$ is a cycle/path in $G$ then the Cycle/Path graph representing $A$ is a subgraph of $G$. This leads to defining the concept of two distinct path/cycles. Two paths/cycles in $G$ are said to be distinct if, when they they are constructed as Path/Cycle subgraphs of $G$ they differ in at least one edge. After defining some important concepts, the next step is to extend definition \ref{Graph} to define another class of graphs called weighted graphs. It must be noted that all definitions presented so far apply also to weighted graphs.
+Clearly, by definition \ref{subgraph} and the construction of Cycle/Path graphs, if $A$ is a cycle/path in $G$ then the Cycle/Path graph representing $A$ is a subgraph of $G$. This observation helps to define the concept of two distinct path/cycles. Two paths/cycles in $G$ are said to be distinct if, when they they are constructed as Path/Cycle subgraphs of $G$ they differ in at least one edge. After defining some important concepts, the next step is to extend Definition \ref{Graph} to define another important class of graphs called weighted graphs. It must also be noted that all definitions presented so far apply also to weighted graphs.
 \begin{definition}
 \label{Weighted Function}
 Given a graph G(V,E), a weight function is a function f : E $\mapsto$ $\real^+$ {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. The real numbers assigned to each edge are called weights.
 \end{definition}
-Note that in definition \ref{Weighted Function}, the weights are taken to be positive. According to \cite{harris_hirst_mossinghoff_2008}, there could be cases were negative weights would be appropiate. However, unless otherwise stated, it is to be assumed that when considering a weight function, the weights are positive.
+Note that in Definition \ref{Weighted Function}, the weights are taken to be positive. According to \cite{harris_hirst_mossinghoff_2008}, there could be cases where negative weights would be appropriate, however in this dissertation it is to be assumed that when considering a weight function, the weights are positive.
 \begin{definition}
 \label{Weighted Graph}
-A weighted graph is a graph G(V,E) with a weight function f {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. This is denoted by the triple G(V,E,f) or G. 
+A weighted graph is a graph G(V,E) with a weight function f {\normalfont{\cite{harris_hirst_mossinghoff_2008}}}. This will be denoted by the triple G(V,E,f) or G. 
 \end{definition}
-According to Bondy and Murty \cite{bondy_murty_1982}, weighted graphs occur regularly in applied graph theory. For example, a railway network can be represented by a weighted graph were, the vertices are the set of towns in the railway network, and there are edges between 2 vertices in the graph if, there is a direct route from one town to another, without visiting other towns in the process. The weight function would then represent the cost of travelling directly from one town to another. In addition to that, the shortest path between 2 towns in the network may be required. It is clear that in order to try and solve such problems, the total weight of a subgraph must first be defined.
+According to Bondy and Murty \cite{bondy_murty_1982}, weighted graphs occur regularly in applied graph theory. For example, a railway network can be represented by a weighted graph where the vertices are the set of towns in the railway network, and two vertices are connected if there is a direct route using the railway from one town to another, without visiting other towns in the process. The weight function would then represent the cost of travelling directly from one town to another. In addition to this, the shortest path between two towns in the network may be required. It is clear that in order to try and solve such problems, the total weight of a subgraph must first be defined.
 \begin{definition}
 \label{weightofasubgraph}
-Given a weighted graph G(V,E,f), the total weight of any subgraph  H($V^\prime$,$E^\prime$,f) of G is: $$\sum_{e \in E^\prime}^{} f(e) $$. \normalfont{\cite{bondy_murty_1982}}
+Given a weighted graph G(V,E,f), the total weight of any subgraph  H($V^\prime$,$E^\prime$,f) of G is $\sum_{e \in E^\prime}^{} f(e) $ \normalfont{\cite{bondy_murty_1982}}.
 \end{definition}
-It is important to note that by definition \ref{subgraph}, any weighted graph G is a subgraph of itself, therefore, it's weight can be calculated. This is highlighted in Example \ref{example4} below.
+It is important to note that by Definition \ref{subgraph}, any weighted graph G is a subgraph of itself, therefore, it's weight can be calculated. This is highlighted in Example \ref{example4} below.
 \begin{example}
 \label{example4}
-{\normalfont{Consider the weighted graph}} G(V,E,f) {\normalfont{such that,}} G(V,E) {\normalfont{ is the graph in example \ref{example3} with weight function}} f {\normalfont{such that}},\\
+{\normalfont{Consider the weighted graph}} G(V,E,f) {\normalfont{such that,}} G(V,E) {\normalfont{ is the graph in Example \ref{example3} with the weight function}} f {\normalfont{defined below:}}\\
 f(\{$v_1, v_2\}$) = 4\\
 f(\{$v_1, v_3\}$) = 5\\
 f(\{$v_2, v_3\}$) = 2\\
 f(\{$v_3, v_4\}$) = 10\\
 f(\{$v_2, v_4\}$) = 4\\
 f(\{$v_4, v_1\}$) = 7\\
-{\normalfont{Then by definition \ref{Weighted Graph}, the graph below is a weighted graph}}.\\
-\end{example}
+{\normalfont{Then by Definition \ref{Weighted Graph}, the graph below is a weighted graph}}.\\
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -258,32 +259,34 @@ f(\{$v_4, v_1\}$) = 7\\
     \path[->] (v3) edge  node[]{10}(v4);
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
-\end{tikzpicture}\\
- {\normalfont{Also according to definition \ref{subgraph}, the above graph is a subgraph of itself. Therefore it's weight can be calculated, where by definition \ref{weightofasubgraph}, the weight of}} G {\normalfont{is 32.}}\\
-\\
+\end{tikzpicture}
+\end{center}
+ {\normalfont{As highlighted previously, the above graph is a subgraph of itself. Therefore, it's weight can be calculated. As a result, by Definition \ref{weightofasubgraph}, the weight of}} G {\normalfont{is 32.}}
+\end{example}
 According to Guichard \cite{guichard_2018}, trees are another useful class of graphs.
 \begin{definition}
 \label{tree}
-A tree is a connected graph with no cycles. \normalfont{\cite{guichard_2018}}
+A tree is a connected graph with no cycles \normalfont{\cite{guichard_2018}}.
 \end{definition}
-Having defined the basic graph theoretic concepts, it is now time to define harder concepts that use previous definitions. It is important to note that the following concepts can be applied to both weighted and unweighted graphs. Therefore, in the remaining definitions the graph being considered can either be weighted or unweighted.
+Having defined the basic building blocks in graph theory, it is now time to define harder concepts that use previous definitions. It is important to note that the following concepts can be applied to both weighted and unweighted graphs. Therefore, in the remaining definitions the graph being considered can either be weighted or unweighted.
 \begin{definition}
 \label{spanning subgraph}
-H($V^\prime$,$E^\prime$) is a spanning subgraph of G(V,E) if H is a subgraph of G and $V^\prime$ = V. \normalfont{\cite{ray_2013}}
+H($V^\prime$,$E^\prime$) is a spanning subgraph of G(V,E) if H is a subgraph of G and $V^\prime$ = V \normalfont{\cite{ray_2013}}.
 \end{definition}
-There are many spanning subgraphs, however the ones that are relevant to this thesis are spanning trees and spanning cycles, the latter mostly known as Hamiltonian cycles.
+There are many types of spanning subgraphs, however, the ones that are relevant to this dissertation are spanning trees and spanning cycles, the latter mostly known as Hamiltonian cycles.
 \begin{definition}
-A graph H is a spanning tree of G if H is a tree and H is a spanning subgraph of G. \normalfont{\cite{ray_2013}}
+A graph H is a spanning tree of G if H is a tree, and H is a spanning subgraph of G \normalfont{\cite{ray_2013}}.
 \label{spanning tree}
 \end{definition}
 \begin{definition}
 \label{hamiltonian cycle}
-Given a graph G, C is a Hamiltonian cycle in G if C is a cycle and C is a spanning subgraph of G. Also, a graph that contains a Hamiltonian cycle is called a Hamiltonian graph. \normalfont{\cite{ray_2013}}
+Given a graph G, C is a Hamiltonian cycle of G if C is a cycle, and C is a spanning subgraph of G. Also, a graph that contains a Hamiltonian cycle is called a Hamiltonian graph. \normalfont{\cite{ray_2013}}
 \end{definition}
-It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cycles can be represented by Cycle graphs due to the construction discussed earlier. What follows now is an example that illustrates better definitions \ref{spanning subgraph}, \ref{spanning tree} and \ref{hamiltonian cycle}. 
+It is worth mentioning that Definition \ref{hamiltonian cycle} holds because, cycles can be represented by Cycle graphs due to the construction discussed earlier. What follows now is an example that illustrates better Definitions \ref{spanning subgraph}, \ref{spanning tree} and \ref{hamiltonian cycle}. 
 \begin{example}
 \label{example5}
-{\normalfont{Let}} G {\normalfont{be the graph in example \ref{example4}. Then, according to definition \ref{spanning subgraph}, the two graphs below are two spanning subgraphs of}} G {\normalfont{because, they contain all the vertices of}} G {\normalfont{and are subgraphs of }}G .\\
+{\normalfont{Let}} G {\normalfont{be the graph in Example \ref{example4}. Then, according to Definition \ref{spanning subgraph}, the two graphs below are two spanning subgraphs of}} G {\normalfont{because, they contain all the vertices of}} G {\normalfont{and are subgraphs of }}G .\\
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -307,8 +310,9 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
     \path[->] (v1) edge  node[]{5}(v3);
     \path[->] (v3) edge  node[]{10}(v4);
     \path[->] (v2) edge  node[]{4}(v4);
-\end{tikzpicture}\\
-\\
+\end{tikzpicture}
+\end{center}
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -332,9 +336,11 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
     \path[->] (v2) edge  node[pos=0.2,below right]{2} (v3);
     \path[->] (v2) edge  node[]{4}(v4);
     \path[->] (v4) edge  node[pos=0.2,below left]{7}(v1);
-\end{tikzpicture}\\
-{\normalfont{It must also be said that by definition \ref{hamiltonian cycle}, the above two graphs are Hamiltonian cycles in}} G {\normalfont{because, they are spanning sub-graphs of}} G {\normalfont{and are Cycle sub-graphs of}} G. {\normalfont{Since the above graphs are sub-graphs of }}G{\normalfont{, by definition \ref{weightofasubgraph}, their weight can be calculated by summing up the weights of the edges. Thus, the Hamiltonian cycles above have weight 23 and 18 respectively.}}\\
-{\normalfont{Given the same graph }}G{\normalfont{ in example \ref{example4}, the two graphs below are spanning trees of }}G{\normalfont{ of weight 18 and 19 respectively.}}\\
+\end{tikzpicture}
+\end{center}
+{\normalfont{It must also be said that by Definition \ref{hamiltonian cycle}, the two graphs above are Hamiltonian cycles of}} G {\normalfont{because, they are spanning sub-graphs of}} G, {\normalfont{and are Cycle sub-graphs of}} G. {\normalfont{Since the above graphs are sub-graphs of }}G{\normalfont{, by Definition \ref{weightofasubgraph}, their weight can be calculated by summing up the weights of the edges. Thus, the Hamiltonian cycles above have weight 23 and 18 respectively.}}\\
+{\normalfont{Given the graph }}G{\normalfont{ in Example \ref{example4}, the two graphs below are spanning trees of }}G{\normalfont{ of weight 18 and 19 respectively.}}\\
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -357,7 +363,9 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
     \path[->] (v1) edge  node[]{4}(v2);
     \path[->] (v3) edge  node[]{10}(v4);
     \path[->] (v2) edge  node[]{4}(v4);
-\end{tikzpicture}\\
+\end{tikzpicture}
+\end{center}
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -380,37 +388,39 @@ It is worth mentioning that definition \ref{hamiltonian cycle} holds because, cy
     \path[->] (v1) edge  node[]{4}(v2);
     \path[->] (v1) edge  node[]{5}(v3);
     \path[->] (v3) edge  node[]{10}(v4);
-\end{tikzpicture}\\
+\end{tikzpicture}
+\end{center}
 {\normalfont{This example also shows that within the same weighted graph, there could be multiple Hamiltonian cycles and spanning trees of different weight.}}
 \end{example}
-Having defined Hamiltonian cycles and spanning trees, it is natural to ask whether there are necessary and sufficient conditions in a graph that guarantee it is Hamiltonian or that it contains a spanning tree as sub-graph. In fact, theorem \ref{spanningtreetheorem} gives a necessary and sufficient condition for a graph to have a spanning tree.
+Having defined Hamiltonian cycles and spanning trees, it is natural to ask whether there are necessary and sufficient conditions in a graph that guarantee it is Hamiltonian, or that it contains a spanning tree as sub-graph. In fact, Theorem \ref{spanningtreetheorem} gives a necessary and sufficient condition for a graph to have a spanning tree. Note that the proof of Theorem \ref{spanningtreetheorem} was constructed using ideas from \cite{ray_2013}.
 \begin{theorem}
 A graph G has a spanning tree $\iff$ it is connected {\normalfont{\cite{ray_2013}}}.
 \label{spanningtreetheorem}
 \end{theorem} 
 \begin{proof}
 ($\implies$) Let $\mathit{G(V,E)}$ be a graph having a spanning tree $\mathit{T(V^\prime,E^\prime)}$ as one of it's subgraphs. Let $\mathit{v1, v2}$ $\in$ $\mathit{V}$. Since, $\mathit{T}$ is a spanning tree of $\mathit{G}$, then, $\mathit{T}$ is a spanning subgraph of $\mathit{G}$. Thus, $\mathit{v1, v2}$ $\in$ $V^\prime$. Also, since $\mathit{T}$ is a tree, $\mathit{T}$ must be connected. Therefore, $\exists$ a path $\mathit{P}$ joining vertices $\mathit{v_1}$ and $\mathit{v_2}$ in $\mathit{T}$. But since $\mathit{T}$ is a subgraph of G, then $\mathit{P}$ is also a path in $\mathit{G}$. Therefore $\mathit{G}$ must be connected.\\
-($\Leftarrow$) Conversely, let $\mathit{G(V,E)}$ be a connected graph. Then, if $\mathit{G}$ has no cycles, $\mathit{G}$ itself must be a spanning tree. If $\mathit{G}$ has cycles, delete an edge from a cycle in $\mathit{G}$. Clearly, the resultant graph is still connected and contains one less cycle. Repeat this procedure untill no more cycles are left in the graph. Then, the resultant graph $\mathit{G^\prime}$ would be a connected subgraph of $\mathit{G}$ having no cycles(i.e a tree). Also, since by the deletion procedure, no vertex was deleted from $\mathit{G}$, $\mathit{G^\prime}$ is a spanning subgraph of $\mathit{G}$. Therefore $\mathit{G^\prime}$ is a spanning tree of $\mathit{G}$. \normalfont{\cite{ray_2013}}
+($\Leftarrow$) Conversely, let $\mathit{G(V,E)}$ be a connected graph. Then, if $\mathit{G}$ has no cycles, $\mathit{G}$ itself must be a spanning tree. If $\mathit{G}$ has cycles, delete an edge from a cycle in $\mathit{G}$. Clearly, the resultant graph is still connected and contains one less cycle. Repeat this procedure untill no more cycles are left in the graph. Then, the resultant graph $\mathit{G^\prime}$ would be a connected subgraph of $\mathit{G}$ having no cycles (i.e a tree). Also, since by the deletion procedure no vertex was deleted from $\mathit{G}$, $\mathit{G^\prime}$ is a spanning subgraph of $\mathit{G}$. Therefore $\mathit{G^\prime}$ is a spanning tree of $\mathit{G}$.
 \end{proof}
-Theorem \ref{spanningtreetheorem} confirms that for a graph to have a spanning tree, the graph must be connected and vice-versa. Thus, for spanning trees, the necessary and sufficient condition is connectivity. However, the same cannot be said about Hamiltonian cycles because, no necessary and sufficient conditions are known for a graph to be Hamiltonian. In fact, there are sufficient conditions for a graph to be Hamiltonian, however, these conditions are not necessary. There are also necessary conditions, some of which are trivial, such as, if $\mathit{G}$ is Hamiltonian then G must be connected, but this is not necessary and sufficient. According to Guichard \cite{guichard_2018}, these sufficient conditions typically say that for a graph to be Hamiltonian it must have a lot of edges. But it is also argued in \cite{guichard_2018}, that these conditions are not necessary, because, there are Hamiltonian graphs that have few edges. For example, $\mathit{C_n}$ has only $\mathit{n}$ edges but is Hamiltonian. One such sufficient but not necessary condition for Hamiltonianicity is Ore's Theorem below.
+Theorem \ref{spanningtreetheorem} confirms that for a graph to have a spanning tree, the graph must be connected and vice-versa. Thus, for spanning trees, the necessary and sufficient condition is connectivity. However, the same cannot be said about Hamiltonian cycles because, no necessary and sufficient conditions are known for a graph to be Hamiltonian \cite{guichard_2018}. In fact, there are sufficient conditions for a graph to be Hamiltonian, however, these conditions are not necessary. There are also necessary conditions, some of which are trivial, such as, if $\mathit{G}$ is Hamiltonian then G must be connected, but this is not necessary and sufficient. According to Guichard \cite{guichard_2018}, these sufficient conditions typically say that for a graph to be Hamiltonian it must have a lot of edges. But, it is also argued in \cite{guichard_2018} that these conditions are not necessary because, there are Hamiltonian graphs that do not have many edges. For example, $\mathit{C_n}$ has only $\mathit{n}$ edges but is Hamiltonian. A sufficient but not necessary condition for Hamiltonianicity is Ore's Theorem below. Note that the proof of Theorem \ref{ore's theorem} was constructed using ideas from {\normalfont{\cite{ray_2013}}}.
 \begin{theorem}[Ore's Theorem]
 \label{ore's theorem}
-Let G be a graph on n $\geq$ 3 vertices such that if v and w are not adjacent in G then deg(v) + deg(w) $\geq$ n. Then G is Hamiltonian. {\normalfont{\cite{ray_2013}}}
+Let G be a graph on n $\geq$ 3 vertices such that if v and w are not adjacent in G, then deg(v) + deg(w) $\geq$ n. Then G is Hamiltonian. {\normalfont{\cite{ray_2013}}}
 \end{theorem}
 \begin{proof}
-Suppose that $\mathit{G(V,E)}$ is a graph satisfying all the conditions in the theorem statement but is not Hamiltonian. Then since $\mathit{G}$ is not Hamiltonian and $K_n$ is Hamiltonian, $\mathit{G}$ must be a subgraph of $\mathit{K_n}$ having fewer edges than $\mathit{K_n}$. Therefore, add edges to $\mathit{G}$ between non adjacent vertices to obtain a subgraph $\mathit{H(V^\prime,E^\prime)}$ of $\mathit{K_n}$ such that adding an edge to $\mathit{H}$ would create a subgraph of $\mathit{K_n}$ which is Hamiltonian. Let $\mathit{u, v}$ $\in$ $V^\prime$ be 2 non-adjecent vertices in H. Since by construction $\mathit{G}$ is a subgraph of $\mathit{H}$, $\mathit{u, v}$ must be non-adjcent in $\mathit{G}$. Therefore $\mathit{deg(u) + deg(v) \geq n}$ in both G and H. Since adding an edge to $\mathit{H}$ creates a resultant graph that is Hamiltonian, then, adding an edge between $\mathit{u}$ and $\mathit{v}$ creates a Hamiltonian graph. Therefore, in $\mathit{H}$ there must be a path joining $\mathit{u}$ and $\mathit{v}$ containing all the vertices of $\mathit{H}$. Let the path be $\mathit{u = v_1, v_2, ..., v_n = v}$.\\
-Now suppose $\mathit{deg(v_1)}$ = $\alpha$ in $\mathit{H}$. Now $\forall \mathit{i}, 1 <  i < \mathit{n}$, if there is an edge between $\mathit{u_1}$ and $\mathit{u_i}$ in $\mathit{H}$, then there must not be an edge between $\mathit{u_{i-1}}$ and $\mathit{u_n}$ because, $\mathit{u_1, u_i, u_{i+1}, ..., u_n, u_{i-1}, u_{i-2}, ..., u_1}$ would be a Hamiltonian cycle in $\mathit{H}$, thus H would be Hamiltonian. Therefore, $\mathit{deg(u_n)}$ $\leq$ $\mathit{n-1-\alpha}$\\
-$\implies$ $\mathit{deg(u_1) + deg(u_n) \leq \alpha +  n-1 - \alpha}$ in $\mathit{H}$\\
-$\implies$ $\mathit{deg(u_1) + deg(u_n) \leq n-1}$ in $\mathit{H}$\\
-$\implies$ $\mathit{deg(u_1) + deg(u_n) < n}$ in $\mathit{G}$ since $\mathit{G}$ is a subgraph of $\mathit{H}$.\\
-This contradicts the assumption that $\mathit{deg(u_1 = u) + deg(u_n = v) \geq n}$ in $\mathit{G}$ \\
-Therefore, $\mathit{G}$ must be Hamiltonian. \cite{ray_2013}
+Suppose that $\mathit{G(V,E)}$ is a graph satisfying all the conditions in the theorem statement, but is not Hamiltonian. Since $\mathit{G}$ is not Hamiltonian and $K_n$ is Hamiltonian, $\mathit{G}$ must be a subgraph of $\mathit{K_n}$ having fewer edges than $\mathit{K_n}$. Therefore, add edges to $\mathit{G}$ between non adjacent vertices to obtain a subgraph $\mathit{H(V^\prime,E^\prime)}$ of $\mathit{K_n}$, such that adding an edge to $\mathit{H}$ would create a subgraph of $\mathit{K_n}$ which is Hamiltonian. Let $\mathit{u, v}$ $\in$ $V^\prime$ be 2 non-adjacent vertices in H. Since by construction $\mathit{G}$ is a subgraph of $\mathit{H}$, $u$ and $v$ must be non-adjacent in $\mathit{G}$. Therefore, $\mathit{deg(u) + deg(v) \geq n}$ in both G and H. Since adding an edge to $\mathit{H}$ creates a resultant graph that is Hamiltonian, then, adding an edge between $\mathit{u}$ and $\mathit{v}$ creates a Hamiltonian graph. Therefore, in $\mathit{H}$ there must be a path joining $\mathit{u}$ and $\mathit{v}$ containing all the vertices of $\mathit{H}$. Let the path be $\mathit{u = v_1, v_2, ..., v_n = v}$.\\
+Now, suppose $\mathit{deg(v_1)}$ = $\alpha$ in $\mathit{H}$. Now $\forall \mathit{i}, 1 <  i < \mathit{n}$, if there is an edge between $\mathit{v_1}$ and $\mathit{v_i}$ in $\mathit{H}$, then there must not be an edge between $\mathit{v_{i-1}}$ and $\mathit{v_n}$ because, $\mathit{v_1, v_i, v_{i+1}, ..., v_n, v_{i-1}, v_{i-2}, ..., v_1}$ would be a Hamiltonian cycle in $\mathit{H}$, thus H would be Hamiltonian. Therefore, $\mathit{deg(v_n)}$ $\leq$ $\mathit{n-1-\alpha}$\\
+$\implies$ $\mathit{deg(v_1) + deg(v_n) \leq \alpha +  n-1 - \alpha}$ in $\mathit{H}$\\
+$\implies$ $\mathit{deg(v_1) + deg(v_n) \leq n-1}$ in $\mathit{H}$\\
+$\implies$ $\mathit{deg(v_1) + deg(v_n) < n}$ in $\mathit{G}$ since $\mathit{G}$ is a subgraph of $\mathit{H}$.\\
+This contradicts the assumption that $\mathit{deg(v_1 = u) + deg(v_n = v) \geq n}$ in $\mathit{G}$ \\
+Therefore, $\mathit{G}$ must be Hamiltonian.
 \end{proof}
-It is important to note that the above proof uses the fact that $K_n$ is Hamiltonian. This is true because any $C_n$ is always a subgraph of $K_n$. Therefore any $C_n$ that spans $K_n$ is a subgraph of $K_n$. Example \ref{example 6} below is a counter example to show why Ore's theorem gives a sufficient but not necessary condition.\\
+It is important to note that the above proof uses the fact that $K_n$ is Hamiltonian. This is true because, any cycle $C$ consisting of vertices from $K_n$ only is always a subgraph of $K_n$. Therefore, any cycle $C$ that spans $K_n$ is a spanning subgraph of $K_n$. Hence, by Definition \ref{hamiltonian cycle}, $C$ must be a Hamiltonian cycle of $K_n$, and therefore, $K_n$ is Hamiltonian. Example \ref{example 6} below is a counter example which shows why Ore's theorem gives a sufficient but not necessary condition.\\
 \begin{example}
 \label{example 6}
 {\normalfont{Consider the graph}} $C_5$ below.
 \\
+\begin{center}
 \begin{tikzpicture}[
     > = , % arrow head style
     shorten > = 1pt, % don't touch arrow head to node
@@ -436,67 +446,68 @@ It is important to note that the above proof uses the fact that $K_n$ is Hamilto
     \path[->] (v4) edge  node[]{}(v5);
     \path[->] (v5) edge  node[]{}(v3);
     \path[->] (v3) edge  node[]{}(v1);
-\end{tikzpicture}\\
+\end{tikzpicture}
+\end{center}
 $C_5$ {\normalfont{above is Hamiltonian because it contains the Hamiltonian cycle}} $v_1, v_2, v_4, v_5, v_3, v_1$. {\normalfont{However,}} deg($v_1$) + deg($v_5$) = 4 $<$ 5 = n. {\normalfont{Therefore, the condition in Ore's Theorem is not a necessary condition}}.
 \end{example} 
-To conclude, these facts seem to indicate that determining whether a graph is Hamiltonian is a very difficult problem and that there are certain problems that are harder than other problems. In order to reason about such problems, some computational theory must first be established. This is done in the next subsection.
+The discussion in this section indicates that determining whether a graph is Hamiltonian is a very difficult problem. This means that there are certain problems that are harder than other problems. To formally reason about such problems, some computational theory must first be presented. This is done in the next section.
 \subsection{Some Computational Theory}
-After defining some important graph theoretic concepts, it is now time to present some important computational theory that will be used in later sections. The discussion will now proceed by defining two different types of problems and describing the relationship between them.
+After defining some important graph theoretic concepts, it is now time to present some important computational theory that will be used in the upcoming chapters. The discussion will now proceed by defining two different types of problems, and describing the relationship between them.
 \begin{definition}
 \label{optimization problems}
-Suppose that a problem P has many possible solutions such that each solution has an associated value. Then P is an optimisation problem if P requires to find the solution with the best value.  \normalfont{\cite{cormen_leiserson_rivest_stein}}
+Suppose that a problem P has many possible solutions such that each solution has an associated value. Then, P is an optimization problem if P requires to find the solution with the best (minimum/maximum) value.  \normalfont{\cite{cormen_leiserson_rivest_stein}}
 \end{definition}
-Therefore, according to definition \ref{optimization problems}, the aim of the algorithm solving an optimisation problem would then be to find the solution with the best (min/max) value. An maximisation problem is an optimization problem that asks to find the solution with the maximum value. On the other hand, a minimisation problem is an optimisation problem that asks to find the solution with the minimum value. The solution with the best value is called an optimal solution to the problem, and it's value is known as the optimal value. An optimal solution is not termed as `the' optimal solution because, there could be many optimal solutions having the same optimal value. \cite{cormen_leiserson_rivest_stein} \\\\Another type of problems is called decision problems.
+Therefore, the aim of the algorithm solving an optimization problem is to find the solution with the best (minimum/maximum) value. A maximization problem is an optimization problem that requires to find the solution with the maximum value. On the other hand, a minimization problem is an optimization problem that requires to find the solution with the minimum value. A solution with the best value is called an optimal solution to the optimization problem being solved, and it's value is known as the optimal value. Note that an optimal solution is not termed as `the' optimal solution because, there could be many solutions having the same optimal value. Another type of problems area called decision problems. \cite{cormen_leiserson_rivest_stein}
 \begin{definition}
 \label{decision problems}
-Decision problems are problems whose solutions are either a yes or a no. \normalfont{\cite{cormen_leiserson_rivest_stein}}
+A Decision problems is a problem whose solution is either a yes or a no \normalfont{\cite{cormen_leiserson_rivest_stein}}.
 \end{definition}
-In \cite{cormen_leiserson_rivest_stein} it is argued that, given an optimisation problem, one can transform this optimisation problem into a decision problem such that, the decision problem is easier than the optimisation problem. Therefore, if some optimisation problem is easy to solve, the decision problem version is easy to solve as well \cite{cormen_leiserson_rivest_stein}. On the other hand, if the decision problem is hard to solve then this would mean that the original optimization problem is also hard to solve \cite{cormen_leiserson_rivest_stein}. Note that the notion of `hard' and `easy' problems will be defined rigorously later in this section. This concept was only mentioned here to show that there exists a relationship between optimisation problems and decision problems. Before going into harder computational theory, an example is given to undestand how an optimisation problem can be transformed into a related decision problem.
+In \cite{cormen_leiserson_rivest_stein} it is argued that given an optimization problem, one can transform the given optimization problem into a decision problem, where the decision problem is easier to solve than the optimization problem. Therefore, if some optimization problem is easy to solve, the decision problem version is easy to solve as well \cite{cormen_leiserson_rivest_stein}. On the other hand, if the decision problem is hard to solve, then this would mean that the original optimization problem is also hard to solve \cite{cormen_leiserson_rivest_stein}. Note that the notion of `hard' and `easy' problems will be rigorously defined later in this section. This concept was only mentioned here to show that there exists a relationship between optimization problems and decision problems. Before going into harder computational theory, the example below is given to show how an optimization problem can be transformed into a related decision problem.
 \begin{example}
 \label{example decision/optimization}
-{\normalfont{Two optimisation problems are:\\
-1. The shortest path problem\\
-2. The minimum weight spanning tree problem\\
-Given a connected weighted graph}} G{\normalfont{, the shortest path problem is the task of finding a path}} P {\normalfont{between two vertices in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths joining these two vertices in }}G {\normalfont{\cite{hackerearth_blog}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the minimum weight spanning tree problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{geeksforgeeks}. The shortest path problem is an optimsation problem because, from all the possible paths in the graph, a path having the optimal value (minimum weight) is chosen. In this case the best path is the path with minimum weight. Similarly, using the same reasoning, the minimum weight spanning tree problem is an optimisation problem. }}\\
-{\normalfont{The decision problems related to these optimisation problems can be obtained by specifying a bound on the value to be optimized \cite{cormen_leiserson_rivest_stein}. Therefore, the decision problems related to the shortest path problem, and the minimum weight spanning tree problem defined in this example are:}}\\
-{\normalfont{1.Given a connected weighted graph}} G, {\normalfont{two vertices}} u {\normalfont{and}} v, {\normalfont{and an integer}} k,{\normalfont{ does a path exist from}} u {\normalfont{to}} v {\normalfont{in}} G {\normalfont{of weight at most}} k?\\
-{\normalfont{2.Given a connected weighted graph}} G, {\normalfont{and an integer}} k{\normalfont{, does}} G {\normalfont{contain a spanning tree of weight at most}} k?\\
-{\normalfont{The above two problems are decision problems because the answer to these problems is either a yes or a no.}}
+{\normalfont{Two optimization problems are:\\
+1. The Shortest Path Problem\\
+2. The Minimum Weight Spanning Tree problem\\
+Given a connected weighted graph}} G{\normalfont{ and two vertices $u$ and $v$ of $G$, the Shortest Path Problem is the task of finding a path}} P {\normalfont{between $u$ and $v$ in}} G {\normalfont{such that, the weight of }}P {\normalfont{is the minimum amongst all paths joining $u$ and $v$ in }}G {\normalfont{\cite{bondy_murty_1982}}}. {\normalfont{On the other hand, given a  connected weighted graph}} G {\normalfont{the Minimum Weight Spanning Tree Problem is the task of finding a spanning tree in}} G {\normalfont{of minimum weight \cite{harris_hirst_mossinghoff_2008}. The Shortest Path Problem is an optimization problem because, from all the possible paths joining $u$ and $v$ in the graph $G$, a path having the optimal value (minimum weight) joining $u$ and $v$ is chosen. In this case, the optimal solution is the path with minimum weight. Similarly, using the same reasoning, the minimum weight spanning tree problem is an optimisation problem. }}\\
+{\normalfont{The decision problems related to the optimization problems above can be obtained by specifying a bound on the value to be optimized \cite{cormen_leiserson_rivest_stein}. Therefore, the decision problems related to the Shortest Path Problem and the Minimum Weight Spanning Tree Problem are the following:}}\\
+{\normalfont{1. Given a connected weighted graph}} G, {\normalfont{two vertices}} u {\normalfont{and}} v, {\normalfont{and an integer}} k,{\normalfont{ does a path exist from}} u {\normalfont{to}} v {\normalfont{in}} G {\normalfont{of weight at most}} k?\\
+{\normalfont{2. Given a connected weighted graph}} G, {\normalfont{and an integer}} k{\normalfont{, does}} G {\normalfont{contain a spanning tree of weight at most}} k?\\
+{\normalfont{The two problems above are decision problems because the answer to these problems is either a yes or a no.}}
 \end{example}
-Reasoning about computational problems is usually done by analyzing the properties belonging to the algorithms that solve these problems. One property that is analyzed is called the running time of an algorithm. This is defined in definition \ref{running_time} below.
+Reasoning about computational problems is usually done by analyzing the properties belonging to the algorithms that solve these problems. A common property which is analyzed is the running time of an algorithm. This is defined in Definition \ref{running_time} below.
 \begin{definition}
 \label{running_time}
-Given an input I, the running time of an algorithm A is the number of steps executed by A given I. The running time of an algorithm A can be represented by the function T $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ were the domain represents the size of the input, and the co-domain represents the amount of steps taken by the algorithm to execute given an input size. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
+The running time of an algorithm A given an input I is the number of steps executed by A when given I. The running time of an algorithm A can be represented by the function T $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ where the domain represents the size of the input, and the co-domain represents the amount of steps executed by the algorithm, given an input size. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
 \end{definition}
-The following is an example on how the running time of an algorithm can be constructed.
+What follows is an example which demonstrates how the running time of an algorithm can be computed.
 \begin{example}
 \label{example_running}
-{\normalfont{Consider an algorithm that performs the addition of two}} n-{{\normalfont{bit strings. Then if the addition of 2 bits takes}}} a {\normalfont{computational steps, the addition of 2}} $\mathit{n-}${\normalfont{bit strings will take}} a $\times$ n {\normalfont{steps, since, each computation must be performed}} n {\normalfont{times (i.e on each bit in the string). Therefore, the running time of this algorithm for an input of size}} n {\normalfont{can be represented by the function,\\}} T(n) = a $\times$ n. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
+{\normalfont{Consider an algorithm that performs the addition of two}} n-{{\normalfont{bit strings. Then, if the addition of 2 bits takes}}} a {\normalfont{computational steps, the addition of 2}} $\mathit{n}${\normalfont{-bit strings will take}} a $\times$ n {\normalfont{steps, since, each computation must be performed}} n {\normalfont{times. Therefore, the running time of this algorithm for an input of size}} n {\normalfont{can be represented by the function,\\}} T(n) = a $\times$ n. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
 \end{example}
-Expressing the running time in this way seems pretty easy to understand. However, it has problems. Typically, the running time of an algorithm is fixed for any input, however, the running time function is not defined on the actual inputs, but, on the input sizes. As a result, since the same input size might represent different inputs, there could be different running times for the same input size $\mathit{n}$, as this depends on which input is given. This means that for any input size $\mathit{n}$, there are different running time functions giving different running times. These different running time functions represent the different cases that could arise in an algorithm given any input size $\mathit{n}$. The most important runnning time functions are the worst-case running time, the best-case running time and the average-case running time. The worst/best/average case running time are the longest/shortest/average running time of an algorithm given any input of size $\mathit{n}$ respectively. Therefore the problem is what running time function should be used to reason about algorithms. Although the average-case running time generally has a greater practical significance, it is often very difficult to compute. Therefore, the worst-case running time is usually used, that is, finding the running time function that gives the worst-case running time for any input of size $\mathit{n}$. The worst-case running time of an algorithm is an upper bound to all other running times, therefore, this assures that the algorithm will never get a longer running time for any input of size $\mathit{n}$. So, if the worst case running time is polynomial in the input size, then we know that the problem is in class P (These terms will be defined below).  \cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}\\\\
-Another problem is that, the running time of an algorithm can be difficult to compute precisely because it depends on the computer the algorithm is executed on. This informally means that, an algorithm may need different amount of computational steps on different computers for the same input. For example, the number of steps taken for adding 2-bits as seen in example \ref{example_running}, may be different on different computers, resulting into running time functions that represent the same worst/best/average running time case, differing only in multiplicative constants and low order terms. To get around this problem, a mechanism that identifies a common property between all running time functions is needed. This mechanism is called asymptotic analysis. This means making the input size increase without bound so that only the order of growth of the running time function is relevant. This works because, as the input size increases, the low-order terms and multiplicative constants of the running time function get dominated by the size of the input itself. This means that, given any running time function, the low-order terms and multiplicative constants of the function can be ignored leaving only the order of growth (which is common across all running time functions representing the same best/worst/average running time case). In a running time function, the order of growth is given by the highest order term. This is because, the highest order term has the greatest effect on the running time function as the input size increases. For example, given the running time function $\mathit{T(n) = an^2+bn+c}$, $\mathit{n^2}$ is the term that increases the running time the most as the input size increases without bound. \cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009} \\\\
+Expressing the running time in this way seems pretty easy to understand. However, this representation has a number of problems. Typically, the running time of an algorithm is fixed for any input, however, the running time function is not defined on the actual inputs, but, on the input sizes. As a result, since the same input size might represent different inputs, there could be different running times for the same input size $\mathit{n}$ as this depends on which input is given. This means that for any input size $\mathit{n}$, there may be different running time functions giving different running times. These different running time functions represent the different cases that could arise in an algorithm, given any input size $\mathit{n}$. The most important runnning time functions are the worst-case running time, the best-case running time, and the average-case running time. The worst/best/average case running time are the longest/shortest/average running time of an algorithm given any input of size $\mathit{n}$ respectively. Therefore, the problem is what running time function should be used to reason about algorithms. Although the average-case running time generally has a greater practical significance, it is often very difficult to compute. Therefore, the worst-case running time is usually used, that is, finding the running time function that gives the worst-case running time for any input of size $\mathit{n}$. The worst-case running time will be used because it is an upper bound to all other running times, therefore, this assures that the algorithm will never get a longer running time for any input of size $\mathit{n}$. So, if the worst case running time of an algorithm is polynomial in the input size, then it is known that the problem is in the class P (These terms will be defined later).  \cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}\\\\
+Another problem is that the running time of an algorithm can be difficult to compute precisely because, it depends on the computer the algorithm is executed on. This informally means that, an algorithm may need different amount of computational steps on different computers for the same input. For example, the number of steps taken for adding 2-bits as seen in Example \ref{example_running} may be different on different computers, resulting into running time functions that represent the same worst/best/average running time case, differing only in multiplicative constants and low order terms. To get around this problem, a mechanism that identifies a common property between all running time functions is needed. This mechanism is called asymptotic analysis. This means making the input size increase without bound so that only the order of growth of the running time function is relevant. This works because, as the input size increases, the low-order terms and multiplicative constants of the running time function get dominated by the size of the input itself. This means that, given any running time function, the low-order terms and multiplicative constants of the function can be ignored leaving only the order of growth (which is common across all running time functions representing the same best/worst/average running time case). In a running time function, the order of growth is given by the highest order term. This is true because, the highest order term has the greatest effect on the running time function as the input size increases. For example, given the running time function $\mathit{T(n) = an^2+bn+c}$, $\mathit{n^2}$ is the term that increases the running time the most, as the input size increases without bound. \cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009} \\\\
 The following example is used to explain better what has been discussed in the previous paragraph.
 \begin{example}
-{\normalfont{Suppose that the }} n-{\normalfont{bit addition algorithm in example \ref{example_running}, has a worst-case running time function}} T(n) = a $\times$ n {\normalfont{on computer}} A {\normalfont{and a worst-case running time function}} T(n) = b $\times$ n {\normalfont{on computer}} B {\normalfont{where,}} a/b {\normalfont{represent the number of computational steps required to perform 2-bit addition on computers}} A/B {\normalfont{respectively. The asymptotic analysis of the algorithm concludes that, the}} n-{\normalfont{bit addition algorithm has an }} $n^2$ {\normalfont{ asymptotic behaviour. Note that this is common to both running time functions}}. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
+{\normalfont{Suppose that the}} n-{\normalfont{bit addition algorithm in Example \ref{example_running} has a worst-case running time function}} T(n) = a $\times$ n {\normalfont{on computer}} A, {\normalfont{and a worst-case running time function}} T(n) = b $\times$ n {\normalfont{on computer}} B {\normalfont{where,}} a/b {\normalfont{represent the number of computational steps required to perform 2-bit addition on computers}} A/B {\normalfont{respectively. The asymptotic analysis of the algorithm concludes that, the}} n-{\normalfont{bit addition algorithm has an }} $n$ {\normalfont{ asymptotic behaviour. Note that this is common to both running time functions}}. {\normalfont{\cite{cormen_leiserson_rivest_stein}, \cite{adamchik_2009}}}
 \end{example}
 To express the asymptotic behaviour of functions mathematically, asymptotic notations are normally used. One of these notations is called the Big O Notation, whose exact definition is given below.
 \begin{definition}
 \label{bigonotation}
-Let f $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ and g $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ be two monotonic functions. Then f(n) = O(g(n)) if $\exists$ c $>$ 0 and $n_0$ $>$ 0 such that f(n) $\leq$ cg(n) $\forall$ n $\geq$ $n_0$. \normalfont{\cite{adamchik_2009}} 
+Let f $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ and g $:$ $\mathbb{N}$ $\mapsto$ $\mathbb{N}$ be two monotonic functions. Then, f(n) = O(g(n)) if $\exists$ c $>$ 0 and $n_0$ $>$ 0 such that f(n) $\leq$ cg(n) $\forall$ n $\geq$ $n_0$. \normalfont{\cite{adamchik_2009}} 
 \end{definition}
-Definition \ref{bigonotation} implicitly states that when writing $\mathit{f(n) = O(g(n)), g(n)}$ is an upperbound to $\mathit{f(n)}$ as the input size $\mathit{n}$ grows without bound \cite{adamchik_2009}. Therefore, if $\mathit{f(n)}$ is the worst case running time function of an algorithm and $\mathit{f(n) = O(g(n))}$, then it is guaranteed that as $\mathit{n \rightarrow \infty}$ the algorithm will never get a running time longer than $\mathit{g(n)}$ times some constant. Note that definition \ref{bigonotation} can be used even for the asymptotic analysis of the average and best case running times. However, unless otherwise stated, it can be assumed that in this thesis Big O Notation will be used for the worst-case asymptotic analysis of algorithms. The following is a continuation to example \ref{running_time}.
+Definition \ref{bigonotation} implicitly states that when writing $\mathit{f(n) = O(g(n)), g(n)}$ is an upperbound to $\mathit{f(n)}$ as the input size $\mathit{n}$ grows without bound \cite{adamchik_2009}. Therefore, if $\mathit{f(n)}$ is the worst case running time function of an algorithm and $\mathit{f(n) = O(g(n))}$, then it is guaranteed that as $\mathit{n \rightarrow \infty}$, the algorithm will never get a running time longer than $\mathit{g(n)}$ times some constant. Note that Definition \ref{bigonotation} can be used even for the asymptotic analysis of the average and best case running times. However, unless otherwise stated, it can be assumed that in this dissertation Big O Notation will be used for the worst-case asymptotic analysis of algorithms. The following is a continuation of Example \ref{example_running}.
 \begin{example}
 \label{bigonotationexample}
-{\normalfont{By example \ref{running_time}, the algorithm that performs two}} n-{\normalfont{bit addition has a running time function}} T(n)= an. {\normalfont{Therefore, by definition \ref{bigonotation},}} T(n) = O(n) {\normalfont{because, since}} a  {\normalfont{is a natural number}} $\exists$ z $\geq$ a {\normalfont{such that,}} an $\leq$ zn $\forall$ n $\in$ $\mathbb{N}$. {\normalfont{Therefore at each step, the order of growth of}} T(n) {\normalfont{is linear with respect to the input size}} n.
+{\normalfont{By Example \ref{example_running}, the algorithm that performs two}} n-{\normalfont{bit addition has a running time function}} T(n)= an. {\normalfont{Therefore, by Definition \ref{bigonotation},}} T(n) = O(n) {\normalfont{because, since}} a  {\normalfont{is a natural number}} $\exists$ z $\geq$ a {\normalfont{such that,}} an $\leq$ zn $\forall$ n $\in$ $\mathbb{N}$. {\normalfont{Therefore at each step, the order of growth of}} T(n) {\normalfont{is linear with respect to the input size}} n.
 \end{example}
-It is important to note that if $\mathit{T(n) = O(g(n))}$, then, $\mathit{T(n) = O(h(n))}$ if $\mathit{h(n)}$ has a higher order of growth than $\mathit{g(n)}$. For example, in example \ref{bigonotation} $\mathit{T(n) = O(n^2)}$ as well since, $\mathit{n^2}$ is an upperbound to $\mathit{n}$ therefore, it is an upperbound to $\mathit{T(n)}$. However, unless otherwise stated, it can be assumed that whenever $\mathit{T(n) = O(g(n))}$, $\mathit{g(n)}$ is a tight asymptotic bound to $\mathit{T(n)}$. A tight asymptotic bound to $\mathit{T(n)}$ is a function $\mathit{g(n)}$ such that, if $\mathit{T(n)=O(f(n))}$ then $\mathit{g(n)=O(f(n))}$.\\\\
-So we have the following definition.
+It is important to note that if $\mathit{T(n) = O(g(n))}$, and $\mathit{h(n)}$ has a higher order of growth than $\mathit{g(n)}$, then, $\mathit{T(n) = O(h(n))}$. For example, in Example \ref{bigonotationexample} $\mathit{T(n) = O(n^2)}$ as well since $\mathit{n^2}$ is an upperbound to $\mathit{n}$, and hence, $n^2$ is an upperbound to $\mathit{T(n)}$. However, unless otherwise stated, it can be assumed that whenever $\mathit{T(n) = O(g(n))}$, $\mathit{g(n)}$ is a tight asymptotic bound to $\mathit{T(n)}$. A tight asymptotic bound to $\mathit{T(n)}$ is a function $\mathit{g(n)}$ such that if $\mathit{T(n)=O(f(n))}$, then $\mathit{g(n)=O(f(n))}$.\\\\
+Given the above, the time complexity of an algorithm can now be defined formally.
 \begin{definition}
 \label{time_complexity}
 Given a function g(n) and an algorithm A having a running time function T(n), A is said to have a time complexity of O(g(n)) if T(n) = O(g(n)). \normalfont{\cite{adamchik_2009}} 
 \end{definition}
-Definition \ref{time_complexity} does not apply only to the worst case running time function. However, recall that when discussing running time functions it was said that it can be assumed that, the worst-case running time function is taken. Therefore, it can be assumed that the worst-case running time function is taken when saying that an algorithm has an $\mathit{O(g(n))}$ time complexity, or when saying that an algorithm is an $\mathit{O(g(n))}$ algorithm. This will sometimes also be termed as, the worst-case time complexity of the algorithm. Note that when it is said that a problem can be solved in $\mathit{O(g(n))}$ time, this means the problem can be solved by an algorithm that has an $\mathit{O(g(n))}$ worst-case time complexity.\\\\
-The following table summarizes some of the most common time complexities encountered in computational theory, and what they are commonly known as. The table was adapted using information from \cite{big_o_notation_explained} and \cite{carter_1999}.
+Definition \ref{time_complexity} does not apply only to the worst case running time function. However, recall that when discussing running time functions it was highlighted that it can be assumed that, the worst-case running time function is always taken. Therefore, it can be assumed that the worst-case running time function is taken when saying that an algorithm has an $\mathit{O(g(n))}$ time complexity, or when saying that an algorithm is an $\mathit{O(g(n))}$ algorithm. For clarity, this will sometimes also be termed as the `worst-case time complexity' of the algorithm. Note that when it is said that a problem can be solved in $\mathit{O(g(n))}$ time, this means that the problem can be solved by an algorithm that has an $\mathit{O(g(n))}$ worst-case time complexity.\\\\
+The following table summarizes some of the most common time complexities encountered in computational theory, and what they are commonly known as. The table was adapted using information from \cite{pettis} and \cite{carter_1999}.
 \begin{table}[!htbp]
   \begin{center}
     \caption{Time Complexities and Terminology Used.}
@@ -515,8 +526,8 @@ The following table summarizes some of the most common time complexities encount
     \end{tabular}
   \end{center}
 \end{table}
-\\In Table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth \cite{big_o_notation_explained}. This means that, for example, constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order or growth, the more steps the algorithm needs to execute for any input and therefore, the less efficient it is. In general, problems that can be solved in polynomial time are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require superpolynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general, tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve. Table \ref{tab:table2} below is constructed to show why problems that can be solved in polynomial time are tractable, whilst, problems that cannot be solved in polynomial time are intractable. Table \ref{tab:table2} gives the execution time of any algorithm given an input of size $\mathit{10}$ or $\mathit{100}$, provided that the algorithm's time complexity is $\mathit{O(n)}$, $\mathit{O(n^2)}$, $\mathit{O(2^n)}$ or $\mathit{O(n!)}$.
-\begin{table}[!htbp]
+\\In Table \ref{tab:table1}, the time-complexities are ordered in ascending order of growth using the curves in \cite{rowell}. This means that for example constant time algorithms have a smaller order of growth than logarithmic time algorithms. It must be noted that the higher the order of growth of an algorithm is, the more steps the algorithm needs to execute for any input, and therefore, the less efficient the algorithm is. In general, problems that can be solved in polynomial time are tractable problems \cite{cormen_leiserson_rivest_stein}. On the other hand, problems that require super-polynomial (exponential/factorial) time algorithms to be solved are intractable problems \cite{cormen_leiserson_rivest_stein}. In general, tractable problems are considered to be easy to solve, whereas intractable problems are hard to solve. Table \ref{tab:table2} below is constructed to show why problems that can be solved in polynomial time are tractable, whilst, problems that cannot be solved in polynomial time are intractable. Table \ref{tab:table2} gives the execution time of any algorithm given an input of size $\mathit{10}$ or $\mathit{100}$, provided that the algorithm's time complexity is $\mathit{O(n)}$, $\mathit{O(n^2)}$, $\mathit{O(2^n)}$ or $\mathit{O(n!)}$.\\\\
+\begin{table}[h]
   \begin{center}
     \caption{Execution Time Given Input Size and Time Complexity}
     \label{tab:table2}
@@ -531,7 +542,7 @@ The following table summarizes some of the most common time complexities encount
     \end{tabular}
   \end{center}
 \end{table}
-\\\\Table \ref{tab:table2} above was adapted from \cite{pettis}. In Table \ref{tab:table2} above it is assumed that the machine the algorithms can be executed on perform $\mathit{10^9}$ computational steps per second \cite{pettis}. It can be concluded from Table \ref{tab:table2} above that, as the size of the input increases, only the polynomial functions have small values. This means that a polynomial time algorithm does not have a very large execution time even if the size of the input is increased substantially. On the other hand, an algorithm with an exponential or factorial time complexity has a very large execution time, because, the rate of growth of the time complexity function is very large.
+\\Table \ref{tab:table2} above was adapted from \cite{pettis}. In Table \ref{tab:table2} above it is assumed that the machine the algorithms can be executed on perform $\mathit{10^9}$ computational steps per second \cite{pettis}. It can be concluded from Table \ref{tab:table2} above that, as the size of the input increases, only the polynomial functions have small values. This means that a polynomial time algorithm does not have a very large execution time even if the size of the input is increased substantially. On the other hand, an algorithm with an exponential or factorial time complexity has a very large execution time, because, the rate of growth of the time complexity function is very large.
 \\\\The following is an example to wrap-up all the time complexity concepts discussed so far.
 \begin{example}
 \label{time_complexity_example}
