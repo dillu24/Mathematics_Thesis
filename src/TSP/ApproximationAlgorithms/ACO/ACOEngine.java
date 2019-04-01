@@ -251,8 +251,8 @@ public class ACOEngine {
         Ant globalBestAnt = new Ant();
         int numberOfCities = graph.getVertices().size(); // stores the number of cities in the graph
         double [][] distanceMatrix = graph.getDistanceMatrix(); //stores the distance matrix of the graph in question
-        System.out.print("["); //for python experiment
-        for(int i=0;i<2000;i++){ // for a number of iterations
+        //System.out.print("["); //for python experiment
+        for(int i=0;i<10000;i++){ // for a number of iterations
             createAnts(); //create new ants at each iteration for more efficiency (thus not need to clear list taking o(n)time)
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){ //until last ant completed tour(i.e all of them complete)
                 for(int j=0;j<numberOfAnts;j++){ //for each ant in the list
@@ -282,11 +282,11 @@ public class ACOEngine {
             for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
                 globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),globalBestAnt.getRouteLength());
             }
-            //System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
-            System.out.print(routeLength+", "); //for python experiment
+            System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
+            //System.out.print(routeLength+", "); //for python experiment
             listOfAnts = new ArrayList<>(); // create new list to avoid clearing it thus taking o(n) time
         }
-        System.out.print("]"); //for python experiment
+        //System.out.print("]"); //for python experiment
         return routeLength; //return result.
     }
 
