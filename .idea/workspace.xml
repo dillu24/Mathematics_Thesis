@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13c7ba10-a7d3-4ad4-93db-ad47b6b78e3f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/screenshots/screenshot1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/TSP/GraphInstances/ali535" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/TSP/GraphInstances/berlin52" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/TSP/GraphInstances/burma14" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/TSP/GraphInstances/d1291" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/TSP/GraphInstances/d198" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/TSP/GraphInstances/u2319" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/AlgorithmLauncher.class" afterPath="$PROJECT_DIR$/out/production/MathematicsThesis/AlgorithmLauncher.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/ApproximationAlgorithms/ACO/ACOEngine.class" afterPath="$PROJECT_DIR$/out/production/MathematicsThesis/TSP/ApproximationAlgorithms/ACO/ACOEngine.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up_better.pdf" afterPath="$PROJECT_DIR$/write_up_better.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up_better.synctex.gz" afterPath="$PROJECT_DIR$/write_up_better.synctex.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AlgorithmLauncher.java" afterPath="$PROJECT_DIR$/src/AlgorithmLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/ACOEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/Ant.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/ACO/Ant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/NearestNeighbourApproximation/NearestNeighbourHeuristicEngine.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/NearestNeighbourApproximation/NearestNeighbourHeuristicEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/PrimMST.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/PrimMST.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/PrimsPriorityQueueEntry.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/PrimsPriorityQueueEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/TwiceAroundMSTHeuristic.java" afterPath="$PROJECT_DIR$/src/TSP/ApproximationAlgorithms/TwiceAroundMST/TwiceAroundMSTHeuristic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/City.java" afterPath="$PROJECT_DIR$/src/TSP/City.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/CompleteWeightedPlanarGraph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" afterPath="$PROJECT_DIR$/src/TSP/Graphs/Graph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plot_script.py" afterPath="$PROJECT_DIR$/src/plot_script.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/write_up_better.tex" afterPath="$PROJECT_DIR$/write_up_better.tex" />
-    </list>
+    <list default="true" id="13c7ba10-a7d3-4ad4-93db-ad47b6b78e3f" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -552,7 +527,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -564,7 +539,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27332243" sideWeight="0.13691376" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27332243" sideWeight="0.8630862" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27332243" sideWeight="0.8630862" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
