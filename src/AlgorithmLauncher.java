@@ -1,18 +1,21 @@
-/*
-  This class contains the main method which is used to start all the algorithms that were developed to approximate the
-  TSP instances found in TSPLIB.
- */
-
 import TSP.ApproximationAlgorithms.ACO.ACOEngine;
 import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbourHeuristicEngine;
-import TSP.ApproximationAlgorithms.TwiceAroundMST.PrimMST;
+//import TSP.ApproximationAlgorithms.TwiceAroundMST.PrimMST;
 import TSP.ApproximationAlgorithms.TwiceAroundMST.TwiceAroundMSTHeuristic;
-import TSP.City;
+//import TSP.City;
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 
-import java.util.ArrayList;
-
+//import java.util.ArrayList;
+/**
+ This class contains the main method which is used to start all the algorithms that were developed, to approximate the
+ TSP instances found in the folder MathematicsThesis/src/TSP/GraphInstances.
+ */
 public class AlgorithmLauncher {
+    /**
+     * This is the main function
+     * @param args
+     *  The command line arguments
+     */
     public static void main (String args[]){
         ACOEngine aco = new ACOEngine(); //Creates the ACO algorithm object
         System.out.println("This is the Ant Colony System's result: "+aco.approximateTsp()); //Starts the algorithm and
@@ -45,16 +48,15 @@ public class AlgorithmLauncher {
         }*/
 
         //This creates the TwiceAroundMstHeuristic object that is used to start the algorithm and displays result
-        //TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
-                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u1060"));
+        TwiceAroundMSTHeuristic twiceAroundMSTHeuristic = new TwiceAroundMSTHeuristic(
+                new CompleteWeightedPlanarGraph("TSP/GraphInstances/eil51"));
+        System.out.println("Twice around the MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
 
-        //System.out.println("Twice around the MST heuristic result: "+twiceAroundMSTHeuristic.approximateTSP());
-
-         //This creates the NearestNeighbourHeuristic object which is also used to approximate tsp and then the result
+        //This creates the NearestNeighbourHeuristic object which is also used to approximate the TSP, and then the result
         // is displayed
-        //NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
-                //new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/u2319"));
-        //System.out.println("Nearest Neighbour heuristic result: "+nnh.approximateTsp());
+        NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(
+                new CompleteWeightedPlanarGraph("TSP/GraphInstances/eil51"));
+        System.out.println("Nearest Neighbour heuristic result: "+nnh.approximateTsp());
 
 
     }

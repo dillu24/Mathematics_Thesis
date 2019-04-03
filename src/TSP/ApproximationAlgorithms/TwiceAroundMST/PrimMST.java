@@ -3,24 +3,21 @@ package TSP.ApproximationAlgorithms.TwiceAroundMST;
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
 import java.util.PriorityQueue;
-import java.util.Random;
-//Was made to work even on non complete graphs.
-
+/**
+ * This class encodes Prim's algorithm for finding a minimum spanning tree. This algorithm was made to work even
+ * for incomplete graphs, where a value different from 0 or infinity means that there is no edge between 2 vertices.
+ * This was carried out in this way in order to cater for different options.
+ * Note that in this algorithm, the adjacency matrix of the calculated MST is outputted as result, since this is going
+ * to be needed in the 2*MST heuristic approximation algorithm.
+ */
 public class PrimMST {
-    /**
-     * This class encodes Prim's algorithm for finding a minimum spanning tree . This algorithm was made to work even
-     * for incomplete graphs where a value different from 0 or infinity means that there is an edge between 2 vertices.
-     * This was carried out in this way in order to cater for different options for different use of this algorithm.
-     * Note that in this algorithm the adjacency matrix of the calculated MST is outputted as result since this is going
-     * to be needed in the 2*MST heuristic approximation algorithm.
-     */
    private Graph g; //This stores the graph to be considered
    private PriorityQueue<PrimsPriorityQueueEntry> priorityQueue; //this stores the priority queue
-   private boolean[] verticesInMst; // this boolean array has value 1 aat index i if i has already been included in the MST , and 0 otherwise
-   private PrimsPriorityQueueEntry[] allEntries; // this is used to store the current values in the entries because there is no way how to update directly the entries in the priority queue
+   private boolean[] verticesInMst; // this boolean array has value 1 at index i if i has already been included in the MST, and 0 otherwise
+   private PrimsPriorityQueueEntry[] allEntries; // this is used to store the current values in the entries, because there is no way how to update directly the entries in the priority queue
 
     /**
-     * This default constructor is used to initialize the fields of the mst to default values and allocate memory to
+     * This default constructor is used to initialize the fields of the mst to default values, and allocate memory.
      */
    public PrimMST(){
        g = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"); // initialize to some graph instance
@@ -30,7 +27,7 @@ public class PrimMST {
    }
 
     /**
-     * This constructor is used to create an instance of Prim's algorithm whose calculation of the MST is based on the
+     * This constructor is used to create an instance of Prim's algorithm, whose calculation of the MST is based on the
      * parameter value g
      * @param g
      *  Stores the graph to be stored in this.graph .. i.e the graph to be considered
@@ -43,15 +40,18 @@ public class PrimMST {
    }
 
     /**
-     * This method is used to calculate the MST based on Prim's algorithm . It returns the adjacency matrix of the
+     * /**
+     * This method is used to calculate the MST based on Prim's algorithm. It returns the adjacency matrix of the
      * resultant tree
+     * @param startingVertex
+     * The starting vertex of the algorithm
      * @return
      *  The adjacency matrix of the resultant tree
      */
    public int[][] calculateMinimumWeightSpanningTree(int startingVertex){
        int [][] MSTAdjacencyMatrix = new int[g.getVertices().size()][g.getVertices().size()]; //stores the resultant adjacency matrix of the tree
        double [][] distanceMatrix = g.getDistanceMatrix(); //stores the distance matrix of the graph
-       PrimsPriorityQueueEntry firstEntry = new PrimsPriorityQueueEntry(startingVertex); // choose a random vertex for the graph and create an entry for it
+       PrimsPriorityQueueEntry firstEntry = new PrimsPriorityQueueEntry(startingVertex); // create an entry for the starting vertex
        firstEntry.updateEntry(0.0,-1);//need to update first entry because it's edge value must be 0
        allEntries[firstEntry.getCityId()] = firstEntry; //modify first entry's entry in the list of entries
        priorityQueue.add(firstEntry); // add the first entry to the priority queue
@@ -79,6 +79,6 @@ public class PrimMST {
                }
            }
        }
-       return MSTAdjacencyMatrix; //return adjacency matrix ofmst
+       return MSTAdjacencyMatrix; //return adjacency matrix of mst
    }
 }

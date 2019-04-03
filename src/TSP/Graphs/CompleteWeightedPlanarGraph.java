@@ -3,20 +3,17 @@ package TSP.Graphs;
 import TSP.City;
 import java.io.*;
 import java.util.Objects;
-
+/**
+ * This class is used to encode a complete weighted planar graph. Note that in this project, only complete graphs
+ * were considered since any incomplete graph can be converted to a complete graph by setting missing edges with
+ * infinite weights. Note by doing so, the theory that is represented in the write up will not be effected, nor
+ * the algorithms. With regards to distance between points, TSPLIB provides instances were the co ordinates are in
+ * euclidean space. Thus euclidean distance is defined. This class inherits the class graph hence
+ * it contains the protected/public methods/fields.
+ */
 public class CompleteWeightedPlanarGraph extends Graph {
     /**
-     * This class is used to encode a complete weighted planar graph . Note that in this project only complete graphs
-     * were considered since any incomplete graph can be converted to a complete graph by setting missing edges with
-     * infinite weights . Note by doing so , the theory that is represented in the write up will not be effected , nor
-     * the algorithms. With regards to distance between points , TSPLIB provides instances were the co ordinates are in
-     * euclidean space . Thus euclidean distance is defined . This will again enable the use of the 2*MST heuristic
-     * since this can only be used whenever the triangle inequality holds. This class inherits the class graph hence
-     * it contains the protected/public methods/fields.
-     */
-
-    /**
-     *This is the default constructor and it just calls the default constructor of the parent
+     *This is the default constructor, and it just calls the default constructor of the parent
      */
     public CompleteWeightedPlanarGraph(){
         super();
@@ -34,7 +31,7 @@ public class CompleteWeightedPlanarGraph extends Graph {
     /**
      * This function is used to initialize a complete weighted planar graph based on the TSPLIB instance who's
      * path is passed as parameter . Note that for this graph the distance matrix is filled as follows:
-     * distance[i,j] = {0 if i==j , euclideanDistance[i,j] if i=/=j}.
+     * distance[i,j] = {0 if i==j, euclideanDistance[i,j] if i=/=j}.
      * @param filepath
      *  Stores the path of the TSPLIB instance to be used to initialize the graph
      */
@@ -67,7 +64,7 @@ public class CompleteWeightedPlanarGraph extends Graph {
     }
 
     /**
-     * This method is used to compute the euclidean distance between 2 cities so that the distance matrix can be filled
+     * This method is used to compute the euclidean distance between 2 cities, so that the distance matrix can be filled
      * @param city1
      *  Stores the first city
      * @param city2
@@ -77,32 +74,6 @@ public class CompleteWeightedPlanarGraph extends Graph {
      */
     private double getEuclideanDistance(City city1, City city2){
         return Math.sqrt(Math.pow(city1.getX()-city2.getX(),2)+Math.pow(city1.getY()-city2.getY(),2));
-    }
-
-    private double geometricDistanceBetween2Cities(City city1, City city2){
-        //First convert each x and y co ordinate of the 2 cities to radian and put them in separate arrays
-        double cityX[] = {computeCoordinateToRadian(city1.getX()),computeCoordinateToRadian(city2.getX())};
-        double cityY[] = {computeCoordinateToRadian(city1.getY()),computeCoordinateToRadian(city2.getY())};
-        double RRR = 6378.388; // constant used to compute
-
-        double q1 = Math.cos(cityY[0]-cityY[1]); //compute the distance as specified by TSPLIB FAQ
-        double q2 = Math.cos(cityX[0]-cityX[1]);
-        double q3 = Math.cos(cityX[0]+cityX[1]);
-        return (int)( RRR * Math.acos( 0.5*((1.0+q1)*q2 - (1.0-q1)*q3) ) + 1.0); //return the distance
-    }
-
-    /**
-     * This method is used to convert the x-co ordinates to radians
-     * @param input
-     * stores the input to be converted
-     * @return
-     * The corresponding radian value.
-     */
-
-    private double computeCoordinateToRadian(double input){
-        int degree = (int) input; //Convert as specified in TSPLIB FAQ
-        double min = input-degree;
-        return Math.PI * (degree + 5.0*(min/3.0)) / 180.0;
     }
 
 }

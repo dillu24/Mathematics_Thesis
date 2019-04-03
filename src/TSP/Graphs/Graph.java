@@ -2,22 +2,20 @@ package TSP.Graphs;
 
 import TSP.City;
 import java.util.ArrayList;
-
+/**
+ * This class is used to encode a graph . In this project a graph is taken to be abstract where all the common
+ * fields and methods are presented in this class . The abstraction is then to be implemented by the respective
+ * instances. Thus, although in this project only complete graphs are considered, the possibility to add more graphs
+ * is given. Note that a distance matrix is used to represent the graph, since weighted graphs can be used.
+ * This enables different graphs to be represented, since the adjacency matrix restricts the entries to be either
+ * 1 or 0, thus is not able to store distances.
+ */
 public abstract class Graph {
-    /**
-     * This class is used to encode a graph . In this project a graph is taken to be abstract where all the common
-     * fields and methods are presented in this class . The abstraction is then to be implemented by the respective
-     * instances by implemented how the graph initializes it's edges . For example Kn has different edges than B(n,k).
-     * Thus although in this project only complete graphs are considered due to the fact that we must be certain that
-     * the graph contains a hamiltonian path , the possibility to add more graphs is given. Note that a distance matrix
-     * is used to represent the graph since weighted graphs can be used . This enables different graphs to be represented
-     * since the adjacency matrix restrictsthe entries to be either 1 or 0 , thus is not able to store distances
-     */
     protected ArrayList<City> vertices; //Stores the vertices in the graph (which are the cities)
     protected double[][] distanceMatrix; //Stores the distance matrix
 
     /**
-     * This is the default constructor and is used to assign memory to the list of vertices. Note that the distance
+     * This is the default constructor, and is used to assign memory to the list of vertices. Note that the distance
      * matrix was not given memory since the number of vertices are still not known
      */
     public Graph(){

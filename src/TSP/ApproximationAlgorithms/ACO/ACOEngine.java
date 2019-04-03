@@ -4,22 +4,17 @@ import TSP.ApproximationAlgorithms.NearestNeighbourApproximation.NearestNeighbou
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
-
+/**
+ * This class is used to represent the ACS algorithm presented in the Dorigo paper. This graph considers
+ * only the case when the graph is complete, so that it is guaranteed that a Hamiltonian path exists. Note that any
+ * weighted graph can be modified to a complete graph by setting the missing edges to infinite weight distance .
+ * This algorithm has a number of parameters as discussed by Dorigo paper, and they were set in the default
+ * constructor as suggested in the same paper.
+ */
 public class ACOEngine {
-    /**
-     * This class is used to represent the ACO ant system algorithm presented in the Dorigo paper. This graph considers
-     * only the case when the graph is complete so that we are sure that a Hamiltonian path exists. Note that any
-     * weighted graph can be modified to a complete graph by setting the missing edges to infinite weight distance . As
-     * a result with the mechanisms taken in this algorithm , such large edges would not be considered and thus the
-     * algorithm won't be effected. This algorithm has a number of parameters as discussed by Dorigo paper and they were
-     * set in the default constructor as suggested in the same paper. Loops in the graph are also avoided implicitly
-     * since the ant will never visit a city that it has already visited since a visited city will be market as visited
-     * when added to a set of visited cities.
-     */
     private ArrayList<Ant> listOfAnts; //stores all the ants traversing the graph
     private int beta; //Weighs the importance of pheromone to closeness of next city
     private double alpha; // the level of pheromone evaporation at each iteration
@@ -31,7 +26,7 @@ public class ACOEngine {
 
     /**
      * This is the default constructor and is used to created an instance of the algorithm based on values specified
-     * in the Dorigo book. Note that in dorigo book it was argued that p = zeta = 0.1, therefore in this implementation,
+     * in the Dorigo book. Note that in Dorigo book, it was argued that p= zeta = 0.1, therefore in this implementation,
      * alpha denotes both zeta and p.
      */
     public ACOEngine(){
@@ -40,13 +35,13 @@ public class ACOEngine {
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
-        graph = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/p654");
+        graph = new CompleteWeightedPlanarGraph("TSP/GraphInstances/eil51");
         NearestNeighbourHeuristicEngine nnh = new NearestNeighbourHeuristicEngine(graph);
         t0 = 1/(graph.getVertices().size()* nnh.approximateTsp()); // as suggested in Dorigo paper
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
         for(int i=0;i<graph.getVertices().size();i++){ //initialize pheromone matrix
             for(int j=0;j<graph.getVertices().size();j++){
-                pheromoneMatrix[i][j] = t0;
+                pheromoneMatrix[i][j] = t0; //as suggested in Dorigo paper
             }
         }
     }
@@ -59,7 +54,7 @@ public class ACOEngine {
      */
     public ACOEngine(Graph g){
         listOfAnts = new ArrayList<>(); //allocate memory
-        beta = 2;
+        beta = 5;
         alpha = 0.1;
         q0 = 0.9;
         numberOfAnts = 10;
@@ -69,13 +64,13 @@ public class ACOEngine {
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocation memory
         for(int i=0;i<graph.getVertices().size();i++){ //initialize pheromone matrix with starting default value
             for(int j=0;j<graph.getVertices().size();j++){
-                pheromoneMatrix[i][j] = t0;
+                pheromoneMatrix[i][j] = t0; //as suggested by Dorigo paper
             }
         }
     }
 
     /**
-     * This constructor is used to create a new aco algorithm instance based on parameter value as wanted by the user
+     * This constructor is used to create a new aco algorithm instance based on parameter values as required by the user
      * @param beta
      *  Stores the value to be stored in this.beta
      * @param alpha
@@ -100,7 +95,7 @@ public class ACOEngine {
         pheromoneMatrix = new double[graph.getVertices().size()][graph.getVertices().size()]; //allocate memory
         for(int i=0;i<graph.getVertices().size();i++){ // initialize pheromone matrix
             for(int j=0;j<graph.getVertices().size();j++){
-                pheromoneMatrix[i][j] = 0.00005;
+                pheromoneMatrix[i][j] = this.t0;
             }
         }
     }
@@ -110,16 +105,16 @@ public class ACOEngine {
      */
     private void createAnts(){
         Random randomNumberGenerator = new Random(System.currentTimeMillis()); //random number generator instance
-        for(int i =0;i<numberOfAnts;i++){ // create this.numberOfAnts ants on a random city and add the ant to the list of ants
+        for(int i =0;i<numberOfAnts;i++){ // create this.numberOfAnts ants on a random city and add the ants to the list of ants
             listOfAnts.add(new Ant(randomNumberGenerator.nextInt(graph.getVertices().size())));
         }
     }
 
     /**
-     * This method is used to determine the next city the ant must travel to based on the formula presented in the
+     * This method is used to determine the next city the ant must travel to, based on the formula presented in the
      * Dorigo paper
      * @param ant
-     *  Stores the ant that will consider the next move
+     *  Stores the ant that will be moved
      * @return
      *  The id of the city to be visited next
      */
@@ -134,7 +129,7 @@ public class ACOEngine {
     }
 
     /**
-     * This method encodes the first part of the formula presented in the dorigo paper
+     * This method encodes the first part of the formula presented in the Dorigo paper
      * @param ant
      *  Stores the ant to move to the next city
      * @return
@@ -149,9 +144,9 @@ public class ACOEngine {
             if(visitedCities.contains(i)){ // if vertex is already visited skip it
                 continue;
             }
-            //otherwise compute a value as shown in the formula
+            //otherwise compute a value as suggested by Dorigo paper
             double computedValue = pheromoneMatrix[currentCityId][i]*Math.pow(1/(graph.getDistanceMatrix()[currentCityId][i]),beta);
-            if(computedValue >= max_value){ // if computed value is bigger than maximum value store that city's details
+            if(computedValue >= max_value){ // if computed value is bigger than maximum value, store that city's details,
                                             // since it has the best value in terms of closeness + pheromone strength
                 max_value = computedValue;
                 chosenCityId = i;
@@ -163,7 +158,7 @@ public class ACOEngine {
     /**
      * This method is used to encode the second part of the formula whenever q>qo . This is based on a random variable,
      * thus a form of roulette wheel selection was implemented in this function. This part of the formula is used to
-     * explore new paths in the graph so that local minimum are avoided
+     * explore new paths in the graph so that local minima are avoided
      * @param ant
      *  Stores the ant to be visited
      * @return
@@ -248,12 +243,12 @@ public class ACOEngine {
      */
     public double approximateTsp(){
         double routeLength = Double.MAX_VALUE; //stores the result
-        Ant globalBestAnt = new Ant();
+        Ant globalBestAnt = new Ant(); //stores the global best ant
         int numberOfCities = graph.getVertices().size(); // stores the number of cities in the graph
         double [][] distanceMatrix = graph.getDistanceMatrix(); //stores the distance matrix of the graph in question
-        //System.out.print("["); //for python experiment
+        //System.out.print("["); //for python experiment, to output plots
         for(int i=0;i<10000;i++){ // for a number of iterations
-            createAnts(); //create new ants at each iteration for more efficiency (thus not need to clear list taking o(n)time)
+            createAnts(); //create new ants at each iteration for more efficiency (thus no need to clear list)
             while(!listOfAnts.get(listOfAnts.size()-1).antCompletedTour(numberOfCities)){ //until last ant completed tour(i.e all of them complete)
                 for(int j=0;j<numberOfAnts;j++){ //for each ant in the list
                     Ant ant = listOfAnts.get(j); // get an ant
@@ -263,7 +258,7 @@ public class ACOEngine {
                 }
             }
             double shortestTour = Double.MAX_VALUE; //stores the length of the shortest tour in the current iteration
-            int bestAntIndex = -1; //stores the index of the best ant that performed the shortest tour in the iteration
+            int bestAntIndex = -1; //stores the index of the best ant that performed the shortest tour in the current iteration
             for(int j=0;j<numberOfAnts;j++){ //for each ant
                 Ant ant = listOfAnts.get(j); //get ant
                 localTrailUpdating(ant.getCurrentCityId(),ant.getStartingCityId()); //locally update pheromone from last city to first city
@@ -274,19 +269,19 @@ public class ACOEngine {
                 }
             }
             Ant ant = listOfAnts.get(bestAntIndex); //get ant that produced the best tour in the current iteration
-            if(ant.getRouteLength() < routeLength){ // if length of route produced by the best ant in the iteration is better than previous best store it
+            if(ant.getRouteLength() < routeLength){ // if length of route produced by the best ant in the iteration is better than the weight of the global best route store it
                 routeLength = ant.getRouteLength();
                 globalBestAnt = ant;
             }
-            ArrayList<Integer> bestRoute = globalBestAnt.getVisitedCitiesOrdered(); //get route of the best ant
-            for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to best ant
+            ArrayList<Integer> bestRoute = globalBestAnt.getVisitedCitiesOrdered(); //get route of the global best ant
+            for(int j=0;j<bestRoute.size()-1;j++){ // globally update pheromone on the edges belonging to the global best tour
                 globalTrailUpdating(bestRoute.get(j),bestRoute.get(j+1),globalBestAnt.getRouteLength());
             }
-            System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen
-            //System.out.print(routeLength+", "); //for python experiment
-            listOfAnts = new ArrayList<>(); // create new list to avoid clearing it thus taking o(n) time
+            System.out.println("Iteration "+i+" Best tour length = "+routeLength); //output to screen current iteration number
+            //System.out.print(routeLength+", "); //for python experiment, for plots
+            listOfAnts = new ArrayList<>(); // create new list to avoid clearing it
         }
-        //System.out.print("]"); //for python experiment
+        //System.out.print("]"); //for python experiment, for plots
         return routeLength; //return result.
     }
 

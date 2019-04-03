@@ -3,18 +3,16 @@ package TSP.ApproximationAlgorithms.TwiceAroundMST;
 import TSP.Graphs.CompleteWeightedPlanarGraph;
 import TSP.Graphs.Graph;
 import java.util.ArrayList;
-
+/**
+ * This class is used to encode the Twice Around the Minimum Spanning Tree algorithm in order to provide an approximation
+ * for the TSP. Note that for this heuristic to have a known approximation factor, the triangle inequality must hold in
+ * the space the graph is being considered. In the case were TSPLIB instances are being used, euclidean distance
+ * is defined in them thus, the triangle inequality must hold. That being said, to avoid repetitions in the tour,
+ * the graphs must be complete. It must also be noted that in this implementation, the algorithm gives the oportunity
+ * to each vertex to act as a starting vertex. As a result, the Hamiltonian cycle of least weight encountered by
+ * the algorithm is then returned.
+ */
 public class TwiceAroundMSTHeuristic {
-    /**
-     * This class is used to encode the twice around minimum spanning tree heuristic in order to provide an approximation
-     * for the best tour in the TSP. Note that for this heuristic to be correct, the triangle inequality must hold in
-     * the space the graph is being considered. In the case were TSPLIB instances are being used , euclidean distance
-     * is defined in them thus , the triangle inequality must hold . That being said to avoid repetitions in the tour
-     * it is needed that the graph must be complete , thus if the graph is not complete another heuristic must be used
-     * or we add infinite weights to missing edges , however this can make the approximate tour very infeasible. It must
-     * also be noted that in this implementation , the algorithm is made to start from all the  vertices
-     * , taking the minimum in the process for better approximation results.
-     */
     private Graph g; //Stores the graph to be considered
     private int [][] MSTAdjacencyMatrix; // Stores the MST's adjacency matrix calculated by Prim's algorithm
     private boolean[] visitedVertices; // A boolean array that is used to indicate that a city has already been visited
@@ -24,13 +22,13 @@ public class TwiceAroundMSTHeuristic {
      * This is the default constructor and is used to allocate memory and set default values to the fields
      */
     public TwiceAroundMSTHeuristic(){
-        g = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/burma14"); //default graph
+        g = new CompleteWeightedPlanarGraph("./src/TSP/GraphInstances/berlin52"); //default graph
         visitedVertices = new boolean[g.getVertices().size()]; //allocate memory
-        approximateTour = new ArrayList<>(); // allcoate memory
+        approximateTour = new ArrayList<>(); // allocate memory
     }
 
     /**
-     * This constructor is used to create an instance of the TwiceAroundMSTHeuristic given the graph as parameter
+     * This constructor is used to create an instance of the TwiceAroundMSTHeuristic, given the graph as parameter
      * @param g
      *  Stores the graph to be stored in this.g
      */
@@ -47,7 +45,7 @@ public class TwiceAroundMSTHeuristic {
      */
     public double approximateTSP(){
         double result = Double.MAX_VALUE; //stores the result
-        for(int j=0;j<g.getVertices().size();j++) { //do procedure form every vertex for better approximation result
+        for(int j=0;j<g.getVertices().size();j++) { //give the opportunity to each vertex to act as starting vertex for better approximation result
             PrimMST mst = new PrimMST(g);//create prim's algorithm instance
             MSTAdjacencyMatrix = mst.calculateMinimumWeightSpanningTree(j); //calculate mst's adjacency matrix starting from current vertex
             double partialResult = 0.0;
@@ -66,8 +64,8 @@ public class TwiceAroundMSTHeuristic {
     }
 
     /**
-     * This function is used to perform DFS on the MST starting from some vertex. This function is implemented recursively
-     * and does not repeat vertex visits since a boolean array checker called this.visitedVertices is used.
+     * This function is used to perform DFS on the MST starting from some given vertex. This function is implemented
+     * recursively and does not visit visited vertices since a boolean array checker called this.visitedVertices is used.
      * @param currentVertex
      *  Stores the vertex id the algorithm is currently in.
      */
@@ -75,7 +73,7 @@ public class TwiceAroundMSTHeuristic {
         approximateTour.add(currentVertex); //add current vertex to tour
         visitedVertices[currentVertex] = true; //mark current vertex as visited
         for(int i=0;i<g.getVertices().size();i++){ // for each vertex in the graph
-            if(MSTAdjacencyMatrix[currentVertex][i] == 1 && !visitedVertices[i]){ //if vertex is adjacent to current vertex and not visited , visit it using recursion
+            if(MSTAdjacencyMatrix[currentVertex][i] == 1 && !visitedVertices[i]){ //if vertex is adjacent to current vertex and not visited, visit it using recursion
                 DFS(i);
             }
         }

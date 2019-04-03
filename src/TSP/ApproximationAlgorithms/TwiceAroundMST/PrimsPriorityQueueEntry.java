@@ -1,10 +1,9 @@
 package TSP.ApproximationAlgorithms.TwiceAroundMST;
-
+/**
+ * This class represents an entry in the priority queue that is used in Prim's algorithm. A normal priority queue
+ * could not be used since more than 1 field is needed to be held in the priority queue.
+ */
 public class PrimsPriorityQueueEntry implements Comparable<PrimsPriorityQueueEntry>{
-    /**
-     * This class represents an entry in the priority queue that is used in Prim's algorithm . A normal priority queue
-     * could not be used since more than 1 field is needed to be hold in the priority queue.
-     */
     private int cityID; //stores the city id
     private Double minimumWeightConnectedEdge; //stores the key value in the priority queue
     private int nearestCityId; // stores the id of the city that gave the minimum key so far
@@ -62,8 +61,8 @@ public class PrimsPriorityQueueEntry implements Comparable<PrimsPriorityQueueEnt
 
     /**
      * This method is used to define how to compare the different entries in the priority queue since we have a min-
-     * queue. Thus as it can be seen in the implementation the Double's compartor is used by comparing the values stored
-     * in this.minimumWeightConnectedEdge . In this way the shortest edge considered so far in Prim's algorithm would
+     * queue. Thus as it can be seen in the implementation the Double's comparator is used by comparing the values stored
+     * in this.minimumWeightConnectedEdge. In this way the shortest edge considered so far in Prim's algorithm would
      * be at the top of the queue.
      * @param entry
      *  Stores the entry to be compared

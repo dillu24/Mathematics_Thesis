@@ -2,18 +2,17 @@ package TSP.ApproximationAlgorithms.ACO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-
+/**
+ * This class encodes the artificial ant described in the Dorigo ant system paper, which is used to traverse the graph
+ * created using graph instances found in the folder src/TSP/GraphInstances. Each ant has a number of fields which
+ * were set to private so that no one cannot access or modify directly the fields (thus having encapsulation).
+ * Each ant has a set of visited cities and a list of visited cities . Two were needed so that the algorithm
+ * is more efficient, since in the algorithm we need to check if an ant has already moved to a particular city .
+ * In this case the set is used because it only takes O(1) time to do so . However, whenever we want the order how
+ * the cities were visited , the array list is used for efficiency. Each ant also contains the id of the city it
+ * is currently in, the id of the city it started in and the route length of the traverse route so far .
+ */
 public class Ant {
-    /**
-     * This class encodes the artificial ant described in the Dorigo ant system paper that is used to traverse the graph
-     * created using a TSPLIB instance. Each ant has a number of fields which were set to private so that no one can
-     * access or modify directly the fields (thus having encapsulation). Each ant has a set of visited cities and a list
-     * of visited cities . 2 were needed so that the algorithm is more efficient since in the algorithm we need to check
-     * if an ant has already moved to a particular city . In this case the set is used because it only takes O(1) time
-     * to do so . However whenever we want the order how the cities were visited , the array list is used for efficiency.
-     * Each ant also contains the id of the city it is currently in , the idof the city it started in and the route
-     * length of the traverse route so far .
-     */
     private HashSet<Integer> visitedCities;
     private ArrayList<Integer> visitedCitiesOrdered;
     private int currentCityId;
@@ -108,12 +107,12 @@ public class Ant {
 
     /**
      * This method is used by the algorithm to move the ant to a new city. Note that the validation of whether the move
-     * is valid was done in the class ACOEngine. In this method the values in this.currentCityId,this.startingCityId,
-     * this.visitedCities,this.visitedCitiesOrdered,this.routeLength are updated accordingly .
+     * is valid was done in the class ACOEngine. In this method, the values in this.currentCityId, this.startingCityId,
+     * this.visitedCities, this.visitedCitiesOrdered, this.routeLength are updated accordingly.
      * @param nextCityId
      *  Stores the id of the city to be visited
      * @param distanceMatrix
-     *  Stores the distance matrix of the graph so that the route length can be modifed.
+     *  Stores the distance matrix of the graph so that the route length can be modified.
      */
     public void moveToCity(int nextCityId,double[][] distanceMatrix){
         visitedCities.add(nextCityId); // add the new city to be visited to the set of cities visited
